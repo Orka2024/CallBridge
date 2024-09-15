@@ -10,53 +10,60 @@ public class HomeController {
 	public String home() {
 		return "index";
 	}
-	
+
 	@GetMapping("/dashboard")
-    public String showDashboard() {
-        return "pages/dashboard";
-    }
-	
+	public String showDashboard() {
+		return "pages/dashboard";
+	}
+
 	@GetMapping("/tables")
-    public String showTables() {
-        return "pages/tables";
-    }
-	
+	public String showTables() {
+		return "pages/tables";
+	}
+
 	@GetMapping("/billing")
-    public String showBilling() {
-        return "pages/billing";
-    }
-	
-	@GetMapping("/user/profile")
-    public String showUserProfile() {
-        return "pages/profile";
-    }
-	
+	public String showBilling() {
+		return "pages/billing";
+	}
+
+	@GetMapping("/profile")
+	public String showUserProfile() {
+		return "pages/profile";
+	}
+
 	@GetMapping("/signin")
-    public String signin() {
-        return "pages/sign-in";
-    }
-	
+	public String signin() {
+		return "pages/sign-in";
+	}
+
 	@GetMapping("/signup")
-    public String signup() {
-        return "pages/sign-up";
-    }
-	
-	@GetMapping("/error")
-    public String error() {
-        return "pages/error";
-    }
+	public String signup() {
+		return "pages/sign-up";
+	}
+
+	@GetMapping("/error404")
+	public String error404() {
+		return "error404";
+	}
+
+	@GetMapping("/error500")
+	public String error500() {
+		return "error";
+	}
+
 	@GetMapping("/virtual-reality")
 	public String virtualreality() {
 		return "pages/virtual-reality";
 	}
-	
+
 	@GetMapping("/rtl")
 	public String rtl() {
 		return "pages/rtl";
 	}
-	
+
 	@GetMapping("/notifications")
 	public String notifications() {
 		return "pages/notifications";
 	}
+
 }
