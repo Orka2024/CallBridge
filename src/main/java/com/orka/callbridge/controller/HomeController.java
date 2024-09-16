@@ -48,7 +48,7 @@ public class HomeController {
 
 	@GetMapping("/error500")
 	public String error500() {
-		return "error";
+		return "error500";
 	}
 
 	@GetMapping("/virtual-reality")
@@ -64,6 +64,20 @@ public class HomeController {
 	@GetMapping("/notifications")
 	public String notifications() {
 		return "pages/notifications";
+	}
+
+	@GetMapping("/icons")
+	public String icons() {
+		return "pages/icons";
+	}
+
+	@GetMapping("/typography")
+	public String typography() {
+		return "pages/typography";
+	}
+	@GetMapping("/map")
+	public String map() {
+		return "pages/map";
 	}
 
 }
