@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 
 <head>
   <meta charset="utf-8" />
@@ -20,6 +20,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle" href="/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
+  <link id="pagestyle2" href="/css/material-dashboard.css" rel="stylesheet" />
   <!-- Nepcha Analytics (nepcha.com) -->
   <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
   <!-- <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script> -->
@@ -92,28 +93,133 @@
                   <p class="mb-0">Enter your email and password to register</p>
                 </div>
                 <div class="card-body">
-                  <form role="form">
+                
+                  <form 
+                  data-th-action="@{'/doUserRegister'}" 
+                  method="post" 
+                  data-th-object="${userForm}"
+                  role="form"
+                  >
+                  
+                    <!----- Name Field ----->
                     <div class="input-group input-group-outline mb-3">
-                      <label class="form-label">Name</label>
-                      <input type="text" class="form-control">
-                    </div>
+					    <label 
+					    for="uName" 
+					    class="form-label"> </label>
+					    <input 
+					    id="uName" 
+					    type="text"
+					    data-th-field="*{uName}" 
+					    class="form-control" 
+					    placeholder="Name" 
+					    maxlength="50"
+					    >
+					</div>
+
+                    <!----- Email Field ----->
                     <div class="input-group input-group-outline mb-3">
-                      <label class="form-label">Email</label>
-                      <input type="email" class="form-control">
+                      <label 
+                      for="uEmail" 
+                      class="form-label"> </label>
+                      <input 
+                      id="uEmail" 
+                      type="email" 
+                      data-th-field="*{uEmail}" 
+                      class="form-control" 
+                      placeholder="Email" 
+                      maxlength="50"
+                      />
                     </div>
+                    
+                    <!----- Phone Number Field ----->
                     <div class="input-group input-group-outline mb-3">
-                      <label class="form-label">Password</label>
-                      <input type="password" class="form-control">
+                      <label 
+                      for="uPhoneNo" 
+                      class="form-label"> </label>
+                      <input 
+                      id="uPhoneNo" 
+                      type="text" 
+                      data-th-field="*{uPhoneNo}" 
+                      class="form-control" 
+                      placeholder="Phone Number" 
+                      maxlength="14"
+                      >
                     </div>
+                    
+                    <!----- PAN Number Field ----->
+                    <div class="input-group input-group-outline mb-3">
+                      <label 
+                      for="uPanNumber" 
+                      class="form-label"> </label>
+                      <input 
+                      id="uPanNumber" 
+                      type="text" 
+                      data-th-field="*{uPanNumber}" 
+                      class="form-control" 
+                      placeholder="PAN Number" 
+                      maxlength="10"
+                      >
+                    </div>
+                    
+                    <!----- Role Field ----->
+                    <div class="input-group input-group-outline mb-3">
+ 					   <label for="uRole" class="form-label"></label>
+					    <select 
+					        name="role" 
+					        id="uRole" 
+					        data-th-field="*{uRole}" 
+					        class="form-control"
+					    >
+					        <option value="" disabled selected>Select a role</option>                        
+					        <option value="Caller">TeleCaller</option>
+					        <option value="SalesOfficer">Sales Officer</option>
+					        <option value="BOM">Operations</option>
+					        <option value="guest">Guest</option>
+					    </select>
+					</div>
+
+                    
+                    <!----- Username Field ----->
+                    <div class="input-group input-group-outline mb-3">
+                      <label 
+                      for="uUserName" 
+                      class="form-label"> </label>
+                      <input 
+                      id="uUserName" 
+                      type="text" 
+                      data-th-field="*{uUserName}" 
+                      class="form-control" 
+                      placeholder="Username" 
+                      maxlength="20"
+                      >
+                    </div>
+                    
+                    <!----- Password Field ----->
+                    <div class="input-group input-group-outline mb-3">
+                      <label 
+                      for="uPassword" 
+                      class="form-label"> </label>
+                      <input 
+                      id="uPassword" 
+                      type="password" 
+                      data-th-field="*{uPassword}" 
+                      class="form-control" 
+                      placeholder="Password" 
+                      maxlength="20"
+                      >
+                    </div>
+                    
                     <div class="form-check form-check-info text-start ps-0">
                       <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
                       <label class="form-check-label" for="flexCheckDefault">
                         I agree the <a href="javascript:;" class="text-dark font-weight-bolder">Terms and Conditions</a>
                       </label>
                     </div>
+                    
                     <div class="text-center">
-                      <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Sign Up</button>
+                      <button type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Sign Up</button>
                     </div>
+                    
                   </form>
                 </div>
                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
@@ -144,7 +250,7 @@
     }
   </script>
   <!-- Github buttons -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- <script async defer src="https://buttons.github.io/buttons.js"></script> -->
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="/js/material-dashboard.min.js?v=3.1.0"></script>
 </body>

@@ -31,15 +31,7 @@ public class HomeController {
 		return "pages/profile";
 	}
 
-	@GetMapping("/signin")
-	public String signin() {
-		return "pages/sign-in";
-	}
 
-	@GetMapping("/signup")
-	public String signup() {
-		return "pages/sign-up";
-	}
 
 	@GetMapping("/error404")
 	public String error404() {

@@ -1,111 +1,199 @@
 package com.orka.callbridge.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
-@Entity
-@Table(name = "USER")
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Entity(name = "user")
+@Table(name = "users")
+@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@ToString
 public class User {
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	@Column(name = "u_id")
+	private String uId;
+
+	@Column(unique = true, nullable = false, length = 10)
+	private String uPanNumber;
 
 	@NotBlank(message = "Name field is required")
 	@Size(min = 3, max = 20, message = "Name must be between 3 - 20 characters")
-	@Column(nullable = false)
-	private String name;
+	@Column(nullable = false, length = 30)
+	private String uName;
 
-	@Column(unique = true, nullable = false)
+	@Column(unique = true, length = 15)
+	private String uUserName;
+
+	@Column(length = 50)
 	@Email(message = "Please provide a valid email address")
-	private String email;
+	private String uEmail;
 
-	@NotBlank(message = "Password field is required")
-	@Size(min = 5, message = "Password must be at least 5 characters")
-	// Add more constraints for password strength if needed
-	private String password;
+	@Column(nullable = false, length = 14)
+	private String uPhoneNo;
 
-	private String role;
-	private boolean enabled;
-	private String imageUrl;
+	@Column(nullable = false, length = 20)
+	private String uPassword;
+
+	@Column(nullable = false)
+	private String uRole;
 
 	@Column(length = 1000)
-	private String about;
+	private String uAbout;
 
-	public int getId() {
-		return id;
+	private String uProfilePic;
+
+	private boolean uEnabled = false;
+
+	private boolean uEmailVerified = false;
+
+	private boolean uPhoneVerified = false;
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+	private List<Client> clients = new ArrayList<>();
+
+	public String getuId() {
+		return uId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setuId(String uId) {
+		this.uId = uId;
 	}
 
-	public String getName() {
-		return name;
+	public String getuPanNumber() {
+		return uPanNumber;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setuPanNumber(String uPanNumber) {
+		this.uPanNumber = uPanNumber;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getuName() {
+		return uName;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setuName(String uName) {
+		this.uName = uName;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getuUserName() {
+		return uUserName;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setuUserName(String uUserName) {
+		this.uUserName = uUserName;
 	}
 
-	public String getRole() {
-		return role;
+	public String getuEmail() {
+		return uEmail;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setuEmail(String uEmail) {
+		this.uEmail = uEmail;
 	}
 
-	public boolean isEnabled() {
-		return enabled;
+	public String getuPhoneNo() {
+		return uPhoneNo;
 	}
 
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
+	public void setuPhoneNo(String uPhoneNo) {
+		this.uPhoneNo = uPhoneNo;
 	}
 
-	public String getImageUrl() {
-		return imageUrl;
+	public String getuPassword() {
+		return uPassword;
 	}
 
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
+	public void setuPassword(String uPassword) {
+		this.uPassword = uPassword;
 	}
 
-	public String getAbout() {
-		return about;
+	public String getuRole() {
+		return uRole;
 	}
 
-	public void setAbout(String about) {
-		this.about = about;
+	public void setuRole(String uRole) {
+		this.uRole = uRole;
+	}
+
+	public String getuAbout() {
+		return uAbout;
+	}
+
+	public void setuAbout(String uAbout) {
+		this.uAbout = uAbout;
+	}
+
+	public String getuProfilePic() {
+		return uProfilePic;
+	}
+
+	public void setuProfilePic(String uProfilePic) {
+		this.uProfilePic = uProfilePic;
+	}
+
+	public boolean isuEnabled() {
+		return uEnabled;
+	}
+
+	public void setuEnabled(boolean uEnabled) {
+		this.uEnabled = uEnabled;
+	}
+
+	public boolean isuEmailVerified() {
+		return uEmailVerified;
+	}
+
+	public void setuEmailVerified(boolean uEmailVerified) {
+		this.uEmailVerified = uEmailVerified;
+	}
+
+	public boolean isuPhoneVerified() {
+		return uPhoneVerified;
+	}
+
+	public void setuPhoneVerified(boolean uPhoneVerified) {
+		this.uPhoneVerified = uPhoneVerified;
+	}
+
+	public List<Client> getClients() {
+		return clients;
+	}
+
+	public void setClients(List<Client> clients) {
+		this.clients = clients;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
-				+ ", enabled=" + enabled + ", imageUrl=" + imageUrl + ", about=" + about + "]";
+		return "User [uId=" + uId + ", uPanNumber=" + uPanNumber + ", uName=" + uName + ", uUserName=" + uUserName
+				+ ", uEmail=" + uEmail + ", uPhoneNo=" + uPhoneNo + ", uPassword=" + uPassword + ", uRole=" + uRole
+				+ ", uAbout=" + uAbout + ", uProfilePic=" + uProfilePic + ", uEnabled=" + uEnabled + ", uEmailVerified="
+				+ uEmailVerified + ", uPhoneVerified=" + uPhoneVerified + ", clients=" + clients + "]";
 	}
 
 }
