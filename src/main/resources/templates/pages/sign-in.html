@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 
 <head>
   <meta charset="utf-8" />
@@ -106,21 +106,56 @@
                 </div>
               </div>
               <div class="card-body">
-                <form role="form" class="text-start">
-                  <div class="input-group input-group-outline my-3">
-                    <label class="form-label">Email</label>
-                    <input type="email" class="form-control">
-                  </div>
-                  <div class="input-group input-group-outline mb-3">
-                    <label class="form-label">Password</label>
-                    <input type="password" class="form-control">
-                  </div>
+              		<div class="text-red-800 my-3" th:if="${param.error}">
+						Invalid Email and Password.</div>
+					<div class="text-green-800 my-3" th:if="${param.logout}">
+						You have been logged out.</div>
+                <form 
+                data-th-action="@{'/authenticate'}" 
+                method="post"
+                role="form"
+               
+                >
+                
+                <!----- Email Field ----->
+                    <div class="input-group input-group-outline mb-3">
+                      <label 
+                      for="uEmail" 
+                      class="form-label"> </label>
+                      <input 
+                      name="uEmail"
+                      id="uEmail" 
+                      type="email" 
+                      
+                      class="form-control" 
+                      placeholder="Email" 
+                      maxlength="50"
+                      />
+                    </div>
+                  
+                  <!----- Password Field ----->
+                    <div class="input-group input-group-outline mb-3">
+                      <label 
+                      for="uPassword" 
+                      class="form-label"> </label>
+                      <input 
+                      name="uPassword"
+                      id="uPassword" 
+                      type="password" 
+                      
+                      class="form-control" 
+                      placeholder="Password" 
+                      maxlength="20"
+                      required
+                      />
+                    </div>
+                  
                   <div class="form-check form-switch d-flex align-items-center mb-3">
                     <input class="form-check-input" type="checkbox" id="rememberMe" checked>
                     <label class="form-check-label mb-0 ms-3" for="rememberMe">Remember me</label>
                   </div>
                   <div class="text-center">
-                    <button type="button" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
+                    <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
                   </div>
                   <p class="mt-4 text-sm text-center">
                     Don't have an account?
@@ -169,7 +204,7 @@
   <!--   Core JS Files   -->
   <script src="/js/core/popper.min.js"></script>
   <script src="/js/core/bootstrap.min.js"></script>
-  <script src="/js/plugins/perfect-scrollbar.min.js"></script>
+  <!-- <script src="/js/plugins/perfect-scrollbar.min.js"></script> -->
   <script src="/js/plugins/smooth-scrollbar.min.js"></script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
