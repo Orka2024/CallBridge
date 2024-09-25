@@ -23,13 +23,7 @@ public class InterestedCustomerController {
 		return "pages/InterestCust_from";
 	}
 	
-	/*
-	 * @PostMapping("/InterestCust_table") public String
-	 * InterCust_table(@ModelAttribute InterestedCustomer customer, Model model) {
-	 * customerService.saveCustomer(customer); return
-	 * "pages/InterestCustomer_table"; }
-	 */
-	
+
 	@GetMapping("/InterestCust_table")
 		public String InterCust_table( Model model) {
 			return "pages/InterestCustomer_table";
