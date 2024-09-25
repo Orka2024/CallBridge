@@ -1,59 +1,46 @@
 package com.orka.callbridge.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import lombok.Builder;
-
-import com.orka.callbridge.entities.User;
-import com.orka.callbridge.forms.UserForm;
-import com.orka.callbridge.service.UserService;
 
 @Controller
-@Builder
+@RequestMapping("/user")
 public class UserController {
 
-	@Autowired
-	private UserService userService;
-
-	@GetMapping("/signin")
-	public String signin() {
-		return "pages/sign-in";
+	@RequestMapping(value = "/caller/dashboard")
+	public String callerDashboard() {
+		return "pages/dashboard";
 	}
 
-	@GetMapping("/signup")
-	public String signup(Model model) {
-		// Create a new UserForm object
-		UserForm userForm = new UserForm();
-		// Add the UserForm object to the model
-		model.addAttribute("userForm", userForm);
-		return "pages/sign-up";
+	@RequestMapping(value = "/admin/dashboard")
+	public String adminDashboard() {
+		return "admin/dashboard";
 	}
 
-	// Process User Registration
-	@RequestMapping(value = "/doUserRegister", method = RequestMethod.POST)
-	public String processUserRegister(@ModelAttribute UserForm userForm) {
-		System.out.println("User Registered.......!");
-		System.out.println(userForm);
+	@RequestMapping(value = "/guest/dashboard")
+	public String guestDashboard() {
+		return "guest/dashboard";
+	}
 
-		// UserForm --> User
-		User userNew = User.builder()
-				.uName(userForm.getuUserName())
-				.uEmail(userForm.getuEmail())
-				.uPhoneNo(userForm.getuPhoneNo())
-				.uPanNumber(userForm.getuPanNumber())
-				.uRole(userForm.getuRole())
-				.uUserName(userForm.getuUserName())
-				.uPassword(userForm.getuPassword())
-				.uProfilePic("https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/default-profile-picture-grey-male-icon.png")
-				.build();
-		User userSaved = userService.saveUser(userNew);
-		System.out.println("User saved : ");
-		return "redirect:/signup";
+	@RequestMapping(value = "/op/dashboard")
+	public String operationsDashboard() {
+		return "operations/dashboard";
+	}
+
+	@RequestMapping(value = "/so/dashboard")
+	public String salesofficersDashboard() {
+		return "so/dashboard";
+	}
+
+	@GetMapping("/profile")
+	public String showUserProfile() {
+		return "profile";
+	}
+
+	@GetMapping("/calling")
+	public String callingClients() {
+		return "pages/CallersCalling";
 	}
 
 }
