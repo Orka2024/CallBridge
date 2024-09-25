@@ -1,20 +1,24 @@
 package com.orka.callbridge.entities;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,7 +36,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder
 @ToString
-public class User {
+public class User implements UserDetails {
 
 	@Id
 	@Column(name = "u_id")
@@ -41,8 +45,6 @@ public class User {
 	@Column(unique = true, nullable = false, length = 10)
 	private String uPanNumber;
 
-	@NotBlank(message = "Name field is required")
-	@Size(min = 3, max = 20, message = "Name must be between 3 - 20 characters")
 	@Column(nullable = false, length = 30)
 	private String uName;
 
@@ -50,13 +52,13 @@ public class User {
 	private String uUserName;
 
 	@Column(length = 50)
-	@Email(message = "Please provide a valid email address")
 	private String uEmail;
 
 	@Column(nullable = false, length = 14)
 	private String uPhoneNo;
 
-	@Column(nullable = false, length = 20)
+	@Column(nullable = false)
+	@Getter(value = AccessLevel.NONE)
 	private String uPassword;
 
 	@Column(nullable = false)
@@ -67,7 +69,8 @@ public class User {
 
 	private String uProfilePic;
 
-	private boolean uEnabled = false;
+	@Getter(value = AccessLevel.NONE)
+	private boolean uEnabled = true;
 
 	private boolean uEmailVerified = false;
 
@@ -194,6 +197,51 @@ public class User {
 				+ ", uEmail=" + uEmail + ", uPhoneNo=" + uPhoneNo + ", uPassword=" + uPassword + ", uRole=" + uRole
 				+ ", uAbout=" + uAbout + ", uProfilePic=" + uProfilePic + ", uEnabled=" + uEnabled + ", uEmailVerified="
 				+ uEmailVerified + ", uPhoneVerified=" + uPhoneVerified + ", clients=" + clients + "]";
+	}
+
+	@ElementCollection(fetch = FetchType.EAGER)
+	private List<String> uRoleList = new ArrayList<>();
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+
+		// List of roles [USER, ADMIN]
+		//Collection of SimpleGrantedAuthority [roles{ADMIN, USER}]
+
+		Collection<SimpleGrantedAuthority> roles = uRoleList.stream().map(uRole -> new SimpleGrantedAuthority(uRole))
+				.collect(Collectors.toList());
+		return roles;
+	}
+
+	// logic Login Credentials for Username
+	@Override
+	public String getUsername() {
+		return this.uUserName;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return this.uEnabled;
+	}
+
+	@Override
+	public String getPassword() {
+		return this.uPassword;
 	}
 
 }

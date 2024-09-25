@@ -31,7 +31,7 @@
     <div class="row">
       <div class="col-12">
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg blur border-radius-lg top-0 z-index-3 shadow position-absolute mt-4 py-2 start-0 end-0 mx-4">
+        <nav class="navbar navbar-expand-lg blur border-radius-lg top-0 z-index-3 shadow position-absolute mt-4 py-2 start-0 end-0 mx-4 navbar-left">
           <div class="container-fluid ps-2 pe-0">
             <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="/dashboard">
               CallBridge
@@ -92,31 +92,54 @@
                   <h4 class="font-weight-bolder">Sign Up</h4>
                   <p class="mb-0">Enter your email and password to register</p>
                 </div>
-                <div class="card-body">
                 
+                <!-- Message Body -->
+                
+                <div class="card-body">
+                <div>
+				<div data-th-replace="~{message :: messagebox}"></div>
+                </div>
                   <form 
                   data-th-action="@{'/doUserRegister'}" 
                   method="post" 
                   data-th-object="${userForm}"
                   role="form"
+                  novalidate
                   >
                   
                     <!----- Name Field ----->
+					 <small 
+					 data-th-if="${#fields.hasErrors('uName')}"
+					 data-th-errors="*{uName}"
+					 style="color:#800000;" 
+					 class="px-2"
+					 >
+					 </small>
                     <div class="input-group input-group-outline mb-3">
 					    <label 
 					    for="uName" 
-					    class="form-label"> </label>
+					    class="form-label"
+					    > </label>
 					    <input 
 					    id="uName" 
 					    type="text"
 					    data-th-field="*{uName}" 
 					    class="form-control" 
 					    placeholder="Name" 
-					    maxlength="50"
-					    >
+					    maxlength="30"
+					    required
+					    />
+					    <br><br>
 					</div>
 
                     <!----- Email Field ----->
+                    <small 
+					 data-th-if="${#fields.hasErrors('uEmail')}"
+					 data-th-errors="*{uEmail}"
+					 style="color:#800000;" 
+					 class="px-2"
+					 >
+					 </small>
                     <div class="input-group input-group-outline mb-3">
                       <label 
                       for="uEmail" 
@@ -132,6 +155,13 @@
                     </div>
                     
                     <!----- Phone Number Field ----->
+                    <small 
+					 data-th-if="${#fields.hasErrors('uPhoneNo')}"
+					 data-th-errors="*{uPhoneNo}"
+					 style="color:#800000;" 
+					 class="px-2"
+					 >
+					 </small>
                     <div class="input-group input-group-outline mb-3">
                       <label 
                       for="uPhoneNo" 
@@ -143,10 +173,18 @@
                       class="form-control" 
                       placeholder="Phone Number" 
                       maxlength="14"
-                      >
+                      required
+                      />
                     </div>
                     
                     <!----- PAN Number Field ----->
+                    <small 
+					 data-th-if="${#fields.hasErrors('uPanNumber')}"
+					 data-th-errors="*{uPanNumber}"
+					 style="color:#800000;" 
+					 class="px-2"
+					 >
+					 </small>
                     <div class="input-group input-group-outline mb-3">
                       <label 
                       for="uPanNumber" 
@@ -155,10 +193,11 @@
                       id="uPanNumber" 
                       type="text" 
                       data-th-field="*{uPanNumber}" 
-                      class="form-control" 
+                      class="form-control required" 
                       placeholder="PAN Number" 
                       maxlength="10"
-                      >
+                      required
+                      />
                     </div>
                     
                     <!----- Role Field ----->
@@ -180,6 +219,7 @@
 
                     
                     <!----- Username Field ----->
+					 </small>
                     <div class="input-group input-group-outline mb-3">
                       <label 
                       for="uUserName" 
@@ -190,11 +230,18 @@
                       data-th-field="*{uUserName}" 
                       class="form-control" 
                       placeholder="Username" 
-                      maxlength="20"
-                      >
+                      maxlength="15"
+                      />
                     </div>
                     
                     <!----- Password Field ----->
+                    <small 
+					 data-th-if="${#fields.hasErrors('uPassword')}"
+					 data-th-errors="*{uPassword}"
+					 style="color:#800000;" 
+					 class="px-2"
+					 >
+					 </small>
                     <div class="input-group input-group-outline mb-3">
                       <label 
                       for="uPassword" 
@@ -206,11 +253,12 @@
                       class="form-control" 
                       placeholder="Password" 
                       maxlength="20"
-                      >
+                      required
+                      />
                     </div>
                     
                     <div class="form-check form-check-info text-start ps-0">
-                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" th:field="*{uEnable}" checked>
                       <label class="form-check-label" for="flexCheckDefault">
                         I agree the <a href="javascript:;" class="text-dark font-weight-bolder">Terms and Conditions</a>
                       </label>
@@ -238,7 +286,7 @@
   <!--   Core JS Files   -->
   <script src="/js/core/popper.min.js"></script>
   <script src="/js/core/bootstrap.min.js"></script>
-  <script src="/js/plugins/perfect-scrollbar.min.js"></script>
+  <!-- <script src="/js/plugins/perfect-scrollbar.min.js"></script> -->
   <script src="/js/plugins/smooth-scrollbar.min.js"></script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
@@ -253,6 +301,7 @@
   <!-- <script async defer src="https://buttons.github.io/buttons.js"></script> -->
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="/js/material-dashboard.min.js?v=3.1.0"></script>
+  
 </body>
 
 </html>

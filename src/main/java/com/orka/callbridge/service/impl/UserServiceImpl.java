@@ -7,10 +7,12 @@ import java.util.UUID;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.orka.callbridge.dao.UserRepository;
 import com.orka.callbridge.entities.User;
+import com.orka.callbridge.helper.AppConstants;
 import com.orka.callbridge.helper.ResourceNotFoundException;
 import com.orka.callbridge.service.UserService;
 
@@ -19,6 +21,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -26,7 +31,15 @@ public class UserServiceImpl implements UserService {
 	public User saveUser(User user) {
 		String uId = UUID.randomUUID().toString();
 		user.setuId(uId);
+		
+		//Encoding Password
 		// user.setuProfilePic(uId);
+		user.setuPassword(passwordEncoder.encode(user.getPassword()));
+		
+		// Set User Role
+		user.setURoleList(List.of(AppConstants.ROLE_USER));		
+		
+		//logger.info(user.getProvider().toString()); //problem
 		return userRepository.save(user);
 	}
 
@@ -49,7 +62,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Optional<User> updateUser(User user) {
 		User userNew = userRepository.findById(user.getuId())
-				.orElseThrow(() -> new ResourceNotFoundException("User not found"));
+	    .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 		userNew.setuName(user.getuName());
 		userNew.setuEmail(user.getuEmail());
 		userNew.setuPhoneNo(user.getuPhoneNo());
