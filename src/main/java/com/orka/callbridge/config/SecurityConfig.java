@@ -97,7 +97,7 @@ public class SecurityConfig {
 				@Override
 				public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 						Authentication authentication) throws IOException, ServletException {
-					response.sendRedirect("/user/caller/dashboard");					
+					response.sendRedirect("/user/dashboard");					
 				}
 			});
 	        
