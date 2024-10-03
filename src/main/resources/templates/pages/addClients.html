@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" 
+  data-th-replace="~{pages/base :: parent(~{::#data},~{::title},~{::script})}"
+   xmlns:th="http://www.thymleaf.org">
+<head>
+<title>Add Clients</title>
+</head>
+<body>
+   <main>
+      <section id="data">
+         <div class="container-fluid py-4">
+         <div class="row">
+         <div class="col-12">
+         <div class="card my-4">
+         <div
+            class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+            <div
+               class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+               <h6 class="text-white text-capitalize ps-3">Add Clients</h6>
+            </div>
+         </div>
+         <div class="card-body px-0 pb-2">
+            <div class="table-responsive p-0">
+               <div class="page-header min-vh-100">
+                  <div class="container">
+                     <div class="row">
+                        <div
+                           class="col-5 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 start-0 text-center justify-content-center flex-column">
+                           <div
+                              class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center"
+                              style="background-image: url('/img/office-dark.jpg'); background-size: cover;">
+                           </div>
+                        </div>
+                        <div
+                           class="col-xl-6 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
+                        <div class="card card-plain">
+                        
+                        <div data-th-replace="~{message::messagebox}"></div>
+                        
+                        <div class="card-body">
+                        <form 
+                        data-th-action="@{'/user/clients/add'}" 
+                        method="post"  
+                        data-th-object="${clientForm}" 
+                        enctype="multipart/form-data"
+                        novalidate
+                        >
+
+                           <!----- Name Field ----->
+                           <p
+                           data-th-if="${#fields.hasErrors('cName')}" 
+                           data-th-errors="*{cName}"
+                           style="color:#800000;" 
+                           >
+                           Invalid Name
+                           </p>
+                           <div class="input-group input-group-outline mb-3">
+                              <label 
+                              for="cName" 
+                              class="form-label"
+                              >
+                              Client Name
+                              </label> 
+                              <input
+                              id="cName"
+                                 data-th-field="*{cName}" 
+                                 type="text"
+                                 class="form-control"
+                                 maxlength="30"
+                                 >
+                           </div>
+
+                           <!----- Phone No Field ----->
+                           <div class="input-group input-group-outline mb-3">
+                              <label 
+                              for="cPhoneNo"
+                              class="form-label"
+                              >
+                              Phone No
+                              </label> 
+                              <input
+                              	 id="cPhoneNo" 
+                                 data-th-field="*{cPhoneNo}" 
+                                 type="text"
+                                 class="form-control"
+                                 >
+                           </div>
+
+                           <!----- Email Field ----->
+                           <div class="input-group input-group-outline mb-3">
+                              <label 
+                              for="cEmail"
+                              class="form-label"
+                              >
+                              Email Id
+                              </label> 
+                              <input
+                              	 id="cEmail" 
+                                 data-th-field="*{cEmail}" 
+                                 type="text"
+                                 class="form-control"
+                                 maxlength="50"
+                                 >
+                           </div>
+
+                           <!----- Status Field ----->
+                           <div class="input-group input-group-outline mb-3">
+                              <label 
+                              for="cStatus"
+                              class="form-label"
+                              >
+                              </label> 
+                              <select
+                              	 name="status" 
+                              	 id="cStatus" 
+                                 data-th-field="*{cStatus}" 
+                                 class="form-control"
+                                 >
+                                 <option value="" disabled selected>Status</option>
+                                 <option value="nothing">Nothing</option>
+                                 <option value="ringing">Ringing</option>
+                                 <option value="busy">Busy</option>
+                                 <option value="outofRange">Out of range</option>
+                                 <option value="switchoff">Switched-off</option>
+                                 <option value="NoDNE">No. does not exists</option>
+                              </select>
+                           </div>
+                           <!-- <div class="input-group input-group-outline mb-3">
+                        			<label class="form-label">Pan Number</label>
+                        		<input type="text" id="cPanNumber" class="form-control">
+                  		</div> -->
+
+                           <!----- Last Date Contacted Field ----->
+                           <div class="input-group input-group-outline mb-3">
+                              <label 
+                              for="cLastDateContacted"
+                              class="form-label"
+                              >
+                              Last Date Contacted
+                              </label> 
+                              <input
+                              	 id="cLastDateContacted"
+                                 data-th-field="*{cLastDateContacted}" 
+                                 type="text"
+                                 class="form-control"
+                                 >
+                           </div>
+                           <!-- <div class="input-group input-group-outline mb-3">
+                        			<label class="form-label">Address</label>
+                        		<input type="text" id="cAddress" class="form-control">
+                  		</div> -->
+                           	<!-- <div class="input-group input-group-outline mb-3">                      
+                        			<label class="form-label">Pin Code</label>
+                        			<input type="text" id="cPinCode"  class="form-control">         
+                 		</div> -->
+		
+                           <!----- File Field ----->
+                           <div class="mb-2">
+                              <label 
+                              for="cImage"
+                              class="form-label"
+                              >
+                              </label> 
+                              <input
+                              id="cInputFileImage"
+                                 class="form-control" 
+                                 data-th-field="*{cImage}"
+                                 type="file"
+                                 accept="image/*"
+                                 >
+                                 <div class="cimage-container" style="display: none;">
+                                 <img 
+                                 alt="" 
+                                 id="cUploadedImagePreview" 
+                                 src=""
+                                 />
+                           		 </div>
+                           </div>
+                           
+                           <!-- <div class="mb-3">
+                  			<label for="formFileMultiple" class="form-label">Multiple files input example</label>
+                  			<input class="form-control" type="file" id="formFileMultiple" multiple>
+                  		</div> -->
+
+                           <!----- Interest Field ----->
+                           <div class="form-check form-check-info text-start ps-0">
+                              <input id="cInterest" data-th-field="*{cInterest}"
+                                 class="form-check-input" type="checkbox" value="">
+                              <label for="cInterest" class="form-check-label">
+                                 Interested </label>
+                           </div>
+
+                           <!----- Apply Cibil Field ----->
+                           <div class="form-check form-check-info text-start ps-0">
+                              <input id="cApplyCibil" data-th-field="*{cApplyCibil}"
+                                 class="form-check-input" type="checkbox" value="">
+                              <label for="cApplyCibil" class="form-check-label">
+                                 Apply for Cibil </label>
+                           </div>
+
+                           <div class="text-center">
+                              <button type="submit"
+                                 class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Submit</button>
+                           </div>
+                        </form>
+                        </div>
+                        </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         </div>
+         </div>
+         </div>
+         </div>
+      </section>
+   </main>
+<script>
+        console.log("Hello from the Add New Clients!");
+    </script>
+    <script data-th-src="@{'/js/admin.js'}"></script>
+</body>
+</html>

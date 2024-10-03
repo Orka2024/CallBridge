@@ -1,23 +1,26 @@
 package com.orka.callbridge.helper;
 
-import java.security.Principal;
-
 import org.springframework.security.core.Authentication;
-import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 
 public class Helper {
 
 	public static String getEmailOfSignedInUser(Authentication authentication) {
 
-		Principal principal = (Principal) authentication.getPrincipal();
+		// AuthenticationPrincipal principal = (AuthenticationPrincipal)
+		// authentication.getPrincipal();
 
-		if (principal instanceof OAuth2AuthenticatedPrincipal) {
+		if (authentication instanceof OAuth2AuthenticationToken) {
+
+			var aOAuth2AuthenticationToken = (OAuth2AuthenticationToken) authentication;
+			String authorizedClientRegistrationId = aOAuth2AuthenticationToken.getAuthorizedClientRegistrationId();
 
 			return "";
 
 		} else {
 
-			return principal.getName();
+			System.out.println("Getting Data from Local Database ");
+			return authentication.getName();
 		}
 
 	}

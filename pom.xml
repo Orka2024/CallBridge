@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.3</version>
+		<version>3.3.4</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.orka.callbridge</groupId>
@@ -17,11 +17,34 @@
 	<description>CallBridge a Calling software</description>
 	<url />
 	<licenses>
-		<license />
+		<license>
+			<name>The Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>src</distribution>
+		</license>
 	</licenses>
 	<developers>
-		<developer />
+		<developer>
+			<id>radsule</id>
+			<name>Rajani Adsule</name>
+			<email>itteam@orkaitsolutions.com</email>
+			<url>http://www.orkaitsolutions.com</url>
+			<roles>
+				<role>developer</role>
+				<role>lead</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>snadar</id>
+			<name>Stephen Nadar</name>
+			<email>itteam@orkaitsolutions.com</email>
+			<url>http://www.orkaitsolutions.com</url>
+			<roles>
+				<role>developer</role>
+			</roles>
+		</developer>
 	</developers>
+
 	<scm>
 		<connection />
 		<developerConnection />
@@ -48,10 +71,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-			<version>3.3.4</version>
+			<!--<version>3.3.4</version>-->
 		</dependency>
 
 		<dependency>
@@ -68,8 +97,19 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<!--<version>1.18.24</version>-->
+			<!--<version>1.18.30</version>-->
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.cloudinary</groupId>
+			<artifactId>cloudinary-http44</artifactId>
+			<version>1.36.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

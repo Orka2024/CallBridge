@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="~{pages/base::parent(~{::#h})}" xmlns:th="http://www.thymleaf.org">
+<html lang="en" 
+data-th-replace="~{pages/base :: parent(~{::#h},~{::title},~{::script})}"
+xmlns:th="http://www.thymleaf.org">
 <head>
 <title>Cibil Form</title>
 </head>
@@ -26,19 +28,34 @@
                       <th class="text-secondary opacity-7">Status</th>
                       <th class="text-secondary opacity-7">Interested</th>
                       <th class="text-secondary opacity-7">Date</th>
-                      <th class="text-secondary opacity-7">Nots</th>                     
+                      <th class="text-secondary opacity-7">Notes</th>                     
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <tr
+                    data-th-object="${c}"
+                    data-th-each="c : ${clients}"
+                    >
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div>
-                            <img src="/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+                            <img 
+                             onerror="this.src='https://static-00.iconduck.com/assets.00/profile-default-icon-2048x2045-u3j7s5nj.png'"
+                            data-th-src="@{*{cImage}}"
+                            src="/img/team-2.jpg" 
+                            class="avatar avatar-sm me-3 border-radius-lg" 
+                            alt="user"
+                            >
                           </div>
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">John Michael</h6>
-                            <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
+                            <h6 
+                            class="mb-0 text-sm"
+                            data-th-text="*{cName}"
+                            >Stephen Nadar</h6>
+                            <p 
+                            class="text-xs text-secondary mb-0"
+                            data-th-text="*{cEmail}"
+                            >sn@orkaitsolutions.com</p>
                           </div>
                         </div>
                       </td>
@@ -54,8 +71,8 @@
 						
 						            <!-- Buttons placed side by side with 2px space -->
 						            <div class="button-container">
-						                <button class="call-action" onclick="makeCall()"><i class="material-icons ">call</i></button>
-						                <button class="call-end" onclick="endCall()"><i class="material-icons">call_end</i></button>
+						                <button class="call-action" onclick="makeCall()"><i class="material-icons mt-1">call</i></button>
+						                <button class="call-end" onclick="endCall()"><i class="material-icons mt-1">call_end</i></button>
 						            </div>
 						        </div>
 						    </div>                
@@ -74,245 +91,14 @@
                       </td>
                       <td>
                           <div class="container">
-					        <button style="height:40px;" id="interest-button" class="not-interested">NOT INTERESTED</button>
+					        <button style="height:40px;" id="interest-button" class="not-interested" data-th-value="*{cInterest}">NOT INTERESTED</button>
 					      </div>
 					      <script src="/js/script.js"></script>                                                  
                       </td>
-                      <td class="align-middle text-center">
-                        23/04/18
-                      </td>
-                      <td >
-						 <div data-mdb-input-init class="form-outline">
-						  <textarea placeholder="Message" id="textAreaExample1" rows="2"></textarea>
-						</div>
-                      </td>
-                    </tr>
-                   
-                     <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">John Michael</h6>
-                            <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-						   <button class="call-button" onclick="openModal()">Call</button>
-						
-						    <div id="callModal" class="modal">
-						        <div class="modal-content">
-						            <span class="close" onclick="closeModal()">&times;</span>
-						            
-						            <!-- Image in the modal (centered) -->
-						            <img src="/img/us2.png" alt="Call Icon" class="call-image">
-						
-						            <!-- Buttons placed side by side with 2px space -->
-						            <div class="button-container">
-						                <button class="call-action" onclick="makeCall()"><i class="material-icons ">call</i></button>
-						                <button class="call-end" onclick="endCall()"><i class="material-icons">call_end</i></button>
-						            </div>
-						        </div>
-						    </div>                
-				     </td>
-                      <td class="align-middle text-center text-sm">
-                        <div class="input-group mb-1">
-						  <select class="form-select" id="inputGroupSelect03" aria-label="Example select with button addon">
-						    <option value="nothing">Nothing</option>
-						    <option value="ringing">Ringing</option>
-						    <option value="busy">Busy</option>
-						    <option value="outofRange">Out of range</option>
-						    <option value="switchoff">Switched-off</option>
-						    <option value="NoDNE">No. does not exists</option>						    
-						  </select>
-						</div>
-                      </td>
-                      <td>
-                          <div class="container">
-					        <button style="height:40px;" id="interest-button" class="not-interested">NOT INTERESTED</button>
-					      </div>
-					      <script src="/js/script.js"></script>                                                  
-                      </td>
-                      <td class="align-middle text-center">
-                        23/04/18
-                      </td>
-                      <td >
-						 <div data-mdb-input-init class="form-outline">
-						  <textarea placeholder="Message" id="textAreaExample1" rows="2"></textarea>
-						</div>
-                      </td>
-                    </tr>
-                   
-                              
-                     <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">John Michael</h6>
-                            <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-						   <button class="call-button" onclick="openModal()">Call</button>
-						
-						    <div id="callModal" class="modal">
-						        <div class="modal-content">
-						            <span class="close" onclick="closeModal()">&times;</span>
-						            
-						            <!-- Image in the modal (centered) -->
-						            <img src="/img/us2.png" alt="Call Icon" class="call-image">
-						
-						            <!-- Buttons placed side by side with 2px space -->
-						            <div class="button-container">
-						                <button class="call-action" onclick="makeCall()"><i class="material-icons ">call</i></button>
-						                <button class="call-end" onclick="endCall()"><i class="material-icons">call_end</i></button>
-						            </div>
-						        </div>
-						    </div>                
-				     </td>
-                      <td class="align-middle text-center text-sm">
-                        <div class="input-group mb-1">
-						  <select class="form-select" id="inputGroupSelect03" aria-label="Example select with button addon">
-						    <option value="nothing">Nothing</option>
-						    <option value="ringing">Ringing</option>
-						    <option value="busy">Busy</option>
-						    <option value="outofRange">Out of range</option>
-						    <option value="switchoff">Switched-off</option>
-						    <option value="NoDNE">No. does not exists</option>						    
-						  </select>
-						</div>
-                      </td>
-                      <td>
-                          <div class="container">
-					        <button style="height:40px;" id="interest-button" class="not-interested">NOT INTERESTED</button>
-					      </div>
-					      <script src="/js/script.js"></script>                                                  
-                      </td>
-                      <td class="align-middle text-center">
-                        23/04/18
-                      </td>
-                      <td >
-						 <div data-mdb-input-init class="form-outline">
-						  <textarea placeholder="Message" id="textAreaExample1" rows="2"></textarea>
-						</div>
-                      </td>
-                    </tr>
-                   
-                   <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">John Michael</h6>
-                            <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-						   <button class="call-button" onclick="openModal()">Call</button>
-						
-						    <div id="callModal" class="modal">
-						        <div class="modal-content">
-						            <span class="close" onclick="closeModal()">&times;</span>
-						            
-						            <!-- Image in the modal (centered) -->
-						            <img src="/img/us2.png" alt="Call Icon" class="call-image">
-						
-						            <!-- Buttons placed side by side with 2px space -->
-						            <div class="button-container">
-						                <button class="call-action" onclick="makeCall()"><i class="material-icons ">call</i></button>
-						                <button class="call-end" onclick="endCall()"><i class="material-icons">call_end</i></button>
-						            </div>
-						        </div>
-						    </div>                
-				     </td>
-                      <td class="align-middle text-center text-sm">
-                        <div class="input-group mb-1">
-						  <select class="form-select" id="inputGroupSelect03" aria-label="Example select with button addon">
-						    <option value="nothing">Nothing</option>
-						    <option value="ringing">Ringing</option>
-						    <option value="busy">Busy</option>
-						    <option value="outofRange">Out of range</option>
-						    <option value="switchoff">Switched-off</option>
-						    <option value="NoDNE">No. does not exists</option>						    
-						  </select>
-						</div>
-                      </td>
-                      <td>
-                          <div class="container">
-					        <button style="height:40px;" id="interest-button" class="not-interested">NOT INTERESTED</button>
-					      </div>
-					      <script src="/js/script.js"></script>                                                  
-                      </td>
-                      <td class="align-middle text-center">
-                        23/04/18
-                      </td>
-                      <td >
-						 <div data-mdb-input-init class="form-outline">
-						  <textarea placeholder="Message" id="textAreaExample1" rows="2"></textarea>
-						</div>
-                      </td>
-                    </tr>
-                   
-                                       <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">John Michael</h6>
-                            <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-						   <button class="call-button" onclick="openModal()">Call</button>
-						
-						    <div id="callModal" class="modal">
-						        <div class="modal-content">
-						            <span class="close" onclick="closeModal()">&times;</span>
-						            
-						            <!-- Image in the modal (centered) -->
-						            <img src="/img/us2.png" alt="Call Icon" class="call-image">
-						
-						            <!-- Buttons placed side by side with 2px space -->
-						            <div class="button-container">
-						                <button class="call-action" onclick="makeCall()"><i class="material-icons ">call</i></button>
-						                <button class="call-end" onclick="endCall()"><i class="material-icons">call_end</i></button>
-						            </div>
-						        </div>
-						    </div>                
-				     </td>
-                      <td class="align-middle text-center text-sm">
-                        <div class="input-group mb-1">
-						  <select class="form-select" id="inputGroupSelect03" aria-label="Example select with button addon">
-						    <option value="nothing">Nothing</option>
-						    <option value="ringing">Ringing</option>
-						    <option value="busy">Busy</option>
-						    <option value="outofRange">Out of range</option>
-						    <option value="switchoff">Switched-off</option>
-						    <option value="NoDNE">No. does not exists</option>						    
-						  </select>
-						</div>
-                      </td>
-                      <td>
-                          <div class="container">
-					        <button style="height:40px;" id="interest-button" class="not-interested">NOT INTERESTED</button>
-					      </div>
-					      <script src="/js/script.js"></script>                                                  
-                      </td>
-                      <td class="align-middle text-center">
-                        23/04/18
+                      <td 
+                      data-th-text="*{cLastDateContacted}"
+                      class="align-middle text-center">
+                        10/01/00
                       </td>
                       <td >
 						 <div data-mdb-input-init class="form-outline">

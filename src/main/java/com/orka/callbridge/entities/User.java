@@ -51,7 +51,7 @@ public class User implements UserDetails {
 	@Column(unique = true, length = 15)
 	private String uUserName;
 
-	@Column(length = 50)
+	@Column(unique = true, length = 50)
 	private String uEmail;
 
 	@Column(nullable = false, length = 14)
@@ -206,7 +206,7 @@ public class User implements UserDetails {
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 
 		// List of roles [USER, ADMIN]
-		//Collection of SimpleGrantedAuthority [roles{ADMIN, USER}]
+		// Collection of SimpleGrantedAuthority [roles{ADMIN, USER}]
 
 		Collection<SimpleGrantedAuthority> roles = uRoleList.stream().map(uRole -> new SimpleGrantedAuthority(uRole))
 				.collect(Collectors.toList());
@@ -216,7 +216,7 @@ public class User implements UserDetails {
 	// logic Login Credentials for Username
 	@Override
 	public String getUsername() {
-		return this.uUserName;
+		return this.uEmail;
 	}
 
 	@Override
