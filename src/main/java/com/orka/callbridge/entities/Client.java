@@ -26,9 +26,6 @@ public class Client {
 	@Id
 	private String cId;
 
-	@Column(unique = true, nullable = false)
-	private String cPanNumber;
-
 	@Column(nullable = false)
 	private String cName;
 
@@ -37,9 +34,36 @@ public class Client {
 	@Column(nullable = false)
 	private String cPhoneNo;
 
-	private String cStatus;
+	// @Column(nullable = false)
+	private String cPanNumber;
+
+	private String cDOB;
+
+	private String cLastDateContacted;
+
+	private String cLastUpdateDate;
+
+	private String cImage;
+
+	private String cFiles;
+
+	private String cAddress;
+
+	private int cPinCode;
+
+	private String cLoanType;
+
+	private String cIncomeSource;
+
+	private String cStatus = "Nothing";
 
 	private boolean cInterest = false;
+
+	private boolean cApplyCibil = false;
+
+	private boolean cEnabled = true;
+
+	private String cCloudinaryImagePublicId;
 
 	@Column(length = 5000)
 	private String cDescription;

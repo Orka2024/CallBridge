@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
+//import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -45,11 +45,6 @@ public class SecurityConfig {
 //		return inMemoryUserDetailsManager;
 //	}
 
-	/*
-	 * @Bean public PasswordEncoder passwordEncoder() { return new
-	 * BCryptPasswordEncoder(); // Use BCrypt for better security }
-	 */
-
 	@Autowired
 	private SecurityCustomUserDetailService userDetailService;
 
@@ -59,13 +54,11 @@ public class SecurityConfig {
 		DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
 		daoAuthenticationProvider.setUserDetailsService(userDetailService); // UserDetailsService object
 		daoAuthenticationProvider.setPasswordEncoder(passwordEncoder()); // PasswordEncoder object
-
 		return daoAuthenticationProvider;
 	}
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-
 		// Configuration
 		// Configure urls for public and private
 		httpSecurity.authorizeHttpRequests(authorize -> {
@@ -73,48 +66,47 @@ public class SecurityConfig {
 			authorize.requestMatchers("/user/**").authenticated();
 			authorize.anyRequest().permitAll();
 		});
-
-		// Form Default Login
+		// Form Login
 		// If we need to change anything : Related to Form Login
-	    httpSecurity.formLogin(formLogin -> {
-	        formLogin.loginPage("/signin");
-	        formLogin.loginProcessingUrl("/authenticate");
-	        formLogin.successForwardUrl("/user/dashboard");
-	        formLogin.failureForwardUrl("/signin?error=true");
-	        formLogin.usernameParameter("uEmail");
-	        formLogin.passwordParameter("uPassword");
-	        formLogin.failureHandler(new AuthenticationFailureHandler() {
-				
+
+		httpSecurity.formLogin(formLogin -> {
+			formLogin.loginPage("/signin");
+			formLogin.loginProcessingUrl("/authenticate");
+			formLogin.successForwardUrl("/user/dashboard");
+			formLogin.failureForwardUrl("/signin?error=true");
+			formLogin.usernameParameter("uEmail");
+			formLogin.passwordParameter("uPassword");
+
+			formLogin.failureHandler(new AuthenticationFailureHandler() {
+
 				@Override
 				public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 						AuthenticationException exception) throws IOException, ServletException {
-					response.sendRedirect("/signin?error=true");					
+					response.sendRedirect("/signin?error=true");
 				}
 			});
-	        
-	        formLogin.successHandler(new AuthenticationSuccessHandler() {
-				
+
+			formLogin.successHandler(new AuthenticationSuccessHandler() {
 				@Override
 				public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 						Authentication authentication) throws IOException, ServletException {
-					response.sendRedirect("/user/dashboard");					
+					response.sendRedirect("/user/dashboard");
 				}
 			});
-	        
-	        
-	        });
-	    
-	    httpSecurity.logout(logoutForm->{
-	    	logoutForm.logoutUrl("/signout");
-	    	logoutForm.logoutSuccessUrl("/signin?logout=true");
-	    });
+
+		});
+
+		httpSecurity.logout(logoutForm -> {
+			logoutForm.logoutUrl("/signout");
+			logoutForm.logoutSuccessUrl("/signin?logout=true");
+		});
 
 		return httpSecurity.build();
 	}
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
+		return new BCryptPasswordEncoder(); // Use BCrypt for better security
 	}
 
 }

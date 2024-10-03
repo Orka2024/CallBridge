@@ -13,6 +13,8 @@ public interface UserService {
 	User saveUser(User user);
 
 	Optional<User> getUserById(String uId);
+	
+	User getUserByEmail(String uEmail);
 
 	Optional<User> updateUser(User user);
 
@@ -22,7 +24,7 @@ public interface UserService {
 
 	boolean isUserExist(String uId);
 
-	boolean isUserExistByUserName(String uUserName);
+	//boolean isUserExistByUserName(String uUserName);
 
 	boolean isUserExistByEmail(String uEmail);
 

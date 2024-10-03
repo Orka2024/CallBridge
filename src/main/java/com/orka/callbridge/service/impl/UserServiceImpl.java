@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
@@ -31,15 +31,15 @@ public class UserServiceImpl implements UserService {
 	public User saveUser(User user) {
 		String uId = UUID.randomUUID().toString();
 		user.setuId(uId);
-		
-		//Encoding Password
+
+		// Encoding Password
 		// user.setuProfilePic(uId);
 		user.setuPassword(passwordEncoder.encode(user.getPassword()));
-		
+
 		// Set User Role
-		user.setURoleList(List.of(AppConstants.ROLE_USER));		
-		
-		//logger.info(user.getProvider().toString()); //problem
+		user.setURoleList(List.of(AppConstants.ROLE_USER));
+
+		// logger.info(user.getProvider().toString()); //problem
 		return userRepository.save(user);
 	}
 
@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Optional<User> updateUser(User user) {
 		User userNew = userRepository.findById(user.getuId())
-	    .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+				.orElseThrow(() -> new ResourceNotFoundException("User not found"));
 		userNew.setuName(user.getuName());
 		userNew.setuEmail(user.getuEmail());
 		userNew.setuPhoneNo(user.getuPhoneNo());
@@ -94,11 +94,11 @@ public class UserServiceImpl implements UserService {
 		return userNew != null ? true : false;
 	}
 
-	@Override
-	public boolean isUserExistByUserName(String uUserName) {
-		User userNew = userRepository.findByUUserName(uUserName).orElse(null);
-		return userNew != null ? true : false;
-	}
+	/*
+	 * @Override public boolean isUserExistByUserName(String uUserName) { User
+	 * userNew = userRepository.findByUUserName(uUserName).orElse(null); return
+	 * userNew != null ? true : false; }
+	 */
 
 	@Override
 	public boolean isUserExistByEmail(String uEmail) {
@@ -109,6 +109,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> getAllUsers() {
 		return userRepository.findAll();
+	}
+
+	@Override
+	public User getUserByEmail(String uEmail) {
+		return userRepository.findByUEmail(uEmail).orElse(null);
 	}
 
 }
