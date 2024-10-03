@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="~{pages/base::parent(~{::#e})}" xmlns:th="http://www.thymleaf.org">
+<html lang="en" data-th-replace="~{pages/base::parent(~{::#e},~{::title},~{::script})}" xmlns:th="http://www.thymleaf.org">
 <head>
-<title>Cibil Form</title>
+<title>Hold</title>
 </head>
 <body>
 
@@ -127,6 +127,9 @@
       </div>
 
    </section>
+  <script>
+  console.log("Hold page")
+  </script>
 </main>
 	
 </body> 

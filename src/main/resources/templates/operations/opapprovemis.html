@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" data-th-replace="~{pages/base::parent(~{::#c},~{::title},~{::script})}" xmlns:th="http://www.thymleaf.org">
+<html lang="en" th:replace="~{operations/opbase::parent(~{::#c})}" xmlns:th="http://www.thymleaf.org">
 <head>
-<title>Approve</title>
+<title>Cibil Form</title>
 </head>
 <body>
 
@@ -131,9 +131,6 @@
       </div>
      </div> 
    </section>
-  <script>
-  console.log("Approve page")
-  </script>
 </main>
 	
 </body> 

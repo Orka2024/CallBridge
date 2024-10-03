@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" data-th-replace="~{pages/base::parent(~{::#h},~{::title},~{::script})}" xmlns:th="http://www.thymleaf.org">
+<html lang="en" th:replace="~{operations/opbase::parent(~{::#a})}" xmlns:th="http://www.thymleaf.org">
 <head>
-<title>Makecalls</title>
+<title>Cibil Application</title>
 </head>
 <body>
 
 <main>
-   <section id="h">
+   <section id="a">
       <div class="container-fluid py-4">
        <div class="row">
         <div class="col-12">
@@ -21,12 +21,12 @@
                 <table class="table align-items-center mb-0"  id="dataTable">
                   <thead>
                     <tr>
-                      <th class="text-secondary opacity-7">Client Name</th>
-                      <th class="text-secondary opacity-7">Call</th>
-                      <th class="text-secondary opacity-7">Status</th>
-                      <th class="text-secondary opacity-7">Interested</th>
-                      <th class="text-secondary opacity-7">Date</th>
-                      <th class="text-secondary opacity-7">Nots</th>                     
+                      <th class="text-secondary opacity-7">Customer Name</th>
+                      <th class="text-secondary opacity-7">Contact</th>
+                      <th class="text-secondary opacity-7">Pan Number</th>
+                      <th class="text-secondary opacity-7">Loan Type</th>
+                      <th class="text-secondary opacity-7">Income Source</th>
+                      <th class="text-secondary opacity-7">Update</th>                     
                     </tr>
                   </thead>
                   <tbody>
@@ -42,6 +42,7 @@
                           </div>
                         </div>
                       </td>
+                      
                       <td>
 						   <button class="call-button" onclick="openModal()">Call</button>
 						
@@ -335,9 +336,6 @@
       </div>
 
    </section>
-  <script>
-  console.log("Makecall page")
-  </script>
 </main>
 	
 </body> 

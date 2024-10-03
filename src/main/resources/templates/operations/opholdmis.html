@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" data-th-replace="~{pages/base::parent(~{::#c},~{::title},~{::script})}" xmlns:th="http://www.thymleaf.org">
+<html lang="en" th:replace="~{operations/opbase::parent(~{::#e})}" xmlns:th="http://www.thymleaf.org">
 <head>
-<title>Approve</title>
+<title>Cibil Form</title>
 </head>
 <body>
 
 <main>
-   <section id="c">
-   <div class="container-fluid py-4">
+   <section id="e">
+     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-12">
           <div class="card my-4">
@@ -52,11 +52,11 @@
                       <td>
                        
                       </td>
-                     
-                      
+                                           
                       <td class="align-middle text-center">
-                           <input type="button" class="btn btn-lg bg-gradient-primary btn-lg w-40 mt-1 mb-0" onclick="location.href='/Cibilform';" value="MoveToHold" />                         
-				      </td>
+                           <input type="button" class="btn btn-lg bg-gradient-primary btn-lg mt-1 mb-0" onclick="location.href='/Cibilform';" value="MoveToApprove" /> 
+                           <input type="button" class="btn btn-lg bg-gradient-primary btn-lg  mt-1 mb-0" onclick="location.href='/Cibilform';" value="MoveToReject" />                                                   
+				      </td> 
                      
                     </tr>
                     
@@ -83,12 +83,11 @@
                       <td>
                        
                       </td>
-    
-                      
+                        
                       <td class="align-middle text-center">
-                           <input type="button" class="btn btn-lg bg-gradient-primary btn-lg w-40 mt-1 mb-0" onclick="location.href='/Cibilform';" value="MoveToHold" />                         
-				      </td>
-                     
+                           <input type="button" class="btn btn-lg bg-gradient-primary btn-lg mt-1 mb-0" onclick="location.href='/Cibilform';" value="MoveToApprove" /> 
+                           <input type="button" class="btn btn-lg bg-gradient-primary btn-lg  mt-1 mb-0" onclick="location.href='/Cibilform';" value="MoveToReject" />                                                   
+				      </td>                      
                     </tr>
                     
                     <tr>
@@ -113,15 +112,12 @@
                       <td>
                         
                       </td>
-                   
-                      <td class="align-middle text-center">
-                           <input type="button" class="btn btn-lg bg-gradient-primary btn-lg w-40 mt-1 mb-0" onclick="location.href='/Cibilform';" value="MoveToHold" />                         
-				      </td>
-                     
-                    </tr>
-                    
-                   
-                  
+                                         
+                     <td class="align-middle text-center">
+                           <input type="button" class="btn btn-lg bg-gradient-primary btn-lg mt-1 mb-0" onclick="location.href='/Cibilform';" value="MoveToApprove" /> 
+                           <input type="button" class="btn btn-lg bg-gradient-primary btn-lg  mt-1 mb-0" onclick="location.href='/Cibilform';" value="MoveToReject" />                                                   
+				      </td>               
+                    </tr>                   
                   </tbody>
                 </table>
               </div>
@@ -129,16 +125,17 @@
           </div>
         </div>
       </div>
-     </div> 
+
    </section>
-  <script>
-  console.log("Approve page")
-  </script>
 </main>
 	
 </body> 
 
 </html>
+
+
+
+
 
 
 
