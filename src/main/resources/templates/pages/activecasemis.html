@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="~{pages/base::parent(~{::#c})}" xmlns:th="http://www.thymleaf.org">
+<html lang="en" data-th-replace="~{pages/base::parent(~{::#f},~{::title},~{::script})}" xmlns:th="http://www.thymleaf.org">
 <head>
-<title>Cibil Form</title>
+<title>Active List</title>
 </head>
 <body>
 
 <main>
-   <section id="c">
+   <section id="f">
       <div class="container-fluid py-4">
       <div class="row">
         <div class="col-12">
@@ -122,6 +122,11 @@
       </div>
 
    </section>
+
+  <script>
+  console.log("Active List page")
+  </script>
+
 </main>
 	
 </body> 

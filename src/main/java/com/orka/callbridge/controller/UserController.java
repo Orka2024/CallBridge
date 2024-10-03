@@ -4,18 +4,23 @@ import java.security.Principal;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.orka.callbridge.entities.Cibilclient;
+import com.orka.callbridge.forms.Cibilclientform;
 import com.orka.callbridge.helper.Helper;
+import com.orka.callbridge.service.CibilclientService;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
-
 
 	private Logger logger = LoggerFactory.getLogger(UserController.class);
 
@@ -30,10 +35,7 @@ public class UserController {
 	}
 
 	@GetMapping("/profile")
-	public String showUserProfile(Authentication authentication) {
-		// String name = principal.getName();
-		String username = Helper.getEmailOfSignedInUser(authentication);
-		logger.info("User Logged in: {}", username);
+	public String showUserProfile() {
 		return "pages/profile";
 	}
 
@@ -42,6 +44,21 @@ public class UserController {
 		return "pages/CallersCalling";
 	}
 
+	@GetMapping("/interested")
+	public String interested() {
+		return "pages/interested";
+	}
+	
+	@GetMapping("/noninterested")
+	public String noninterested() {
+		return "pages/noninterested";
+	}
+	
+	@GetMapping("/dayreport")
+	public String dailyreport() {
+		return "pages/daycallreport";
+	}
+	
 	@RequestMapping(value = "/admin/dashboard")
 	public String adminDashboard() {
 		return "admin/admindashboard";
@@ -67,18 +84,44 @@ public class UserController {
 		return "pages/InterestCustomer_table";
 	}
 
-
+	@Autowired
+	private CibilclientService cibilclientService;
+	
 	@GetMapping("/applycibil")
 	public String CreateForm(Model model) {  
+		
+		Cibilclientform cibilclientform=new Cibilclientform();
+		model.addAttribute("cibilclientform",cibilclientform);
 		return "pages/applycibilform";
 	
 	}
-
-	@GetMapping("/cibilmis")
-	public String Miscibil(Model model) {  
-		return "pages/applycibilmis";
 	
+	@RequestMapping(value="/cibilreturn",method = RequestMethod.POST)
+	public String cibilreturn(@ModelAttribute Cibilclientform cibilclientform) {  
+		System.out.println(cibilclientform);
+		Cibilclient cibilclient=Cibilclient.builder()
+				.clientname(cibilclientform.getClientname())
+				.clientnumber(cibilclientform.getClientnumber())
+				.clientemail(cibilclientform.getClientemail())
+				.clientpan(cibilclientform.getClientpan())
+				.clientbod(cibilclientform.getClientbod())
+				.clientaddress(cibilclientform.getClientaddress())
+				.clientpin(cibilclientform.getClientpin())
+				.clientloanty(cibilclientform.getClientloanty())
+				.clientIncome(cibilclientform.getClientIncome())				
+				.build();
+		Cibilclient saveclient= cibilclientService.saveCibilclient(cibilclient);
+		System.out.println("New Client Save"+saveclient);
+		return "redirect:/user/applycibil";	
 	}
+	
+	
+	@GetMapping("/cibilmis")
+	public String Miscibil() { 		
+		return "pages/applycibilmis";
+	}
+	
+
 	
 	@GetMapping("/activelist")
 	public String activelistmis(Model model) {  
