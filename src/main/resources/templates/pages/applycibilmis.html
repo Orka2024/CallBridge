@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="~{pages/base::parent(~{::#b})}" xmlns:th="http://www.thymleaf.org">
+<html lang="en" data-th-replace="~{pages/base::parent(~{::#b},~{::title},~{::script})}" xmlns:th="http://www.thymleaf.org">
+
 <head>
-<title>Cibil Form</title>
+<title>CibilMis</title>
 </head>
 <body>
 
@@ -130,6 +131,7 @@
                    
                   
                   </tbody>
+                
                 </table>
               </div>
             </div>
@@ -138,6 +140,9 @@
       </div>
    </div>
    </section>
+  <script>
+  console.log("CibilMis page")
+  </script>
 </main>
 	
 </body> 

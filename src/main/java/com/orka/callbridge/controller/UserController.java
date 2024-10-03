@@ -7,9 +7,17 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 
 import com.orka.callbridge.service.UserService;
+import com.orka.callbridge.entities.Cibilclient;
+import com.orka.callbridge.forms.Cibilclientform;
+import com.orka.callbridge.helper.Helper;
+import com.orka.callbridge.service.CibilclientService;
+
 
 @Controller
 @RequestMapping("/user")
@@ -19,6 +27,9 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+  
+  @Autowired
+	private CibilclientService cibilclientService;
 
 	@RequestMapping(value = "/dashboard")
 	public String callerDashboard() {
@@ -36,6 +47,21 @@ public class UserController {
 		return "pages/dashboard";
 	}
 
+	@GetMapping("/interested")
+	public String interested() {
+		return "pages/interested";
+	}
+	
+	@GetMapping("/noninterested")
+	public String noninterested() {
+		return "pages/noninterested";
+	}
+	
+	@GetMapping("/dayreport")
+	public String dailyreport() {
+		return "pages/daycallreport";
+	}
+	
 	@RequestMapping(value = "/admin/dashboard")
 	public String adminDashboard() {
 		return "admin/admindashboard";
@@ -60,17 +86,39 @@ public class UserController {
 	public String InterCust_table(Model model) {
 		return "pages/InterestCustomer_table";
 	}
-
+	
 	@GetMapping("/applycibil")
-	public String CreateForm(Model model) {
+	public String CreateForm(Model model) {  
+		
+		Cibilclientform cibilclientform=new Cibilclientform();
+		model.addAttribute("cibilclientform",cibilclientform);
 		return "pages/applycibilform";
 
 	}
-
+	
+	@RequestMapping(value="/cibilreturn",method = RequestMethod.POST)
+	public String cibilreturn(@ModelAttribute Cibilclientform cibilclientform) {  
+		System.out.println(cibilclientform);
+		Cibilclient cibilclient=Cibilclient.builder()
+				.clientname(cibilclientform.getClientname())
+				.clientnumber(cibilclientform.getClientnumber())
+				.clientemail(cibilclientform.getClientemail())
+				.clientpan(cibilclientform.getClientpan())
+				.clientbod(cibilclientform.getClientbod())
+				.clientaddress(cibilclientform.getClientaddress())
+				.clientpin(cibilclientform.getClientpin())
+				.clientloanty(cibilclientform.getClientloanty())
+				.clientIncome(cibilclientform.getClientIncome())				
+				.build();
+		Cibilclient saveclient= cibilclientService.saveCibilclient(cibilclient);
+		System.out.println("New Client Save"+saveclient);
+		return "redirect:/user/applycibil";	
+	}
+	
+	
 	@GetMapping("/cibilmis")
-	public String Miscibil(Model model) {
+	public String Miscibil() { 		
 		return "pages/applycibilmis";
-
 	}
 
 	@GetMapping("/activelist")

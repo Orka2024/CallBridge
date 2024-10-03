@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" 
-  data-th-replace="~{pages/base :: parent(~{::#data},~{::title},~{::script})}"
-xmlns:th="http://www.thymleaf.org">
+      data-th-replace="~{pages/base::parent(~{::#data},~{::title},~{::script})}" 
+      xmlns:th="http://www.thymleaf.org">
 <head>
 <title>Cibil Form</title>
 </head>
@@ -30,48 +30,48 @@ xmlns:th="http://www.thymleaf.org">
 							            <div class="col-xl-6 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
 							              <div class="card card-plain">
 							                <div class="card-body">
-							                    <form action="cibilmis" method="post">              
+							                    <form data-th-action="@{'/user/cibilreturn'}" method="post"  data-th-object="${cibilclientform}"  >              
 								             	   <div class="input-group input-group-outline mb-3">           	        
 								             	              <label class="form-label">Customer Name</label>
-										                      <input type="text" id="name" class="form-control"  required>         
+										                      <input type="text" id="clientname" class="form-control"  data-th-field="*{clientname}" required>         
 										           </div>
-										           <div class="input-group input-group-outline mb-3">
+										          <div class="input-group input-group-outline mb-3">
 										                      <label class="form-label">Contact</label>
-								       						  <input type="text" id="phone" class="form-control"  required>
+								       						  <input type="text" id="clientnumber" class="form-control" data-th-field="*{clientnumber}" required>
 								                    </div>
 								                    
 								                    <div class="input-group input-group-outline mb-3">           	        
 								             	              <label class="form-label">Email Id</label>
-										                      <input type="text" id="name" class="form-control"  required>         
+										                      <input type="email" id="clientemail" class="form-control" data-th-field="*{clientemail}" required>         
 										           </div>
 										           <div class="input-group input-group-outline mb-3">
 										                      <label class="form-label">Pan Number</label>
-								       						  <input type="text" id="phone" class="form-control"  required>
+								       						  <input type="text"  class="form-control" data-th-field="*{clientpan}" required>
 								                    </div>
 								                    <div class="input-group input-group-outline mb-3">           	        
 								             	              <label class="form-label">Birthday</label>
-										                      <input type="text" id="name" class="form-control"  required>         
+										                      <input type="text"  class="form-control" th:field="*{clientbod}" required>         
 										           </div>
 										           <div class="input-group input-group-outline mb-3">
 										                      <label class="form-label">Address</label>
-								       						  <input type="text" id="phone" class="form-control"  required>
+								       						  <input type="text"  class="form-control" data-th-field="*{clientaddress}" required>
 								                    </div>
 								                    <div class="input-group input-group-outline mb-3">           	        
 								             	              <label class="form-label">Pin Code</label>
-										                      <input type="text" id="name"  class="form-control"  required>         
+										                      <input type="text" class="form-control" data-th-field="*{clientpin}"  required>         
 										           </div>
 										           <div class="input-group input-group-outline mb-3">
 										                      <label class="form-label">Loan Type</label>
-								       						  <input type="text" id="phone" class="form-control"  required>
+								       						  <input type="text" class="form-control" data-th-field="*{clientloanty}" required>
 								                    </div>
 								                    <div class="input-group input-group-outline mb-3">
 										                      <label class="form-label">Income Source</label>
-								       						  <input type="text" id="phone" class="form-control"  required>
+								       						  <input type="text" class="form-control" data-th-field="*{clientIncome}" required>
 								                    </div>
 								                  
 													 <div class="text-center">
-									                      <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Submit</button>
-									                 </div>
+									                      <button type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Submit</button>
+									                 </div> 
 												</form>              
 							                </div>						
 							              </div>
@@ -87,6 +87,9 @@ xmlns:th="http://www.thymleaf.org">
 	      
 	    </div>
    </section>
+  <script>
+  console.log("Cibil form page")
+  </script>
 </main>
 	<script>console.log="This is Apply Cibil Page!";</script>
 </body> 

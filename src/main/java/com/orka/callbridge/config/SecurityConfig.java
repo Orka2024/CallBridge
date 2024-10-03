@@ -68,6 +68,7 @@ public class SecurityConfig {
 		});
 		// Form Login
 		// If we need to change anything : Related to Form Login
+
 		httpSecurity.formLogin(formLogin -> {
 			formLogin.loginPage("/signin");
 			formLogin.loginProcessingUrl("/authenticate");
@@ -77,6 +78,7 @@ public class SecurityConfig {
 			formLogin.passwordParameter("uPassword");
 
 			formLogin.failureHandler(new AuthenticationFailureHandler() {
+
 				@Override
 				public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 						AuthenticationException exception) throws IOException, ServletException {
