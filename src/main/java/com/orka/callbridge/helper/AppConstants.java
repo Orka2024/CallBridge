@@ -12,7 +12,10 @@ public class AppConstants {
 	public static final int CLIENT_IMAGE_WIDTH = 500;
 	public static final int CLIENT_IMAGE_HEIGHT = 500;
 	public static final String CLIENT_IMAGE_CROP = "fill";
+	public static final String DEFAULT_PROFILE_IMAGE_ID = "https://static-00.iconduck.com/assets.00/profile-default-icon-2048x2045-u3j7s5nj.png";
 	
 	public static final long MAX_IMAGE_SIZE = 5 * 1024 * 1024;
+	
+	public static final int PAGE_SIZE = 5;
 
 }
