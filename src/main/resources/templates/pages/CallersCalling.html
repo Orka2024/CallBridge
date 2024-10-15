@@ -1,9 +1,9 @@
-<!DOCTYPE>
+<!DOCTYPE html>
 <html lang="en" 
 data-th-replace="~{pages/base :: parent(~{::#h},~{::title},~{::script})}"
 xmlns:th="http://www.thymleaf.org">
 <head>
-<title>Makecalls</title>
+<title>Make Calls</title>
 </head>
 <body>
 <main>
@@ -12,11 +12,28 @@ xmlns:th="http://www.thymleaf.org">
        <div class="row">
         <div class="col-12">
           <div class="card my-4">
-            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-              <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                <h6 class="text-white text-capitalize ps-3">Make Call</h6>
-              </div>
-            </div>
+          
+          
+<div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+  <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3 d-flex justify-content-between align-items-center">
+    <h6 class="text-white text-capitalize ps-3">Make Call</h6>
+    <div class="input-group input-group-outline pe-3" style="width: 200px;">
+                        <select
+                      id="countries_disabled"
+                      class="form-control"
+                    >
+                      <option selected value="">Select Field</option>
+                      <option value="name">Name</option>
+                      <option value="phone">Phone</option>
+                      <option value="email">Email</option>
+                    </select>
+      <!-- <input id="Search" type="text" class="form-control" placeholder="Search">  -->
+    </div>
+  </div>
+</div>
+
+
+
             <div class="card-body px-0 pb-2">
               <div class="table-responsive p-0">
                 <table class="table align-items-center mb-0"  id="dataTable">
@@ -33,7 +50,7 @@ xmlns:th="http://www.thymleaf.org">
                   <tbody>
                     <tr
                     data-th-object="${c}"
-                    data-th-each="c : ${clients}"
+                    data-th-each="c : ${pageClients.getContent()}"
                     >
                       <td>
                         <div class="d-flex px-2 py-1">
@@ -58,27 +75,39 @@ xmlns:th="http://www.thymleaf.org">
                           </div>
                         </div>
                       </td>
-                      <td>
-						   <button class="call-button" onclick="openModal()">Call</button>
-						
-						    <div id="callModal" class="modal">
-						        <div class="modal-content">
-						            <span class="close" onclick="closeModal()">&times;</span>
-						            
-						            <!-- Image in the modal (centered) -->
-						            <img src="/img/us2.png" alt="Call Icon" class="call-image">
-						
-						            <!-- Buttons placed side by side with 2px space -->
-						            <div class="button-container">
-						                <button class="call-action" onclick="makeCall()"><i class="material-icons mt-1">call</i></button>
-						                <button class="call-end" onclick="endCall()"><i class="material-icons mt-1">call_end</i></button>
-						            </div>
-						        </div>
-						    </div>                
-				     </td>
+<td>
+    <button 
+    id="cName"
+    class="call-button" 
+    data-th-value="*{cName}" 
+    th:data-name="*{cName}"
+    onclick="openModal(this.dataset.name)">
+    Call
+    </button>
+    <div id="callModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img src="/img/us2.png" alt="Call Icon" class="call-image">
+            
+            <div class="d-flex flex-column justify-content-center">
+                            <h5 
+                            id="modalName"
+                            class="mb-0 text-sm"
+                            data-th-text="*{cName}"
+                            >Stephen Nadar</h5>
+                          </div>
+	            
+            <div class="button-container">
+                <button class="call-action" onclick="makeCall()"><i class="material-icons mt-1">call</i></button>
+                <button class="call-end" onclick="endCall()"><i class="material-icons mt-1">call_end</i></button>
+            </div>
+        </div>
+    </div>
+  <link rel="stylesheet" href="/css/styles.css">
+</td>
                       <td class="align-middle text-center text-sm">
                         <div class="input-group mb-1">
-						  <select class="form-select" id="inputGroupSelect03" aria-label="Example select with button addon">
+						  <select class="form-select" aria-label="Example select with button addon">
 						    <option value="nothing">Nothing</option>
 						    <option value="ringing">Ringing</option>
 						    <option value="busy">Busy</option>
@@ -88,12 +117,18 @@ xmlns:th="http://www.thymleaf.org">
 						  </select>
 						</div>
                       </td>
-                      <td>
-                          <div class="container">
-					        <button style="height:40px;" id="interest-button" class="not-interested" data-th-value="*{cInterest}">NOT INTERESTED</button>
+					  <td>
+					      <div class="container">
+					          <button 
+					              class="interest-button ${c.cInterest ? 'interested' : 'not-interested'}"
+					              data-th-text="${c.cInterest ? 'Interested' : 'Not Interested'}"
+					              data-th-value="*{cInterest}">
+					          </button>
 					      </div>
-					      <script src="/js/script.js"></script>                                                  
-                      </td>
+					  </td>
+
+
+
                       <td 
                       data-th-text="*{cLastDateContacted}"
                       class="align-middle text-center">
@@ -101,7 +136,7 @@ xmlns:th="http://www.thymleaf.org">
                       </td>
                       <td >
 						 <div data-mdb-input-init class="form-outline">
-						  <textarea placeholder="Message" id="textAreaExample1" rows="2"></textarea>
+						  <textarea placeholder="Message" rows="2"></textarea>
 						</div>
                       </td>
                     </tr>
@@ -110,6 +145,46 @@ xmlns:th="http://www.thymleaf.org">
               </div>
             </div>
           </div>
+            <!-- Pagination Component -->
+			<div class="paginationContainer">
+			  <nav aria-label="Page navigation example">
+			    <ul class="pagination justify-content-center">
+			    
+			      <li 
+			      data-th-class="${pageClients.first} ? 'page-item disabled' : 'page-item'"
+			      class="page-item">
+			        <a 
+			        data-th-href="@{'/user/clients/calling?size='+${pageSize}+'&page='+${pageClients.number-1}}"
+			        class="page-link" href="#" aria-label="Previous">
+    			      <span aria-hidden="true">&laquo;</span>
+    			    </a>
+			      </li>
+			      
+			      <li 
+			      class="page-item"
+			      data-th-each="index : ${#numbers.sequence(0,pageClients.totalPages-1)}">
+			        <a 
+			        data-th-href="@{'/user/clients/calling?size='+${pageSize}+'&page='+${index}}"
+			        data-th-classappend="${index==pageClients.number? 'list-group-item text-white bg-dark' : ''}"
+			        class="page-link" 
+			        href="#">
+			        <span data-th-text="${index+1}"></span>
+			        </a>
+			      </li>
+			      
+			      <li 
+			      data-th-class="${pageClients.last} ? 'page-item disabled' : 'page-item'"
+			      class="page-item">
+			        <a 
+			        data-th-href="@{'/user/clients/calling?size='+${pageSize}+'&page='+${pageClients.number+1}}"
+			        class="page-link" href="#" aria-label="Next">
+        			  <span aria-hidden="true">&raquo;</span>
+      				</a>
+			      </li>
+			      
+			    </ul>
+			  </nav>
+			</div>
         </div>
       </div>
       </div>
@@ -117,6 +192,7 @@ xmlns:th="http://www.thymleaf.org">
   <script>
   console.log("Makecall page")
   </script>
+  <script src="/js/script.js"></script>
 </main>
 	
 </body> 

@@ -1,11 +1,11 @@
 package com.orka.callbridge.controller;
 
-import java.util.List;
 import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.orka.callbridge.entities.Client;
 import com.orka.callbridge.entities.User;
 import com.orka.callbridge.forms.ClientForm;
+import com.orka.callbridge.helper.AppConstants;
 import com.orka.callbridge.helper.Helper;
 import com.orka.callbridge.helper.Message;
 import com.orka.callbridge.helper.MessageType;
@@ -112,12 +114,22 @@ public class ClientController {
 	}
 
 	@GetMapping("/calling")
-	public String callingClients(Model model, Authentication authentication) {
+	public String callingClients(
+			@RequestParam(value ="page",defaultValue = "0") int page,
+			@RequestParam(value="size", defaultValue = AppConstants.PAGE_SIZE + "") int size,
+			@RequestParam(value="sortBy", defaultValue = "cName") String sortBy,
+			@RequestParam(value = "direction", defaultValue = "asc") String direction,
+			Model model, Authentication authentication) {
 		String userBySignIn= Helper.getEmailOfSignedInUser(authentication);
 		User userByEmail = userService.getUserByEmail(userBySignIn);
-		List<Client> clients = clientService.getByUser(userByEmail);
+		Page<Client> pageClients = clientService.getByUser(userByEmail, page, size, sortBy, direction);
+
 		
-		model.addAttribute("clients", clients);
+		model.addAttribute("pageClients", pageClients);
+	    //model.addAttribute("currentPage", page);
+	    model.addAttribute("pageSize", AppConstants.PAGE_SIZE);
+	    model.addAttribute("sortBy", sortBy);
+	    model.addAttribute("direction", direction);
 		
 		return "pages/CallersCalling";
 	}

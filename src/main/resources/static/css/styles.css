@@ -7,13 +7,26 @@ button {
 	transition: background-color 0.3s ease;
 }
 
+.interested {
+	background-color: #3ec152; /* Green */
+	color: white;
+}
+
+.interested:hover {
+	background-color: #32b943; /* Darker green */
+}
+
 .not-interested {
 	background-color: #ff4d4d; /* Red */
 	color: white;
 }
 
-.interested {
-	background-color: #3ec152; /* Green */
+.not-interested:hover {
+	background-color: #e63939; /* Darker red */
+}
+
+.unknown-interested {
+	background-color: #ff8040; /* Red */
 	color: white;
 }
 
@@ -35,17 +48,18 @@ button {
 
 /* The modal background (hidden by default) */
 .modal {
-	display: none;
-	position: fixed;
-	z-index: 1;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0, 0, 0, 0.5);
-	/* Dark background with opacity */
-	justify-content: center; /* Center horizontally */
-	align-items: center; /* Center vertically */
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    justify-content: center; /* Center modal content */
+    align-items: center; /* Center modal content */
 }
 
 /* Modal content styling */

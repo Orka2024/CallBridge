@@ -32,7 +32,7 @@ public class ImageServiceImpl implements ImageService {
 
 	    // Check if the file is empty
 	    if (cImage.isEmpty()) {
-	        return "File is empty";
+	        return getUrlFromPublicId(AppConstants.DEFAULT_PROFILE_IMAGE_ID);
 	    }
 
 	    // Check for size/type constraints
