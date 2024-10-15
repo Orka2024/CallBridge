@@ -2,6 +2,9 @@ package com.orka.callbridge.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.orka.callbridge.entities.Client;
 import com.orka.callbridge.entities.User;
 
@@ -21,5 +24,5 @@ public interface ClientService {
 
 	List<Client> getByUserId(String uId);
 
-	List<Client> getByUser(User user);
+	Page<Client> getByUser(User user, int page, int size, String sortField, String Direction);
 }
