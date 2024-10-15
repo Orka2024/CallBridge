@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" 
-      data-th-replace="~{pages/base::parent(~{::#data},~{::title},~{::script})}" 
+      data-th-replace="~{pages/base::parent(~{::#update},~{::title},~{::script})}" 
       xmlns:th="http://www.thymleaf.org">
 <head>
 <title>Cibil Form</title>
@@ -8,14 +8,14 @@
 <body>
 
 <main>
-   <section id="data">
+   <section id="update">
 	<div class="container-fluid py-4">
 	     <div class="row">
 	        <div class="col-12">
 	          <div class="card my-4">
 	            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
 	              <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-	                <h6 class="text-white text-capitalize ps-3">Cibil Application Form</h6>
+	                <h6 class="text-white text-capitalize ps-3">Update Cibil-Application</h6>
 	              </div>
 	            </div>
 	            <div class="card-body px-0 pb-2">
@@ -30,7 +30,7 @@
 							            <div class="col-xl-6 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
 							              <div class="card card-plain">
 							                <div class="card-body">
-							                    <form data-th-action="@{'/user/cibilreturn'}" method="post"  data-th-object="${cibilclientform}"  >              
+							                    <form data-th-action="@{'/user/updateapplycibil/' + ${up_cibilclientId}}" method="post"  data-th-object="${cibilupdate}"  >              
 								             	   <div class="input-group input-group-outline mb-3">           	        
 								             	              <label class="form-label">Customer Name</label>
 										                      <input type="text" id="clientname" class="form-control"  data-th-field="*{clientname}" style="text-transform:capitalize;" required>         
@@ -40,7 +40,7 @@
 								       						  <input type="text" id="clientnumber" class="form-control" data-th-field="*{clientnumber}" maxlength="10"  required>
 								                    </div>
 								                    
-								                    <div class="input-group input-group-outline mb-3">           	        
+								                   <div class="input-group input-group-outline mb-3">           	        
 								             	              <label class="form-label">Email Id</label>
 										                      <input type="email" id="clientemail" class="form-control" data-th-field="*{clientemail}" style="text-transform:lowercase;" required>         
 										           </div>
@@ -89,7 +89,7 @@
 								                    </div>
 								                  
 													 <div class="text-center">
-									                      <button type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Submit</button>
+									                      <button type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Update Cibil</button>
 									                 </div> 
 												</form>              
 							                </div>						

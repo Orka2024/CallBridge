@@ -56,7 +56,7 @@ public class ClientController {
 		return "pages/addClients";
 	}
 
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/addsave", method = RequestMethod.POST)
 	public String saveClient(@Valid @ModelAttribute ClientForm clientForm, BindingResult result,
 			Authentication authentication, HttpSession session) {
 

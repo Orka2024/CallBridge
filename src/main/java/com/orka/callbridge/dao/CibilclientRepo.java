@@ -8,5 +8,6 @@ import com.orka.callbridge.entities.Cibilclient;
 
 @Repository
 public interface CibilclientRepo extends JpaRepository<Cibilclient, String> {
+	
 
 }
