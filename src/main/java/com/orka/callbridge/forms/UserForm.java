@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import java.lang.Override;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -101,11 +102,6 @@ public class UserForm {
 		this.uEnable = uEnable;
 	}
 
-	@Override
-	public String toString() {
-		return "UserForm [uName=" + uName + ", uEmail=" + uEmail + ", uPhoneNo=" + uPhoneNo + ", uPanNumber="
-				+ uPanNumber + ", uRole=" + uRole + ", uUserName=" + uUserName + ", uPassword=" + uPassword
-				+ ", uEnable=" + uEnable + "]";
-	}
+
 
 }

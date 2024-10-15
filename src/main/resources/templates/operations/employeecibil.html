@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="~{operations/opbase::parent(~{::#c})}" xmlns:th="http://www.thymleaf.org"><head>
-<title>Cibil Form</title>
+<html lang="en"
+ th:replace="~{operations/opbase::parent(~{::#c},~{::title},~{::script})}"
+  xmlns:th="http://www.thymleaf.org"><title> Cibil Form</title>
 </head>
 <body>
 
 <main>
+
    <section id="c">
     <div class="container-fluid py-4">
       <div class="row">
@@ -26,15 +28,19 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <tr 
+                     data-th-object="${Empl}"
+                     data-th-each="Empl : ${Employee}"
+ 
+                    >
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div>
                             <img src="/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
                           </div>
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">John Michael</h6>
-                            <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
+                            <h6 class="mb-0 text-sm" data-th-text="*{uName}">John Michael</h6>
+                            <p class="text-xs text-secondary mb-0" data-th-text="*{uEmail}">john@creative-tim.com</p>
                           </div>
                         </div>
                       </td>

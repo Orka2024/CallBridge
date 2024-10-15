@@ -22,114 +22,63 @@
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Customer Name</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Contact</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pan Number</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Loan Type</th>   
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Income Source</th>   
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Update</th>                  
+                      <th class="text-secondary opacity-10"> Customer Name</th>
+                      <th class="text-secondary opacity-10"> Contact</th>
+                      <th class="text-secondary opacity-10"> Pan Number</th>
+                      <th class="text-secondary opacity-10"> Loan Type</th>   
+                      <th class="text-secondary opacity-10"> Income Source</th>   
+                      <th class="text-secondary opacity-10"> Update</th>                  
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <tr                     
+                     data-th-object="${cb}"
+                     data-th-each="cb : ${Cibilclient}"
+                    >
                       <td>
                         <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="/img/team-4.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
-                          </div>
+                          <img 
+                            onerror="this.src='https://static-00.iconduck.com/assets.00/profile-default-icon-2048x2045-u3j7s5nj.png'"
+                            src="/img/team-2.jpg" 
+                            class="avatar avatar-sm me-3 border-radius-lg" 
+                            alt="user"
+                            >
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Rohit Kumar</h6>
-                            <p class="text-xs text-secondary mb-0">Manager</p>
+                            <h6 data-th-text="*{clientname}"></h6>
                           </div>
                         </div>
                       </td>
                       <td>
-                        <p class="text-xs font-weight-bold mb-0">+919876543298</p>
-                        <p class="text-xs text-secondary mb-0">Organization</p>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6  data-th-text="*{clientnumber}"> </h6>
+                          </div>
                       </td>
                                           
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success">Interested</span>
-                      </td>
                       <td>
-                       
-                      </td>
-                      <td class="align-middle text-center text-sm">
-
-                      </td>
-                      
-                      <td class="align-middle text-center">
-                           <input type="button" class="btn btn-lg bg-gradient-primary btn-lg w-70 mt-1 mb-0" onclick="location.href='/Cibilform';" value="Update Form" />                         
-				      </td>
-                     
-                    </tr>
-                    
-                     <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
-                          </div>
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Mohit More</h6>
-                            <p class="text-xs text-secondary mb-0">Manager</p>
+                            <h6  data-th-text="*{clientpan}"></h6>
                           </div>
-                        </div>
                       </td>
                       <td>
-                        <p class="text-xs font-weight-bold mb-0">+919373443298</p>
-                        <p class="text-xs text-secondary mb-0">Organization</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success">Interested</span>
-                      </td>
-                      
-                      <td>
-                       
-                      </td>
-                      <td class="align-middle text-center text-sm">
-
-                      </td>
-                      
-                      <td class="align-middle text-center">
-                           <input type="button" class="btn btn-lg bg-gradient-primary btn-lg w-70 mt-1 mb-0" onclick="location.href='/Cibilform';" value="Update Form" />                         
-				      </td>
-                     
-                    </tr>
-                    
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="/img/team-3.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
-                          </div>
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Gauri Mane</h6>
-                            <p class="text-xs text-secondary mb-0">Manager</p>
+                            <h6 data-th-text="*{clientloanty}"> </h6>
                           </div>
-                        </div>
                       </td>
+                      
                       <td>
-                        <p class="text-xs font-weight-bold mb-0">+918876566298</p>
-                        <p class="text-xs text-secondary mb-0">Organization</p>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6  data-th-text="*{clientIncome}"> </h6>
+                          </div>                      
                       </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success">Interested</span>
-                      </td>
-                      <td>
-                        
-                      </td>
-                      <td class="align-middle text-center text-sm">
-
-                      </td>
-                      <td class="align-middle text-center">
-                           <input type="button" class="btn btn-lg bg-gradient-primary btn-lg w-70 mt-1 mb-0" onclick="location.href='/Cibilform';" value="Update Form" />                         
-				      </td>
-                     
-                    </tr>
-                    
                    
-                  
+                      <td> 
+                           <a data-th-href ="@{'/user/delete/'+*{clientId}}" class="btn btn-lg bg-gradient-danger"><i class="material-icons mb-0">delete</i></a> 
+                           <a data-th-href ="@{'/user/update/'+*{clientId}}" class="btn btn-lg bg-gradient-primary"><i class="material-icons mb-0">edit_note</i></a>                                                                                                   
+				      </td>  
+				                         
+                     
+                    </tr>
+                                      
                   </tbody>
                 
                 </table>

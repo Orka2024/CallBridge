@@ -1,5 +1,6 @@
 package com.orka.callbridge.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -38,6 +39,7 @@ public class CibilclientServiceImpl implements CibilclientService  {
 
 	@Override
 	public Optional<Cibilclient> updateCibilclient(Cibilclient cibilclient) {
+		
 		Cibilclient cibilclient1= cibilclientRepo.findById(cibilclient.getClientId()).orElseThrow(()->new ResourceNotFoundException("User Not Found"));
 		cibilclient1.setClientname(cibilclient.getClientname());
 		cibilclient1.setClientnumber(cibilclient.getClientnumber());
@@ -60,4 +62,10 @@ public class CibilclientServiceImpl implements CibilclientService  {
 		 cibilclientRepo.delete(cibilclient1);
 	}
 
+	@Override
+	public List<Cibilclient> getAll() {		
+		return cibilclientRepo.findAll();
+	}
+
+	
 }

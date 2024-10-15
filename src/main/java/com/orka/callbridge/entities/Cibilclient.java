@@ -1,7 +1,7 @@
 package com.orka.callbridge.entities;
 
 import javax.persistence.Table;
-
+import java.lang.Override;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

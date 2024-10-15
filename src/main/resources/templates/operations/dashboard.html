@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="~{operations/opbase::parent(~{::#a})}" xmlns:th="http://www.thymleaf.org">
+<html lang="en"
+ th:replace="~{operations/opbase::parent(~{::#a},~{::title},~{::script})}"
+  xmlns:th="http://www.thymleaf.org">
 <head>
 <title>Cibil Form</title>
 </head>
@@ -488,6 +490,11 @@
      </div>
 
    </section>
+   
+   
+  <script>
+  console.log("Dashboard page")
+  </script>
 </main>
 	
 </body> 
