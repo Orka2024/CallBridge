@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.orka.callbridge.entities.Client;
 import com.orka.callbridge.entities.User;
@@ -25,4 +26,10 @@ public interface ClientService {
 	List<Client> getByUserId(String uId);
 
 	Page<Client> getByUser(User user, int page, int size, String sortField, String Direction);
+	
+	void save(MultipartFile file);
+	
+	String importClientsFromExcel(MultipartFile file);
+
+
 }
