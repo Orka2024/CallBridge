@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" 
+  data-th-replace="~{pages/base :: parent(~{::#data},~{::title},~{::script})}"
+   xmlns:th="http://www.thymleaf.org">
+<head>
+<title>Add Clients</title>
+</head>
+<body>
+   <main>
+      <section id="data">
+         <div class="container-fluid py-4">
+         <div class="row">
+         <div class="col-12">
+         <div class="card my-4">
+         <div
+            class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+            <div
+               class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+               <h6 class="text-white text-capitalize ps-3">Upload Clients Data</h6>
+            </div>
+         </div>
+         <div class="card-body px-0 pb-2">
+            <div class="table-responsive p-0">
+               <div class="page-header min-vh-100">
+                  <div class="container">
+                     <div class="row">
+                        <div
+                           class="col-5 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 start-0 text-center justify-content-center flex-column">
+                           <div
+                              class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center"
+                              style="background-image: url('/img/office-dark.jpg'); background-size: cover;">
+                           </div>
+                        </div>
+                        <div
+                           class="col-xl-6 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
+                        <div class="card card-plain">
+                        
+                        <div class="card-body">
+                      
+                        
+                        
+                        
+                        
+<form th:action="@{/user/clients/upload}" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="file">Excel File:</label>
+            <input type="file" class="form-control-file" id="file" name="file" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+    
+    <div th:if="${message != null}" class="alert mt-3" th:class="${success ? 'alert-success' : 'alert-danger'}">
+        <span th:text="${message}"></span>
+    </div>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        </div>
+                        </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         </div>
+         </div>
+         </div>
+         </div>
+      </section>
+   </main>
+<script>
+        console.log("Hello from the Add New Clients!");
+    </script>
+    <script data-th-src="@{'/js/admin.js'}"></script>
+</body>
+</html>

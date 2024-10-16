@@ -12,9 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.orka.callbridge.entities.Client;
 import com.orka.callbridge.entities.User;
@@ -133,5 +135,38 @@ public class ClientController {
 		
 		return "pages/CallersCalling";
 	}
+	
+	/*
+	 * @PostMapping("/upload") public ResponseEntity<?> upload(@RequestParam("file")
+	 * MultipartFile file){ if (Helper.checkExcelFormat(file)) { //ture
+	 * this.clientService.save(file);
+	 * 
+	 * return ResponseEntity.ok(Map.of(
+	 * "message","File is uploaded data saved to database successfully")); } return
+	 * ResponseEntity.status(HttpStatus.BAD_REQUEST).
+	 * body("Please upload excel file only"); }
+	 * 
+	 * @GetMapping("/getclients") public List<Client> getClients(){ return
+	 * this.clientService.getAll(); }
+	 */
 
-}
+	
+    @GetMapping("/upload")
+    public String showUploadForm(Model model) {
+        model.addAttribute("message", null);
+        return "pages/uploadClients";
+    }
+
+    @PostMapping("/upload")
+    public String uploadClientFile(@RequestParam("file") MultipartFile file, Model model) {
+        String response = clientService.importClientsFromExcel(file);
+        
+        model.addAttribute("message", response);
+        model.addAttribute("success", response.startsWith("Clients imported successfully"));
+
+        return "pages/uploadClients"; // Redirect back to the upload form with message
+    }
+    
+    
+    
+}	
