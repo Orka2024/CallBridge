@@ -53,85 +53,10 @@ public class OAuthAuthenicationSuccessHandler implements AuthenticationSuccessHa
 
 		User user = new User();
 		user.setuId(UUID.randomUUID().toString());
-		user.setURoleList(List.of(AppConstants.ROLE_USER));
+		user.setURoleList(List.of(AppConstants.ROLE_CALLER));
 		user.setuEmailVerified(true);
 		user.setuEnabled(true);
 		user.setuPassword("dummy");
-
-		// google
-		/*
-		 * if (authorizedClientRegistrationId.equalsIgnoreCase("google")) {
-		 * 
-		 * // google attributes
-		 * 
-		 * user.setuEmail(oauthUser.getAttribute("email").toString());
-		 * user.setuProfilePic(oauthUser.getAttribute("picture").toString());
-		 * user.setuName(oauthUser.getAttribute("name").toString());
-		 * user.setProviderUserId(oauthUser.getName());
-		 * user.setProvider(Providers.GOOGLE);
-		 * user.setAbout("This account is created using google.");
-		 * 
-		 * } else if (authorizedClientRegistrationId.equalsIgnoreCase("github")) {
-		 * 
-		 * // github // github attributes String email = oauthUser.getAttribute("email")
-		 * != null ? oauthUser.getAttribute("email").toString() :
-		 * oauthUser.getAttribute("login").toString() + "@gmail.com"; String picture =
-		 * oauthUser.getAttribute("avatar_url").toString(); String name =
-		 * oauthUser.getAttribute("login").toString(); String providerUserId =
-		 * oauthUser.getName();
-		 * 
-		 * user.setuEmail(email); user.setuProfilePic(picture); user.setuName(name);
-		 * user.setProviderUserId(providerUserId); user.setProvider(Providers.GITHUB);
-		 * 
-		 * user.setAbout("This account is created using github"); }
-		 * 
-		 * else if (authorizedClientRegistrationId.equalsIgnoreCase("linkedin")) {
-		 * 
-		 * }
-		 * 
-		 * else { logger.info("OAuthAuthenicationSuccessHandler: Unknown provider"); }
-		 */
-
-		// save the user
-		// facebook
-		// facebook attributes
-		// linkedin
-
-		/*
-		 * 
-		 * 
-		 * 
-		 * DefaultOAuth2User user = (DefaultOAuth2User) authentication.getPrincipal();
-		 * 
-		 * logger.info(user.getName());
-		 * 
-		 * user.getAttributes().forEach((key, value) -> { logger.info("{} => {}", key,
-		 * value); });
-		 * 
-		 * logger.info(user.getAuthorities().toString());
-		 * 
-		 * // data database save:
-		 * 
-		 * String email = user.getAttribute("email").toString(); String name =
-		 * user.getAttribute("name").toString(); String picture =
-		 * user.getAttribute("picture").toString();
-		 * 
-		 * // create user and save in database
-		 * 
-		 * User user1 = new User(); user1.setEmail(email); user1.setName(name);
-		 * user1.setProfilePic(picture); user1.setPassword("password");
-		 * user1.setUserId(UUID.randomUUID().toString());
-		 * user1.setProvider(Providers.GOOGLE); user1.setEnabled(true);
-		 * 
-		 * user1.setEmailVerified(true); user1.setProviderUserId(user.getName());
-		 * user1.setRoleList(List.of(AppConstants.ROLE_USER));
-		 * user1.setAbout("This account is created using google..");
-		 * 
-		 * User user2 = userRepo.findByEmail(email).orElse(null); if (user2 == null) {
-		 * 
-		 * userRepo.save(user1); logger.info("User saved:" + email); }
-		 * 
-		 */
 
 		User userEmailLogin = userRepository.findByUEmail(user.getuEmail()).orElse(null);
 		if (userEmailLogin == null) {
