@@ -20,7 +20,7 @@ import com.orka.callbridge.service.UserService;
 @RequestMapping("/operations")
 public class OpController {
 	
-	@GetMapping("/opdashboard")
+	@GetMapping("/dashboard")
 	public String dashboard() {
 		return "operations/dashboard";
 	}

@@ -37,7 +37,29 @@ public class UserServiceImpl implements UserService {
 		user.setuPassword(passwordEncoder.encode(user.getPassword()));
 
 		// Set User Role
-		user.setURoleList(List.of(AppConstants.ROLE_USER));
+		   if("Caller".equalsIgnoreCase(user.getuRole())) 
+		   {
+		        user.setURoleList(List.of(AppConstants.ROLE_CALLER));
+		   }
+		   else if ("SalesOfficer".equalsIgnoreCase(user.getuRole())) 
+		   {
+		        user.setURoleList(List.of(AppConstants.ROLE_SALESOFFICER));
+		   } 
+		   else if ("Operation".equalsIgnoreCase(user.getuRole()))
+		   {
+		        user.setURoleList(List.of(AppConstants.ROLE_OPERATIONS));
+		   } 
+		   else if ("TL".equalsIgnoreCase(user.getuRole()))
+		   {
+		        user.setURoleList(List.of(AppConstants.ROLE_TL));
+		   }
+		   else if ("Admin".equalsIgnoreCase(user.getuRole())) {
+		        user.setURoleList(List.of(AppConstants.ROLE_ADMIN));
+		    } 
+		   
+		    else {
+		        // Default role if none is selected or invalid input
+		    	user.setURoleList(List.of(AppConstants.ROLE_HR));		    }
 
 		// logger.info(user.getProvider().toString()); //problem
 		return userRepository.save(user);

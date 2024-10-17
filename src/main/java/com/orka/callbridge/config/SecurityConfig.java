@@ -25,26 +25,7 @@ import jakarta.servlet.http.HttpServletResponse;
 @Configuration
 public class SecurityConfig {
 
-	// User create and login using java code with memory service
-//	@Bean
-//	public UserDetailsService userDetailsService() {
-//		UserDetails userAccess = User
-//				.withDefaultPasswordEncoder()
-//				.username("admin123")
-//				.password("admin123")
-//				.roles("ADMIN","USER")
-//				.build();
-//		
-//		UserDetails userCaller = User
-//				.withDefaultPasswordEncoder()
-//				.username("user")
-//				.password("user123")
-//				.build();
-//				
-//		var inMemoryUserDetailsManager = new InMemoryUserDetailsManager(userAccess, userCaller);
-//		return inMemoryUserDetailsManager;
-//	}
-
+	
 	@Autowired
 	private SecurityCustomUserDetailService userDetailService;
 
@@ -62,37 +43,89 @@ public class SecurityConfig {
 		// Configuration
 		// Configure urls for public and private
 		httpSecurity.authorizeHttpRequests(authorize -> {
-			// authorize.requestMatchers("/home","signin","/signup").permitAll();
-			authorize.requestMatchers("/user/**").authenticated();
-			authorize.anyRequest().permitAll();
-		});
+			// Role-based access
+            authorize.requestMatchers("/user/**").hasRole("CALLER");
+            authorize.requestMatchers("/operations/**").hasRole("OPERATIONS");
+            authorize.anyRequest().permitAll(); // All other URLs are accessible	
+            });
 		// Form Login
 		// If we need to change anything : Related to Form Login
 
 		httpSecurity.formLogin(formLogin -> {
 			formLogin.loginPage("/signin");
 			formLogin.loginProcessingUrl("/authenticate");
-			formLogin.successForwardUrl("/user/dashboard");
-			formLogin.failureForwardUrl("/signin?error=true");
+//			formLogin.successForwardUrl("/user/dashboard");
+//			formLogin.failureForwardUrl("/signin?error=true");
 			formLogin.usernameParameter("uEmail");
 			formLogin.passwordParameter("uPassword");
-
-			formLogin.failureHandler(new AuthenticationFailureHandler() {
-
-				@Override
-				public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
-						AuthenticationException exception) throws IOException, ServletException {
-					response.sendRedirect("/signin?error=true");
-				}
-			});
-
+			
+            formLogin.failureHandler(new AuthenticationFailureHandler() {
+                @Override
+                public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
+                                                    AuthenticationException exception) throws IOException, ServletException {
+                    response.sendRedirect("/signin?error=true");
+                }
+            });
+            
 			formLogin.successHandler(new AuthenticationSuccessHandler() {
-				@Override
-				public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-						Authentication authentication) throws IOException, ServletException {
+			@Override
+			public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+					Authentication authentication) throws IOException, ServletException {
+				var authorities=authentication.getAuthorities().toString();
+				
+				if (authorities.contains("ROLE_CALLER"))
+				 {
 					response.sendRedirect("/user/dashboard");
-				}
-			});
+				 }
+				 else if (authorities.contains("ROLE_OPERATIONS"))
+				 {
+			            response.sendRedirect("/operations/dashboard");
+			     } 
+ 
+				 else if (authorities.contains("ROLE_SALESOFFICER"))
+				 {
+			            response.sendRedirect("/so/dashboard");
+			     } 
+				
+//				 else if (authorities.contains("ROLE_ADMIN")) 
+//				 {
+//			            response.sendRedirect("/admin/dashboard");
+//			     }
+//				 else if (authorities.contains("ROLE_TL"))
+//				 {
+//			            response.sendRedirect("/tl/dashboard");
+//			     } 
+//				 else if (authorities.contains("ROLE_HR")) 
+//				 {
+//			            response.sendRedirect("/hr/dashboard");
+//			     }
+				 else 
+				 {
+			            // Default redirect for any other roles
+			            response.sendRedirect("/signin?error=true");
+			     }
+			}
+		});
+			
+			
+			
+
+//			formLogin.failureHandler(new AuthenticationFailureHandler() {
+//
+//				@Override
+//				public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
+//						AuthenticationException exception) throws IOException, ServletException {
+//					response.sendRedirect("/signin?error=true");
+//				}
+//			});
+//
+//			formLogin.successHandler(new AuthenticationSuccessHandler() {
+//				@Override
+//				public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+//						Authentication authentication) throws IOException, ServletException {
+//					response.sendRedirect("/user/dashboard");
+//				}
+//			});
 
 		});
 

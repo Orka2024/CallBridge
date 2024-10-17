@@ -43,7 +43,7 @@ public class User implements UserDetails {
 	private String uId;
 
 	@Column(unique = true, nullable = false, length = 10)
-	private String uPanNumber;
+	private String uPanNumber ;
 
 	@Column(nullable = false, length = 30)
 	private String uName;
@@ -76,8 +76,7 @@ public class User implements UserDetails {
 
 	private boolean uPhoneVerified = false;
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-	private List<Client> clients = new ArrayList<>();
+
 
 	public String getuId() {
 		return uId;
@@ -191,16 +190,13 @@ public class User implements UserDetails {
 		this.clients = clients;
 	}
 
-	@Override
-	public String toString() {
-		return "User [uId=" + uId + ", uPanNumber=" + uPanNumber + ", uName=" + uName + ", uUserName=" + uUserName
-				+ ", uEmail=" + uEmail + ", uPhoneNo=" + uPhoneNo + ", uPassword=" + uPassword + ", uRole=" + uRole
-				+ ", uAbout=" + uAbout + ", uProfilePic=" + uProfilePic + ", uEnabled=" + uEnabled + ", uEmailVerified="
-				+ uEmailVerified + ", uPhoneVerified=" + uPhoneVerified + ", clients=" + clients + "]";
-	}
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+	private List<Client> clients = new ArrayList<>();
+ 
 
-	@ElementCollection(fetch = FetchType.EAGER)
-	private List<String> uRoleList = new ArrayList<>();
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> uRoleList; // Storing roles as list of strings
+	
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -242,6 +238,16 @@ public class User implements UserDetails {
 	@Override
 	public String getPassword() {
 		return this.uPassword;
+	}
+	
+	
+	
+	@Override
+	public String toString() {
+		return "User [uId=" + uId + ", uPanNumber=" + uPanNumber + ", uName=" + uName + ", uUserName=" + uUserName
+				+ ", uEmail=" + uEmail + ", uPhoneNo=" + uPhoneNo + ", uPassword=" + uPassword + ", uRole=" + uRole
+				+ ", uAbout=" + uAbout + ", uProfilePic=" + uProfilePic + ", uEnabled=" + uEnabled + ", uEmailVerified="
+				+ uEmailVerified + ", uPhoneVerified=" + uPhoneVerified + ", clients=" + clients + "]";
 	}
 
 }

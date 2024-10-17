@@ -138,7 +138,7 @@ public class HomeController {
 				.uEnabled(userForm.isuEnable())
 				.build();
 		User userSaved = userService.saveUser(userNew);
-		System.out.println("User saved : ");
+		System.out.println("User saved : "+userSaved);
 
 		// Add the Message
 		Message message = Message.builder().content("User Registration Successful").type(MessageType.green).build();
