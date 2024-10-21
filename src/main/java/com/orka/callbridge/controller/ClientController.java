@@ -26,6 +26,7 @@ import com.orka.callbridge.helper.Helper;
 import com.orka.callbridge.helper.Message;
 import com.orka.callbridge.helper.MessageType;
 import com.orka.callbridge.service.ClientService;
+import com.orka.callbridge.service.EmailService;
 import com.orka.callbridge.service.ImageService;
 import com.orka.callbridge.service.UserService;
 
@@ -136,9 +137,6 @@ public class ClientController {
 		return "pages/CallersCalling";
 	}
 	
-<<<<<<< HEAD
-=======
-	
 // ---------------------------start Client Details --------------------------------
 	
 
@@ -174,9 +172,6 @@ public class ClientController {
 	
 	
 	
-	
-	
->>>>>>> 3459a37c5e6e0c0e19ed5d2dba553cc1699cd808
 	/*
 	 * @PostMapping("/upload") public ResponseEntity<?> upload(@RequestParam("file")
 	 * MultipartFile file){ if (Helper.checkExcelFormat(file)) { //ture
