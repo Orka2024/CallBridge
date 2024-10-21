@@ -14,23 +14,23 @@ xmlns:th="http://www.thymleaf.org">
           <div class="card my-4">
           
           
-			<div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-			  <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3 d-flex justify-content-between align-items-center">
-			    <h6 class="text-white text-capitalize ps-3">Make Call</h6>
-			    <div class="input-group input-group-outline pe-3" style="width: 200px;">
-			    	<select
-			    	id="countries_disabled"
-			    	class="form-control"
-			    	>
-			    	<option selected value="">Select Field</option>
-			        <option value="name">Name</option>
-			        <option value="phone">Phone</option>
-			        <option value="email">Email</option>
-			      </select>
-			      <!-- <input id="Search" type="text" class="form-control" placeholder="Search">  -->
-			    </div>
-			  </div>
-			</div>
+<div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+  <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3 d-flex justify-content-between align-items-center">
+    <h6 class="text-white text-capitalize ps-3">Make Call</h6>
+    <div class="input-group input-group-outline pe-3" style="width: 200px;">
+                        <select
+                      id="countries_disabled"
+                      class="form-control"
+                    >
+                      <option selected value="">Select Field</option>
+                      <option value="name">Name</option>
+                      <option value="phone">Phone</option>
+                      <option value="email">Email</option>
+                    </select>
+      <!-- <input id="Search" type="text" class="form-control" placeholder="Search">  -->
+    </div>
+  </div>
+</div>
 
 
 
@@ -64,11 +64,10 @@ xmlns:th="http://www.thymleaf.org">
                             >
                           </div>
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 
+                            <a  href="/user/clients/clientdetails"
                             class="mb-0 text-sm"
                             data-th-text="*{cName}"
-                            >Stephen Nadar</h6>
-
+                            >Stephen Nadar</a> 
                             <p 
                             class="text-xs text-secondary mb-0"
                             data-th-text="*{cEmail}"
@@ -76,35 +75,36 @@ xmlns:th="http://www.thymleaf.org">
                           </div>
                         </div>
                       </td>
-					  <td>
-					      <button 
-					      id="cName"
-					      class="call-button" 
-					      data-th-value="*{cName}" 
-					      th:data-name="*{cName}"
-					      onclick="openModal(this.dataset.name)">
-					      Call
-					      </button>
-					      <div id="callModal" class="modal">
-					          <div class="modal-content">
-					              <span class="close" onclick="closeModal()">&times;</span>
-					              <img src="/img/us2.png" alt="Call Icon" class="call-image">
-					              
-					              <div class="d-flex flex-column justify-content-center">
-					                              <h5 
-					                              id="modalName"
-					                              class="mb-0 text-sm"
-					                              data-th-text="*{cName}"
-					                              >Stephen Nadar</h5>
-					                            </div> 
-					              <div class="button-container">
-					                  <button class="call-action" onclick="makeCall()"><i class="material-icons mt-1">call</i></button>
-					                  <button class="call-end" onclick="endCall()"><i class="material-icons mt-1">call_end</i></button>
-					              </div>
-					          </div>
-					      </div>
-					    <link rel="stylesheet" href="/css/styles.css">
-					  </td>
+<td>
+    <button 
+    id="cName"
+    class="call-button" 
+    data-th-value="*{cName}" 
+    th:data-name="*{cName}"
+    onclick="openModal(this.dataset.name)">
+    Call
+    </button>
+    <div id="callModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img src="/img/us2.png" alt="Call Icon" class="call-image">
+            
+            <div class="d-flex flex-column justify-content-center">
+                            <h5 
+                            id="modalName"
+                            class="mb-0 text-sm"
+                            data-th-text="*{cName}"
+                            >Stephen Nadar</h5>
+                          </div>
+	            
+            <div class="button-container">
+                <button class="call-action" onclick="makeCall()"><i class="material-icons mt-1">call</i></button>
+                <button class="call-end" onclick="endCall()"><i class="material-icons mt-1">call_end</i></button>
+            </div>
+        </div>
+    </div>
+  <link rel="stylesheet" href="/css/styles.css">
+</td>
                       <td class="align-middle text-center text-sm">
                         <div class="input-group mb-1">
 						  <select class="form-select" aria-label="Example select with button addon">
@@ -126,6 +126,9 @@ xmlns:th="http://www.thymleaf.org">
 					          </button>
 					      </div>
 					  </td>
+
+
+
                       <td 
                       data-th-text="*{cLastDateContacted}"
                       class="align-middle text-center">
@@ -142,8 +145,7 @@ xmlns:th="http://www.thymleaf.org">
               </div>
             </div>
           </div>
-          
-            <!-- Pagination Component Start here-->
+            <!-- Pagination Component -->
 			<div class="paginationContainer">
 			  <nav aria-label="Page navigation example">
 			    <ul class="pagination justify-content-center">
@@ -183,8 +185,6 @@ xmlns:th="http://www.thymleaf.org">
 			    </ul>
 			  </nav>
 			</div>
-            <!-- Pagination Component Start here-->
-			
         </div>
       </div>
       </div>
@@ -198,8 +198,3 @@ xmlns:th="http://www.thymleaf.org">
 </body> 
 
 </html>
-
-
-
-
-
