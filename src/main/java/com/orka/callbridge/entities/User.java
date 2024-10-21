@@ -27,6 +27,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+@SuppressWarnings("serial")
 @Entity(name = "user")
 @Table(name = "users")
 @Data
@@ -69,11 +70,14 @@ public class User implements UserDetails {
 
 	private String uProfilePic;
 
+	@Builder.Default
 	@Getter(value = AccessLevel.NONE)
 	private boolean uEnabled = true;
 
+	@Builder.Default
 	private boolean uEmailVerified = false;
 
+	@Builder.Default
 	private boolean uPhoneVerified = false;
 
 
@@ -242,12 +246,13 @@ public class User implements UserDetails {
 	
 	
 	
-	@Override
-	public String toString() {
-		return "User [uId=" + uId + ", uPanNumber=" + uPanNumber + ", uName=" + uName + ", uUserName=" + uUserName
-				+ ", uEmail=" + uEmail + ", uPhoneNo=" + uPhoneNo + ", uPassword=" + uPassword + ", uRole=" + uRole
-				+ ", uAbout=" + uAbout + ", uProfilePic=" + uProfilePic + ", uEnabled=" + uEnabled + ", uEmailVerified="
-				+ uEmailVerified + ", uPhoneVerified=" + uPhoneVerified + ", clients=" + clients + "]";
-	}
+	/*
+	 * @Override public String toString() { return "User [uId=" + uId +
+	 * ", uPanNumber=" + uPanNumber + ", uName=" + uName + ", uUserName=" +
+	 * uUserName + ", uEmail=" + uEmail + ", uPhoneNo=" + uPhoneNo + ", uPassword="
+	 * + uPassword + ", uRole=" + uRole + ", uAbout=" + uAbout + ", uProfilePic=" +
+	 * uProfilePic + ", uEnabled=" + uEnabled + ", uEmailVerified=" + uEmailVerified
+	 * + ", uPhoneVerified=" + uPhoneVerified + ", clients=" + clients + "]"; }
+	 */
 
 }
