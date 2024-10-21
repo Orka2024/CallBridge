@@ -143,7 +143,7 @@ public class ClientController {
 
 	
 	@Autowired
-	private EmailService service;
+	private EmailService service; 
 	
 	@RequestMapping("/clientdetails")
 	public String Clientdetails(Model model) {
@@ -164,6 +164,8 @@ public class ClientController {
                             Model model) {
     	service.sendEmail(to, subject, body);
         model.addAttribute("message", "Email sent successfully!");
+		System.out.println("email file");
+
         return "redirect:/user/clients/clientdetails";
     }
 	
