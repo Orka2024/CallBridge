@@ -13,10 +13,6 @@ public class CallBridgeApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CallBridgeApplication.class, args);
 		System.out.println("Hello CallBridge in SpringBoot.......!");
-
-		LOGGER.info("Info level log message");
-		LOGGER.debug("Debug level log message");
-		LOGGER.error("Error level log message");
 	}
 
 }
