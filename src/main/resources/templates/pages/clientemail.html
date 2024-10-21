@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{pages/base::parent(~{::#k},~{::title},~{::script})}" xmlns:th="http://www.thymleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Email </title>
+</head>
+<body>
+ <main class="email">
+ 
+    <section id="k"> 
+    <div class="container-fluid px-2 px-md-4 mt-6">
+		 <div class="compose-container">
+		        <div class="compose-header">
+		            <span>New Message</span>
+		            <a href="/user/clients/clientdetails" class="close-btn">&times;</a>	
+		        </div>	        	           
+		        <form data-th-action="@{'/user/clients/sendemail'}" method="post">
+<!-- 		            <label for="to">To:</label>		        
+ -->				    <input type="email" id="to" name="to"  class="input-field" placeholder="To" required><br>
+<!-- 				    <label for="to">Subject:</label>				
+ -->				    <input type="text" id="subject" name="subject"  class="input-field"  placeholder="Subject" required><br>
+<!-- 				    <label for="to">Body:</label>		
+ -->				    <textarea id="body" name="body" class="compose-body" placeholder="Message body..." required></textarea><br>				
+				    <div class="compose-footer">
+				    <button type="submit" class="send-btn">Send Email</button>
+				    </div>
+				</form>
+		        
+	        <p th:if="${message}" th:text="${message}"></p>
+ 		        
+		 </div>  
+    </div>
+    </section>
+ 
+  <script>
+  console.log("email page")
+  </script> 
+ 
+ </main>
+ 
+ 
+
+</body>
+</html>

@@ -136,6 +136,47 @@ public class ClientController {
 		return "pages/CallersCalling";
 	}
 	
+<<<<<<< HEAD
+=======
+	
+// ---------------------------start Client Details --------------------------------
+	
+
+	
+	@Autowired
+	private EmailService service; 
+	
+	@RequestMapping("/clientdetails")
+	public String Clientdetails(Model model) {
+		return "pages/detailspage";
+	}
+	
+	@RequestMapping("/email")
+	public String Clientemail(Model model) {
+		return "pages/clientemail";
+	}
+	
+	
+
+	@RequestMapping(value = "/sendemail", method = RequestMethod.POST)
+    public String sendEmail(@RequestParam(value="to") String to,
+                            @RequestParam(value="subject") String subject,
+                            @RequestParam(value="body") String body,
+                            Model model) {
+    	service.sendEmail(to, subject, body);
+        model.addAttribute("message", "Email sent successfully!");
+		System.out.println("email file");
+
+        return "redirect:/user/clients/clientdetails";
+    }
+	
+// ---------------------------end Client Details --------------------------------
+	
+	
+	
+	
+	
+>>>>>>> 3459a37c5e6e0c0e19ed5d2dba553cc1699cd808
 	/*
 	 * @PostMapping("/upload") public ResponseEntity<?> upload(@RequestParam("file")
 	 * MultipartFile file){ if (Helper.checkExcelFormat(file)) { //ture
