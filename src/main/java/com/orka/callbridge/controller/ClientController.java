@@ -26,6 +26,7 @@ import com.orka.callbridge.helper.Helper;
 import com.orka.callbridge.helper.Message;
 import com.orka.callbridge.helper.MessageType;
 import com.orka.callbridge.service.ClientService;
+import com.orka.callbridge.service.EmailService;
 import com.orka.callbridge.service.ImageService;
 import com.orka.callbridge.service.UserService;
 
@@ -135,6 +136,42 @@ public class ClientController {
 		
 		return "pages/CallersCalling";
 	}
+	
+	
+// ---------------------------start Client Details --------------------------------
+	
+
+	
+	@Autowired
+	private EmailService service;
+	
+	@RequestMapping("/clientdetails")
+	public String Clientdetails(Model model) {
+		return "pages/detailspage";
+	}
+	
+	@RequestMapping("/email")
+	public String Clientemail(Model model) {
+		return "pages/clientemail";
+	}
+	
+	
+
+	@RequestMapping(value = "/sendemail", method = RequestMethod.POST)
+    public String sendEmail(@RequestParam(value="to") String to,
+                            @RequestParam(value="subject") String subject,
+                            @RequestParam(value="body") String body,
+                            Model model) {
+    	service.sendEmail(to, subject, body);
+        model.addAttribute("message", "Email sent successfully!");
+        return "redirect:/user/clients/clientdetails";
+    }
+	
+// ---------------------------end Client Details --------------------------------
+	
+	
+	
+	
 	
 	/*
 	 * @PostMapping("/upload") public ResponseEntity<?> upload(@RequestParam("file")
