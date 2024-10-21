@@ -2,8 +2,6 @@ package com.orka.callbridge.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -55,12 +53,16 @@ public class Client {
 
 	private String cIncomeSource;
 
+	@Builder.Default
 	private String cStatus = "Nothing";
 
+	@Builder.Default
 	private boolean cInterest = false;
 
+	@Builder.Default
 	private boolean cApplyCibil = false;
 
+	@Builder.Default
 	private boolean cEnabled = true;
 
 	private String cCloudinaryImagePublicId;
