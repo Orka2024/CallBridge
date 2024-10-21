@@ -1,16 +1,22 @@
 package com.orka.callbridge;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 public class CallBridgeApplication {
 
+	private static final Logger LOGGER = LogManager.getLogger(CallBridgeApplication.class);
+
 	public static void main(String[] args) {
 		SpringApplication.run(CallBridgeApplication.class, args);
 		System.out.println("Hello CallBridge in SpringBoot.......!");
+
+		LOGGER.info("Info level log message");
+		LOGGER.debug("Debug level log message");
+		LOGGER.error("Error level log message");
 	}
 
 }
