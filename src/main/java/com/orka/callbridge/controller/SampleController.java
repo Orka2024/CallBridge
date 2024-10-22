@@ -11,10 +11,13 @@ public class SampleController {
     private static final Logger logger = LogManager.getLogger(SampleController.class);
 
     @GetMapping("/log")
-    public String logExample() {
-        logger.info("Info level log example");
-        logger.debug("Debug level log example");
-        //logger.error("Error level log example", new Exception("Example exception"));
-        return "Logging has been demonstrated. Check the console and the log file!";
+	public String getLogDetails() {
+		logger.debug("Debug log message");
+		logger.info("Info log message");
+		logger.error("Error log message");
+		logger.warn("Warn log message");
+		logger.trace("Trace log message");
+
+		return "Payment details fetched succesfully.";
     }
 }
