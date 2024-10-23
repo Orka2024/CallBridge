@@ -28,6 +28,7 @@ import com.orka.callbridge.helper.MessageType;
 import com.orka.callbridge.service.ClientService;
 import com.orka.callbridge.service.EmailService;
 import com.orka.callbridge.service.ImageService;
+import com.orka.callbridge.service.SmsService; 
 import com.orka.callbridge.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -137,20 +138,23 @@ public class ClientController {
 		return "pages/CallersCalling";
 	}
 	
-// ---------------------------start Client Details --------------------------------
+// ---------------------------start email/sms Client Details --------------------------------
 	
 
 	
 	@Autowired
-	private EmailService service; 
+	private EmailService emailService; 
+	
+	@Autowired
+	private SmsService smsService;
 	
 	@RequestMapping("/clientdetails")
-	public String Clientdetails(Model model) {
+	public String ClientDetails(Model model) {
 		return "pages/detailspage";
 	}
 	
 	@RequestMapping("/email")
-	public String Clientemail(Model model) {
+	public String ClientEmail(Model model) {
 		return "pages/clientemail";
 	}
 	
@@ -160,15 +164,48 @@ public class ClientController {
     public String sendEmail(@RequestParam(value="to") String to,
                             @RequestParam(value="subject") String subject,
                             @RequestParam(value="body") String body,
-                            Model model) {
-    	service.sendEmail(to, subject, body);
+                            Model model) 
+	{
+		emailService.sendEmail(to, subject, body);
         model.addAttribute("message", "Email sent successfully!");
 		System.out.println("email file");
 
         return "redirect:/user/clients/clientdetails";
     }
 	
-// ---------------------------end Client Details --------------------------------
+	/*
+	 * @RequestMapping("/sms") public String ClientSms(Model model) { return
+	 * "pages/clientsms"; }
+	 */
+    @GetMapping("/sendsms")
+    public String showSmsForm() {
+        return "pages/clientsms";
+    }
+	
+	/*
+	 * @RequestMapping(value = "/sendsms", method = RequestMethod.POST) public
+	 * String sendSms(@RequestParam(value="phoneNumber") String phoneNumber,
+	 * 
+	 * @RequestParam(value="msg") String msg, Model model) {
+	 * sms.sendSms(phoneNumber,msg); System.out.println(phoneNumber + " " +msg);
+	 * model.addAttribute("message", "sms sent successfully!");
+	 * System.out.println("sms file"); return
+	 * "redirect:/user/clients/clientdetails"; }
+	 */
+    
+    @PostMapping("/sendsms")
+    public String sendSms(
+            @RequestParam("phoneNumber") String phoneNumber,
+            @RequestParam("msg") String msg,
+            Model model) {
+
+        smsService.sendSms(phoneNumber, msg);
+        model.addAttribute("successMessage", "SMS sent successfully to " + phoneNumber);
+        return "redirect:/user/clients/sendsms";
+    }
+	
+	
+// ---------------------------end email/sms Client Details --------------------------------
 	
 	
 	
