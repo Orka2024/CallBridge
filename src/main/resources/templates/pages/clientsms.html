@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{pages/base::parent(~{::#l},~{::title},~{::script})}" xmlns:th="http://www.thymleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Email </title>
+</head>
+<body>
+ <main class="email">
+ 
+    <section id="l"> 
+    <div class="container-fluid px-2 px-md-4 mt-6">
+		 <div class="compose-container">
+		        <div class="compose-header">
+		            <span>Message</span>
+		            <a href="/user/clients/clientdetails"  class="close-btn">&times;</a>	
+		        </div>	        	           
+		        <form data-th-action="@{'/user/clients/sendsms'}" method="post">
+<!-- 		            <label for="phoneNumber">phoneNumber:</label> -->				  
+ 					    <input type="text" id="phoneNumber" name="phoneNumber"  class="input-field" placeholder="phoneNumber" required><br>
+<!-- 				    <label for="msg">message:</label> -->				  
+ 					    <textarea id="msg" name="msg" class="compose-body" placeholder="Type Here..." required></textarea><br>								   
+				    <div class="compose-footer">
+				        <button type="submit" class="send-btn"><i class="material-icons">send</i></button>
+				    </div>
+				    
+				</form>
+				
+				    <div th:if="${successMessage}">
+        				<p th:text="${successMessage}"></p>
+    				</div>
+		        
+ 		        
+		 </div>  
+    </div>
+    </section>
+	 
+	  <script>
+	 	   console.log("SMS page")
+	  </script> 
+ 
+ </main>
+ 
+ 
+
+</body>
+</html>
