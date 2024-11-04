@@ -40,3 +40,26 @@ window.onclick = function(event) {
         closeModal();
     }
 }
+
+/* email start */
+
+function showSuccessToast() {
+  const toastContainer = document.getElementById('toast-container');
+  const toast = document.createElement('div');
+  toast.classList.add('toast');
+
+  toast.innerHTML = `
+    <span class="icon">✔️</span>
+    <span class="message">Success! Your action was completed.</span>
+  `;
+
+  toastContainer.appendChild(toast);
+
+  setTimeout(() => {
+    toast.remove();
+  }, 4000);
+}
+
+
+/* email end  */
+

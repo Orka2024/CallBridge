@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{pages/base::parent(~{::#m},~{::title},~{::script})}" xmlns:th="http://www.thymleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>SMS Send </title>
+</head>
+<body>
+ <main class="email">
+ 
+    <section id="m"> 
+   <!--  <div class="container-fluid px-2 px-md-4 mt-6">
+    
+	     
+   		 <div class="compose-header" data-th-fragment="message">
+		            <div th:if="${success}" class="alert">
+			            Message sent successfully!
+			        </div>
+			        <div th:if="${!success}" class="alert">
+	                 <span th:text="${errorMessage}">Failed to send SMS.</span>
+	               </div>
+		            <a href="/user/clients/clientdetails"  class="close-btn">&times;</a>	
+		    </div> 
+        
+
+    </div> -->
+    
+    
+
+		<div class="container mt-5">
+		    <div class="alert alert-success alert-dismissible fade show" role="alert">
+		        <strong>Success!</strong> Your message has been sent successfully.
+		        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		    </div>
+		</div>
+
+    </section>
+	 
+	<script>
+	   function sendsms() {
+			alert("Hii Massage send Successfully");
+			 }
+	</script>  
+
+
+
+ </main>
+ 
+ 
+
+</body>
+</html>

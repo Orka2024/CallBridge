@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="~{TL/Tlbase::parent(~{::#a})}" xmlns:th="http://www.thymleaf.org">
+<html lang="en"
+ th:replace="~{TL/Tlbase::parent(~{::#a},~{::title},~{::script})}"
+  xmlns:th="http://www.thymleaf.org">
 <head>
-<title>Cibil Form</title>
+<title>Teamleader Dashboard</title>
 </head>
 <body>
 
@@ -488,6 +490,11 @@
      </div>
 
    </section>
+   
+   
+  <script>
+  console.log("Dashboard page")
+  </script>
 </main>
 	
 </body> 

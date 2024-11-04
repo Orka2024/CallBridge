@@ -46,6 +46,10 @@ public class SecurityConfig {
 			// Role-based access
             authorize.requestMatchers("/user/**").hasRole("CALLER");
             authorize.requestMatchers("/operations/**").hasRole("OPERATIONS");
+            authorize.requestMatchers("/TL/**").hasRole("TL");
+            authorize.requestMatchers("/So/**").hasRole("SALESOFFICER");
+            authorize.requestMatchers("/HR/**").hasRole("HR");
+            authorize.requestMatchers("/Admin/**").hasRole("ADMIN");
             authorize.anyRequest().permitAll(); // All other URLs are accessible	
             });
 		// Form Login
@@ -84,21 +88,20 @@ public class SecurityConfig {
  
 				 else if (authorities.contains("ROLE_SALESOFFICER"))
 				 {
-			            response.sendRedirect("/so/dashboard");
+			            response.sendRedirect("/So/dashboard");
+			     } 				
+				 else if (authorities.contains("ROLE_TL"))
+				 {
+			            response.sendRedirect("/TL/dashboard");
 			     } 
-				
-//				 else if (authorities.contains("ROLE_ADMIN")) 
-//				 {
-//			            response.sendRedirect("/admin/dashboard");
-//			     }
-//				 else if (authorities.contains("ROLE_TL"))
-//				 {
-//			            response.sendRedirect("/tl/dashboard");
-//			     } 
-//				 else if (authorities.contains("ROLE_HR")) 
-//				 {
-//			            response.sendRedirect("/hr/dashboard");
-//			     }
+				 else if (authorities.contains("ROLE_ADMIN")) 
+				 {
+			            response.sendRedirect("/Admin/dashboard");
+			     }
+				 else if (authorities.contains("ROLE_HR")) 
+				 {
+			            response.sendRedirect("/HR/dashboard");
+			     }
 				 else 
 				 {
 			            // Default redirect for any other roles

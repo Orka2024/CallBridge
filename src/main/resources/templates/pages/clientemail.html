@@ -8,7 +8,8 @@
  <main class="email">
  
     <section id="k"> 
-    <div class="container-fluid px-2 px-md-4 mt-6">
+    <div class="container-fluid px-2 px-md-4 mt-6"> 
+         <div data-th-replace="emailsms::successmsg"></div>
 		 <div class="compose-container">
 		        <div class="compose-header">
 		            <span>New Message</span>
@@ -21,12 +22,14 @@
  -->				    <input type="text" id="subject" name="subject"  class="input-field"  placeholder="Subject" required><br>
 <!-- 				    <label for="to">Body:</label>		
  -->				    <textarea id="body" name="body" class="compose-body" placeholder="Message body..." required></textarea><br>				
-				    <div class="compose-footer">
-				    <button type="submit" class="send-btn">Send Email</button>
+ 				
+                    <div class="compose-footer">
+				        <button type="submit" class="send-btn">Send Email</button>
 				    </div>
-				</form>
+
+				    
 		        
-	        <p th:if="${message}" th:text="${message}"></p>
+
  		        
 		 </div>  
     </div>
