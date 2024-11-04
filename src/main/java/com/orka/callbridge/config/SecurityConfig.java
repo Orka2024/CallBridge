@@ -5,7 +5,9 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 //import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.Authentication;
@@ -30,13 +32,24 @@ public class SecurityConfig {
 	private SecurityCustomUserDetailService userDetailService;
 
 	// Configuration of authentication provider for spring security
-	@Bean
-	public DaoAuthenticationProvider authenticationProvider() {
-		DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-		daoAuthenticationProvider.setUserDetailsService(userDetailService); // UserDetailsService object
-		daoAuthenticationProvider.setPasswordEncoder(passwordEncoder()); // PasswordEncoder object
-		return daoAuthenticationProvider;
-	}
+    @Bean
+    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
+        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
+        authenticationManagerBuilder
+            .userDetailsService(userDetailService)
+            .passwordEncoder(passwordEncoder());
+        return authenticationManagerBuilder.build();
+    }
+	
+	/*
+	 * @Bean public DaoAuthenticationProvider authenticationProvider() {
+	 * DaoAuthenticationProvider daoAuthenticationProvider = new
+	 * DaoAuthenticationProvider();
+	 * daoAuthenticationProvider.setUserDetailsService(userDetailService); //
+	 * UserDetailsService object
+	 * daoAuthenticationProvider.setPasswordEncoder(passwordEncoder()); //
+	 * PasswordEncoder object return daoAuthenticationProvider; }
+	 */
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {

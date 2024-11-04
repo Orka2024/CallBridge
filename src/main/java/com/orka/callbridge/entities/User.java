@@ -2,7 +2,6 @@ package com.orka.callbridge.entities;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,8 +34,8 @@ import lombok.ToString;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @ToString
+@Builder
 public class User implements UserDetails {
 
 	@Id
@@ -79,8 +78,6 @@ public class User implements UserDetails {
 
 	@Builder.Default
 	private boolean uPhoneVerified = false;
-
-
 
 	public String getuId() {
 		return uId;
@@ -243,8 +240,6 @@ public class User implements UserDetails {
 	public String getPassword() {
 		return this.uPassword;
 	}
-	
-	
 	
 	/*
 	 * @Override public String toString() { return "User [uId=" + uId +
