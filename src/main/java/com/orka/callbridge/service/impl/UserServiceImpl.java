@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
 		   {
 		        user.setURoleList(List.of(AppConstants.ROLE_CALLER));
 		   }
-		   else if ("SalesOfficer".equalsIgnoreCase(user.getuRole())) 
+		   else if ("Salesofficer".equalsIgnoreCase(user.getuRole())) 
 		   {
 		        user.setURoleList(List.of(AppConstants.ROLE_SALESOFFICER));
 		   } 
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
 		   {
 		        user.setURoleList(List.of(AppConstants.ROLE_OPERATIONS));
 		   } 
-		   else if ("TL".equalsIgnoreCase(user.getuRole()))
+		   else if ("Tl".equalsIgnoreCase(user.getuRole()))
 		   {
 		        user.setURoleList(List.of(AppConstants.ROLE_TL));
 		   }

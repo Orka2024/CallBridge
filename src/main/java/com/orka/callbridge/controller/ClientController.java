@@ -140,71 +140,66 @@ public class ClientController {
 	
 // ---------------------------start email/sms Client Details --------------------------------
 	
-
-	
-	@Autowired
-	private EmailService emailService; 
-	
-	@Autowired
-	private SmsService smsService;
 	
 	@RequestMapping("/clientdetails")
 	public String ClientDetails(Model model) {
 		return "pages/detailspage";
 	}
 	
+
+	@Autowired
+	private EmailService emailService; 
+	
+
 	@RequestMapping("/email")
 	public String ClientEmail(Model model) {
 		return "pages/clientemail";
 	}
 	
-	
-
 	@RequestMapping(value = "/sendemail", method = RequestMethod.POST)
     public String sendEmail(@RequestParam(value="to") String to,
                             @RequestParam(value="subject") String subject,
                             @RequestParam(value="body") String body,
-                            Model model) 
+                            Model model, HttpSession session ) 
 	{
 		emailService.sendEmail(to, subject, body);
-        model.addAttribute("message", "Email sent successfully!");
-		System.out.println("email file");
-
-        return "redirect:/user/clients/clientdetails";
+		session.setAttribute("message", "Email sent successfully!");
+        return "redirect:/user/clients/email";
     }
 	
-	/*
-	 * @RequestMapping("/sms") public String ClientSms(Model model) { return
-	 * "pages/clientsms"; }
-	 */
-    @GetMapping("/sendsms")
+	@Autowired
+	private SmsService smsService; 
+	
+    @GetMapping("/sms")
     public String showSmsForm() {
         return "pages/clientsms";
     }
 	
-	/*
-	 * @RequestMapping(value = "/sendsms", method = RequestMethod.POST) public
-	 * String sendSms(@RequestParam(value="phoneNumber") String phoneNumber,
-	 * 
-	 * @RequestParam(value="msg") String msg, Model model) {
-	 * sms.sendSms(phoneNumber,msg); System.out.println(phoneNumber + " " +msg);
-	 * model.addAttribute("message", "sms sent successfully!");
-	 * System.out.println("sms file"); return
-	 * "redirect:/user/clients/clientdetails"; }
-	 */
-    
     @PostMapping("/sendsms")
     public String sendSms(
             @RequestParam("phoneNumber") String phoneNumber,
             @RequestParam("msg") String msg,
-            Model model) {
-
-        smsService.sendSms(phoneNumber, msg);
-        model.addAttribute("successMessage", "SMS sent successfully to " + phoneNumber);
-        return "redirect:/user/clients/sendsms";
+            Model model, HttpSession session) {
+    	
+		smsService.sendSms(phoneNumber, msg);
+		session.setAttribute("message", "SMS sent successfully!");
+//    	   try {
+//    		   smsService.sendSms(phoneNumber, msg);
+//               model.addAttribute("success", true);
+//           } catch (Exception e) {
+//               model.addAttribute("success", false);
+//               model.addAttribute("errorMessage", "Failed to send SMS.");
+//           }
+        return "redirect:/user/clients/sms";
+    } 
+	
+	
+    
+    @GetMapping("/msg")
+    public String showmsgForm() {
+        return "pages/smsStatus";
     }
-	
-	
+    
 // ---------------------------end email/sms Client Details --------------------------------
 	
 	
