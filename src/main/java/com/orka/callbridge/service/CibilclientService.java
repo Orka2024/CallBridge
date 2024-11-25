@@ -17,6 +17,8 @@ public interface CibilclientService {
 	
 	List<Cibilclient> getAll();
 	
+	List<Cibilclient> findByEmpname(String empname);
+	
 	
 
 

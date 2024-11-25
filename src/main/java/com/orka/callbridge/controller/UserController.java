@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -102,8 +103,12 @@ public class UserController {
 	private CibilclientService cibilclientService;
 	
 	@GetMapping("/applycibil")
-	public String CreateForm(Model model) {  
-		
+	public String CreateForm(Model model,Authentication authentication) {
+		String username = Helper.getEmailOfSignedInUser(authentication);
+		User user = userService.getUserByEmail(username);
+//		model.addAttribute("loggedin",user);
+//		System.out.println("loggedin user name"+user.getuName());
+//		System.out.println("loggedin user name"+user.getuEmail());
 		Cibilclientform cibilclientform=new Cibilclientform();
 		model.addAttribute("cibilclientform",cibilclientform);
 		return "pages/applycibilform";
@@ -120,6 +125,7 @@ public class UserController {
         }
 		
 		Cibilclient cibilclient=Cibilclient.builder()
+				.empname(cibilclientform.getEmpname())
 				.clientname(cibilclientform.getClientname())
 				.clientnumber(cibilclientform.getClientnumber())
 				.clientemail(cibilclientform.getClientemail())
@@ -149,8 +155,7 @@ public class UserController {
 	@GetMapping("/update/{up_cibilclientId}")
 	public String updatecibilclient(@PathVariable("up_cibilclientId") String up_cibilclientId,Model model)
 	{
-		var cibilupdate = cibilclientService.getCibilclientById(up_cibilclientId);
-		
+		var cibilupdate = cibilclientService.getCibilclientById(up_cibilclientId);	
 		model.addAttribute("cibilupdate", cibilupdate);
 		model.addAttribute("up_cibilclientId", up_cibilclientId);
 
@@ -179,8 +184,7 @@ public class UserController {
 
 		logger.info("Your CibilClient Update successfully : ",upcibil);
 		model.addAttribute("message",Message.builder().content("up_cibilclientId")
-				.type(MessageType.green).build());
-		
+				.type(MessageType.green).build());		
 		return "redirect:/user/cibilmis";
 		
 	}

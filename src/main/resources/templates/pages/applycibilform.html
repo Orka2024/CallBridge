@@ -30,14 +30,23 @@
 							            <div class="col-xl-6 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
 							              <div class="card card-plain">
 							                <div class="card-body">
-							                    <form data-th-action="@{'/user/cibilreturn'}" method="post"  data-th-object="${cibilclientform}"  >              
-								             	   <div class="input-group input-group-outline mb-3">           	        
+							                    <form data-th-action="@{'/user/cibilreturn'}" method="post"  data-th-object="${cibilclientform}">  
+							                    							               										 
+ 							                      <div class="input-group input-group-outline mb-3">
+													    <select class="form-select" name="clientloanty" id="clientloanty"  data-th-field="*{empname}" required>
+																 <option  value="">Employee Name</option>
+								                                 <option data-th-value="${signedInUser.uName}"  data-th-text="${signedInUser.uName}"></option>		                     
+													    </select>
+													</div> 
+										                      
+								             	   <div class="input-group input-group-outline mb-3">            	        
 								             	              <label class="form-label">Customer Name</label>
-										                      <input type="text" id="clientname" class="form-control"  data-th-field="*{clientname}" style="text-transform:capitalize;" required>         
+										                      <input type="text" id="clientname" class="form-control"  data-th-field="*{clientname}"  style="text-transform:capitalize;" required>         
 										           </div>
-										          <div class="input-group input-group-outline mb-3"> 
+										           <div class="input-group input-group-outline mb-3"> 
 										                      <label class="form-label">Contact</label>
 								       						  <input type="text" id="clientnumber" class="form-control" data-th-field="*{clientnumber}" maxlength="10"  required>
+								               
 								                    </div>
 								                    
 								                    <div class="input-group input-group-outline mb-3">           	        
@@ -49,7 +58,7 @@
 								       						  <input type="text"  class="form-control" data-th-field="*{clientpan}" maxlength="10" style="text-transform:uppercase;"  required>
 								                    </div>
 								                    <div class="input-group input-group-outline mb-3">           	        
-								             	              <label  class="me-5 mt-2">Date of Birthday</label>
+								             	              <label  class="me-5 mt-2">Date of Birth</label>
  															  <input type="date"  class="form-control" th:field="*{clientbod}" required>         
 										           </div>
 										           
@@ -100,6 +109,7 @@
 							      </div>
 	              </div>
 	            </div>
+	         
 	          </div>
 	        </div>
 	      </div>

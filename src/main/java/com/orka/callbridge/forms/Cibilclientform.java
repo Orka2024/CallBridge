@@ -17,6 +17,7 @@ import lombok.ToString;
 @ToString 
 public class Cibilclientform {
 	
+	private String empname;
 	private String clientname;
 	private String clientnumber;
 	private String clientemail;
@@ -28,13 +29,30 @@ public class Cibilclientform {
 	private String clientIncome;
 	
 
-    // Capitalize the first letter of the name
-    public void setClientname(String clientname) {
+    // Capitalize the first letter of the Employee name
+    public void setEmpname(String empname) {
+        this.empname = capitalizeFirstLetteremp(empname);
+    }
+
+    // Helper method to capitalize the first letter of the Employee name
+    private String capitalizeFirstLetteremp(String name) {
+        if (name == null || name.isEmpty()) {
+            return name;
+        }
+        return name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
+    }
+    
+	
+	
+    // Capitalize the first letter of the client name
+    public void setClientname(String clientname)
+    {
         this.clientname = capitalizeFirstLetter(clientname);
     }
 
-    // Helper method to capitalize the first letter of the name
-    private String capitalizeFirstLetter(String name) {
+    // Helper method to capitalize the first letter of the client name
+    private String capitalizeFirstLetter(String name) 
+    {
         if (name == null || name.isEmpty()) {
             return name;
         }
@@ -43,13 +61,15 @@ public class Cibilclientform {
     
 
     // Ensure PAN number is always uppercase
-    public void setClientpan(String clientpan) {
+    public void setClientpan(String clientpan)
+    {
         this.clientpan = clientpan != null ? clientpan.toUpperCase() : null;
     }
 
 
 	 // Ensure email is always lowercase
-    public void setClientemail(String clientemail) {
+    public void setClientemail(String clientemail)
+    {
         this.clientemail = clientemail != null ? clientemail.toLowerCase() : null;
     }
 	

@@ -8,30 +8,31 @@ button {
 }
 
 .interested {
-	background-color: #3ec152; /* Green */
+	background-color: #3ec152; Green
 	color: white;
 }
 
 .interested:hover {
-	background-color: #32b943; /* Darker green */
+	background-color: #32b943; Darker green
 }
 
 .not-interested {
-	background-color: #ff4d4d; /* Red */
+	background-color: #ff4d4d; Red
 	color: white;
 }
 
 .not-interested:hover {
-	background-color: #e63939; /* Darker red */
+	background-color: #e63939; Darker red
 }
 
 .unknown-interested {
-	background-color: #ff8040; /* Red */
+	background-color: #ff8040; Red
 	color: white;
 }
 
-/* Basic button styling */
-.call-button {
+/* Basic button styling
+ */
+ .call-button {
 	background-color: #28a745;
 	color: white;
 	padding: 10px 20px;
@@ -46,24 +47,25 @@ button {
 	background-color: #218838;
 }
 
-/* The modal background (hidden by default) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+/* The modal background (hidden by default)
+ */
+ .modal {
+    display: none; Hidden by default
+    position: fixed; Stay in place
+    z-index: 1; Sit on top
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    justify-content: center; /* Center modal content */
-    align-items: center; /* Center modal content */
+    width: 100%; Full width
+    height: 100%; Full height
+    overflow: auto; Enable scroll if needed
+    background-color: rgb(0,0,0); Fallback color
+    background-color: rgba(0,0,0,0.4); Black w/ opacity
+    justify-content: center; Center modal content
+    align-items: center; Center modal content
 }
 
-/* Modal content styling */
-.modal-content {
+/* Modal content styling
+ */.modal-content {
 	background-color: white;
 	padding: 20px;
 	width: 350px;
@@ -72,7 +74,7 @@ button {
 	text-align: center;
 }
 
-/* Close button */
+Close button
 .close {
 	position: absolute;
 	top: 10px;
@@ -87,7 +89,7 @@ button {
 	color: red;
 }
 
-/* Call and End Call button styles with 2px space between them */
+Call and End Call button styles with 2px space between them
 .button-container {
 	display: flex;
 	justify-content: space-between;
@@ -121,8 +123,9 @@ button {
 	background-color: #c82333;
 }
 
-/* Image styling */
-.call-image {
+/* Image styling
+ */
+ .call-image {
 	width: 100px;
 	height: 100px;
 	margin: 10px 100px;
@@ -139,7 +142,7 @@ button {
 	width: 100%;
 	height: 100%;
 	object-fit: contain;
-	/* Ensures the image fits while maintaining aspect ratio */
+	Ensures the image fits while maintaining aspect ratio
 }
 
 .file-upload {
@@ -177,8 +180,9 @@ button {
     font-size: 1em;
 }
 
-/* start email */
-
+/* start email
+ */
+ 
 mail .email {
     font-family: Arial, sans-serif;
     background-color:#f4fcfd;
@@ -282,7 +286,7 @@ mail .email {
 .toast {
   display: flex;
   align-items: center;
-  background-color: #4caf50; /* Success color */
+  background-color: #4caf50; Success color
   color: #fff;
   padding: 15px 20px;
   border-radius: 5px;
@@ -323,13 +327,13 @@ mail .email {
 
 
 
-/* end email */
+/* end email
+ */
 
 
 
-
-/* start sms */
-
+/* start sms
+ */
 main .sms {
   font-family: Arial, sans-serif;
   display: flex;
@@ -351,7 +355,7 @@ main .sms {
 .toast {
   display: flex;
   align-items: center;
-  background-color: #4caf50; /* Success color */
+  background-color: #4caf50; Success color
   color: #fff;
   padding: 15px 20px;
   border-radius: 5px;
@@ -392,10 +396,10 @@ main .sms {
 
 
 
-/* end sms  */
-
-/* msg try  start*/
-
+/* end sms 
+ */
+/* msg try  start
+ */
 main .msg {
   font-family: Arial, sans-serif;
   display: flex;
@@ -417,7 +421,7 @@ main .msg {
 .toast {
   display: flex;
   align-items: center;
-  background-color: #4caf50; /* Success color */
+  background-color: #4caf50; Success color
   color: #fff;
   padding: 15px 20px;
   border-radius: 5px;
@@ -457,4 +461,5 @@ main .msg {
 }
 
 
-/* msg end  */
+/* msg end 
+ */

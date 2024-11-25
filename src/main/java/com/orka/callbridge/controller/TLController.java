@@ -20,38 +20,9 @@ public class TLController {
 		return "TL/profile";
 	}
 
-	
-//	@GetMapping("/viewreport")
-//	public String viewreport() {
-//		return "TL/viewcallerreport";
-//	}
-//	
-//	@GetMapping("/interested")
-//	public String interested() {
-//		return "TL/interested";
-//	}
-//	
-//	@GetMapping("/noninterested")
-//	public String noninterested() {
-//		return "TL/noninterested";
-//	}
-//	
-//
-//	@GetMapping("/approvemis")
-//	public String approvelist(Model model) {  
-//		return "TL/Tlapprovemis";
-//	}
-//
-//	
-//	@GetMapping("/rejectmis")
-//	public String rejectlist(Model model) {  
-//		return "TL/Tlrejectmis";
-//	}
-//	
-//	
-//	@GetMapping("/holdmis")
-//	public String holdlist(Model model) {  
-//		return "TL/Tlholdmis";
-//	}
+	@GetMapping("/Assignin")
+	public String Assigninpage() {
+		return "TL/Assign_page";
+	}
 
 }
