@@ -67,5 +67,11 @@ public class CibilclientServiceImpl implements CibilclientService  {
 		return cibilclientRepo.findAll();
 	}
 
+	@Override
+	public List<Cibilclient> findByEmpname(String empname) {
+		// TODO Auto-generated method stub
+		return  cibilclientRepo.findByEmpname(empname);
+	}
+
 	
 }

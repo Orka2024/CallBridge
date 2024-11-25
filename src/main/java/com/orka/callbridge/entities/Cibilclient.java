@@ -23,6 +23,9 @@ public class Cibilclient {
 	
 	@Id
 	private String clientId;
+	 
+	@Column(nullable = false)
+	private String empname;
 	
 	@Column(nullable = false)
 	private String clientname;
@@ -51,14 +54,22 @@ public class Cibilclient {
 	@Column(nullable = false)
 	private String clientIncome;
 
-	
 	@Override
 	public String toString() {
-		return "Cibilclient [clientId=" + clientId + ", clientname=" + clientname + ", clientnumber=" + clientnumber
-				+ ", clientemail=" + clientemail + ", clientpan=" + clientpan + ", clientbod=" + clientbod
-				+ ", clientaddress=" + clientaddress + ", clientpin=" + clientpin + ", clientloanty=" + clientloanty
-				+ ", clientIncome=" + clientIncome + "]";
+		return "Cibilclient [clientId=" + clientId + ", empname=" + empname + ", clientname=" + clientname
+				+ ", clientnumber=" + clientnumber + ", clientemail=" + clientemail + ", clientpan=" + clientpan
+				+ ", clientbod=" + clientbod + ", clientaddress=" + clientaddress + ", clientpin=" + clientpin
+				+ ", clientloanty=" + clientloanty + ", clientIncome=" + clientIncome + "]";
 	}
+
+
+
+
+	
+	
+
+	
+
 	
 	
 

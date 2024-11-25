@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en"
- th:replace="~{operations/opbase::parent(~{::#b},~{::title},~{::script})}"
-  xmlns:th="http://www.thymleaf.org"><head>
+ th:replace="~{operations/opbase::parent(~{::#g},~{::title},~{::script})}"
+  xmlns:th="http://www.thymleaf.org">
+<head>
 <title>Applications Of Cibil</title>
 </head>
-
 
 <body>
 
 <main>
-   <section id="b">
+   <section id="g">
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-12">
           <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                <h6 class="text-white text-capitalize ps-3">Interested Customer</h6>
+                <h6 class="text-white text-capitalize ps-3"> Employee : <span data-th-text="${emp}"></span></h6>
               </div>
             </div>
             <div class="card-body px-0 pb-2">
@@ -24,17 +24,19 @@
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr>
-                      <th class="text-secondary opacity-10"> Customer Name</th>
-                      <th class="text-secondary opacity-10"> Contact</th>
-                      <th class="text-secondary opacity-10"> Pan Number</th>
-                      <th class="text-secondary opacity-10"> Loan Type</th>   
-                      <th class="text-secondary opacity-10"> Income Source</th>   
+                      <th class="text-secondary opacity-10">Customer Name</th>
+                      <th class="text-secondary opacity-10">Contact</th>
+                      <th class="text-secondary opacity-10">Pan Number</th>
+                      <th class="text-secondary opacity-10">Loan Type</th>   
+                      <th class="text-secondary opacity-10">Income Source</th>   
+                      <th class="text-secondary opacity-10">Actions</th>   
+                      
                     </tr>
                   </thead>
                   <tbody>
                     <tr                     
                      data-th-object="${cb}"
-                     data-th-each="cb : ${Cibilclient}"
+                     data-th-each="cb : ${client}"
                     >
                       <td>
                         <div class="d-flex px-2 py-1">
@@ -45,39 +47,35 @@
                             alt="user"
                             >
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 data-th-text="*{clientname}"></h6>
+                             <h6 data-th-text="*{clientname}"></h6>
                           </div>
                         </div>
-                      </td> 
+                      </td>  
                       <td>
                           <div class="d-flex flex-column justify-content-center">
-                            <h6  data-th-text="*{clientnumber}"> </h6>
+                            <h6 data-th-text="*{clientnumber}"></h6>
                           </div>
                       </td>
                                           
                       <td>
                           <div class="d-flex flex-column justify-content-center">
-                            <h6  data-th-text="*{clientpan}"></h6>
+                              <h6 data-th-text="*{clientpan}"></h6>
                           </div>
                       </td>
                       <td>
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 data-th-text="*{clientloanty}"> </h6>
+                          <h6 data-th-text="*{clientloanty}"></h6>
                           </div>
                       </td>
                       
                       <td>
                           <div class="d-flex flex-column justify-content-center">
-                            <h6  data-th-text="*{clientIncome}"> </h6>
+                          <h6 data-th-text="*{clientIncome}"></h6>
                           </div>                      
-                      </td>
-<!--                    
-                      <td> 
-                           <a data-th-href ="@{'/user/delete/'+*{clientId}}" class="btn btn-lg bg-gradient-danger"><i class="material-icons mb-0">delete</i></a> 
-                           <a data-th-href ="@{'/user/update/'+*{clientId}}" class="btn btn-lg bg-gradient-primary"><i class="material-icons mb-0">edit_note</i></a>                                                                                                   
-				      </td>  
-				                -->          
-                     
+                      </td>   
+                      <td>
+                          <a data-th-href="@{'/operations/checkreport/'+*{clientId} }" class="btn btn-lg bg-gradient-primary">Check cibil</a>                                 
+                      </td>                                       
                     </tr>
                                       
                   </tbody>

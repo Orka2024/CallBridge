@@ -23,15 +23,15 @@
                   <thead>
                     <tr>
                       <th class="text-secondary opacity-7">Employee Name</th>
-                      <th class="text-secondary opacity-7">File</th>
-                      <th class="text-secondary opacity-7">View</th>               
+                       <th class="text-secondary opacity-7">Roll</th>
+<!--                       <th class="text-secondary opacity-7">File</th>
+ -->                      <th class="text-secondary opacity-7">View</th>               
                     </tr>
                   </thead>
                   <tbody>
                     <tr 
                      data-th-object="${Empl}"
-                     data-th-each="Empl : ${Employee}"
- 
+                     data-th-each="Empl : ${emp}"
                     >
                       <td>
                         <div class="d-flex px-2 py-1">
@@ -45,19 +45,23 @@
                         </div>
                       </td>
                       <td>
-                          <div >
-                          <h6>0</h6>
-					      </div>
-					                                                       
+                          <div>
+                          <h6 class="mb-0 text-sm" data-th-text="*{uRole}">John Michael</h6>
+					      </div>					                                                       
                       </td>
-                      <td>
-                         <input type="button" class="btn btn-lg bg-gradient-primary btn-lg  mt-1 mb-0" onclick="location.href='/Cibilform';" value="check cibil" />                                              
+<!--                       <td>
+                          <div >
+                          <h6></h6>
+					      </div>
+					                                                        
+                      </td> --> 
+                      <td>                    
+                        <a data-th-href="@{'/operations/checkcibil/'+ *{uName}}" class="btn btn-lg bg-gradient-primary">Check cibil</a>             
+<!--                         <a data-th-href="@{'/operations/checkcibil/'+*{uRole} +' :: '+ *{uName}}" class="btn btn-lg bg-gradient-primary">Check cibil</a>             
+ -->                     
                       </td>  
                     </tr>
 
-                                        
-
-                  
                   </tbody>
                 
                 </table>
