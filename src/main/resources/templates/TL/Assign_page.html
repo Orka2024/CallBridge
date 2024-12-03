@@ -1,10 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en"
+	data-th-replace="~{pages/base :: parent(~{::#h},~{::title},~{::script})}"
+	xmlns:th="http://www.thymleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Assign Clients</title>
 </head>
 <body>
-<h1>Assign_page</h1>
+	<main>
+		<section id="h">
+			<div class="container-fluid py-4">
+				<div class="row">
+					<div class="col-12">
+						<div class="card my-4">
+
+
+							<div
+								class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+								<div
+									class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3 d-flex justify-content-between align-items-center">
+									<h6 class="text-white text-capitalize ps-3">Make Call</h6>
+									<div class="input-group input-group-outline pe-3"
+										style="width: 200px;">
+										<select id="countries_disabled" class="form-control">
+											<option selected value="">Select Field</option>
+											<option value="name">Name</option>
+											<option value="phone">Phone</option>
+											<option value="email">Email</option>
+										</select>
+										<!-- <input id="Search" type="text" class="form-control" placeholder="Search">  -->
+									</div>
+								</div>
+							</div>
+							<div class="card-body px-0 pb-2">
+								<div class="table-responsive p-0">
+									
+								</div>
+							</div>
+						</div>
+						<!-- Pagination Component -->
+					</div>
+				</div>
+			</div>
+		</section>
+		<script>
+  console.log("Assign Clients page")
+  </script>
+	</main>
+
 </body>
+
 </html>
