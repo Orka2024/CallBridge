@@ -119,9 +119,9 @@ public class ClientServiceImpl implements ClientService {
                 
                 client.setCName(getCellValue(row.getCell(1)));
                 client.setCPhoneNo(getCellValue(row.getCell(2)));
-                client.setCEmail(getCellValue(row.getCell(3)));
-                client.setCStatus(getCellValue(row.getCell(4)));
-                client.setCLastDateContacted(getCellValue(row.getCell(5)));
+                //client.setCEmail(getCellValue(row.getCell(3)));
+                //client.setCStatus(getCellValue(row.getCell(4)));
+                //client.setCLastDateContacted(getCellValue(row.getCell(5)));
                 client.setCCloudinaryImagePublicId( UUID.randomUUID().toString());
                 client.setCImage(AppConstants.DEFAULT_PROFILE_IMAGE_ID);
                 client.setUser(userByUId);
