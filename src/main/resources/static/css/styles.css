@@ -8,25 +8,25 @@ button {
 }
 
 .interested {
-	background-color: #3ec152; Green
+	background-color: #3ec152; /* Green */
 	color: white;
 }
 
 .interested:hover {
-	background-color: #32b943; Darker green
+	background-color: #32b943; /* Darker green */
 }
 
 .not-interested {
-	background-color: #ff4d4d; Red
+	background-color: #ff4d4d; /* Red */
 	color: white;
 }
 
 .not-interested:hover {
-	background-color: #e63939; Darker red
+	background-color: #e63939; /* Darker red */
 }
 
 .unknown-interested {
-	background-color: #ff8040; Red
+	background-color: #ff8040; /* Red */
 	color: white;
 }
 
@@ -50,18 +50,18 @@ button {
 /* The modal background (hidden by default)
  */
  .modal {
-    display: none; Hidden by default
-    position: fixed; Stay in place
-    z-index: 1; Sit on top
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
     left: 0;
     top: 0;
-    width: 100%; Full width
-    height: 100%; Full height
-    overflow: auto; Enable scroll if needed
-    background-color: rgb(0,0,0); Fallback color
-    background-color: rgba(0,0,0,0.4); Black w/ opacity
-    justify-content: center; Center modal content
-    align-items: center; Center modal content
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    justify-content: center;/*  Center modal content */
+    align-items: center; /* Center modal content */
 }
 
 /* Modal content styling
@@ -89,8 +89,10 @@ Close button
 	color: red;
 }
 
-Call and End Call button styles with 2px space between them
-.button-container {
+/* Call and End Call button styles with 2px space between them
+ */
+ 
+ .button-container {
 	display: flex;
 	justify-content: space-between;
 	margin-top: 20px;
@@ -142,8 +144,9 @@ Call and End Call button styles with 2px space between them
 	width: 100%;
 	height: 100%;
 	object-fit: contain;
-	Ensures the image fits while maintaining aspect ratio
-}
+/* 	Ensures the image fits while maintaining aspect ratio
+ */
+ }
 
 .file-upload {
     position: relative;
@@ -286,7 +289,7 @@ mail .email {
 .toast {
   display: flex;
   align-items: center;
-  background-color: #4caf50; Success color
+  background-color: #4caf50; /* Success color */
   color: #fff;
   padding: 15px 20px;
   border-radius: 5px;
@@ -355,7 +358,7 @@ main .sms {
 .toast {
   display: flex;
   align-items: center;
-  background-color: #4caf50; Success color
+  background-color: #4caf50; /* Success color */
   color: #fff;
   padding: 15px 20px;
   border-radius: 5px;
@@ -421,7 +424,7 @@ main .msg {
 .toast {
   display: flex;
   align-items: center;
-  background-color: #4caf50; Success color
+  background-color: #4caf50; /* Success color */
   color: #fff;
   padding: 15px 20px;
   border-radius: 5px;

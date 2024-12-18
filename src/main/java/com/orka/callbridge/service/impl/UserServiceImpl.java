@@ -55,8 +55,7 @@ public class UserServiceImpl implements UserService {
 		   }
 		   else if ("Admin".equalsIgnoreCase(user.getuRole())) {
 		        user.setURoleList(List.of(AppConstants.ROLE_ADMIN));
-		    } 
-		   
+		    } 		   
 		    else {
 		        // Default role if none is selected or invalid input
 		    	user.setURoleList(List.of(AppConstants.ROLE_HR));		    }

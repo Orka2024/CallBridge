@@ -8,4 +8,7 @@ public interface ImageService {
 
 	String getUrlFromPublicId(String publicId);
 
+	String cibiluploadImage(MultipartFile cibilupload,String filename);
+
+	String getUrlFromPublicIdsec(String publicIdsec);
 }

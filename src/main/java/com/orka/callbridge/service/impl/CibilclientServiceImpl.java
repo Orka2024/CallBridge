@@ -27,8 +27,6 @@ public class CibilclientServiceImpl implements CibilclientService  {
 	
 	@Override
 	public Cibilclient saveCibilclient(Cibilclient cibilclient) {
-		String clientId=UUID.randomUUID().toString();
-		cibilclient.setClientId(clientId);
 		return cibilclientRepo.save(cibilclient);
 	}
 

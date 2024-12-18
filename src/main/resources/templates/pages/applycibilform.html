@@ -15,7 +15,7 @@
 	          <div class="card my-4">
 	            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
 	              <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-	                <h6 class="text-white text-capitalize ps-3">Cibil Application Form</h6>
+	                <h6 class="text-white text-capitalize ps-3">Cibil Application : <span data-th-text="${Client.client_name}"></span></h6>
 	              </div>
 	            </div>
 	            <div class="card-body px-0 pb-2">
@@ -33,46 +33,35 @@
 							                    <form data-th-action="@{'/user/cibilreturn'}" method="post"  data-th-object="${cibilclientform}">  
 							                    							               										 
  							                      <div class="input-group input-group-outline mb-3">
-													    <select class="form-select" name="clientloanty" id="clientloanty"  data-th-field="*{empname}" required>
+													    <select class="form-select" name="clientloanty" id="clientloanty" data-th-field="*{empname}"  required>
 																 <option  value="">Employee Name</option>
 								                                 <option data-th-value="${signedInUser.uName}"  data-th-text="${signedInUser.uName}"></option>		                     
 													    </select>
-													</div> 
-										                      
-								             	   <div class="input-group input-group-outline mb-3">            	        
-								             	              <label class="form-label">Customer Name</label>
-										                      <input type="text" id="clientname" class="form-control"  data-th-field="*{clientname}"  style="text-transform:capitalize;" required>         
-										           </div>
-										           <div class="input-group input-group-outline mb-3"> 
-										                      <label class="form-label">Contact</label>
-								       						  <input type="text" id="clientnumber" class="form-control" data-th-field="*{clientnumber}" maxlength="10"  required>
-								               
-								                    </div>
-								                    
+													</div> 									                   								                    
 								                    <div class="input-group input-group-outline mb-3">           	        
-								             	              <label class="form-label">Email Id</label>
+								             	              <label class="form-label">Customer Email</label>
 										                      <input type="email" id="clientemail" class="form-control" data-th-field="*{clientemail}" style="text-transform:lowercase;" required>         
-										           </div>
+										            </div>
 										           <div class="input-group input-group-outline mb-3">
 										                      <label class="form-label">Pan Number</label>
-								       						  <input type="text"  class="form-control" data-th-field="*{clientpan}" maxlength="10" style="text-transform:uppercase;"  required>
+								       						  <input type="text"  class="form-control" data-th-field="*{clientpan}"  maxlength="10" style="text-transform:uppercase;"  required>
 								                    </div>
 								                    <div class="input-group input-group-outline mb-3">           	        
 								             	              <label  class="me-5 mt-2">Date of Birth</label>
- 															  <input type="date"  class="form-control" th:field="*{clientbod}" required>         
+ 															  <input type="date"  class="form-control" data-th-field="*{clientbod}" required>         
 										           </div>
 										           
 										           <div class="input-group input-group-outline mb-3">
 										                      <label class="form-label">Address</label>
-								       						  <input type="text"  class="form-control" data-th-field="*{clientaddress}" required>
+								       						  <input type="text"  class="form-control" data-th-field="*{clientaddress}"  required>
 								                    </div>
 								                    <div class="input-group input-group-outline mb-3">           	        
 								             	              <label class="form-label">Pin Code</label>
-										                      <input type="text" class="form-control" data-th-field="*{clientpin}" maxlength="6"  required>         
+										                      <input type="text" class="form-control" data-th-field="*{clientpin}"  maxlength="6"  required>         
 										           </div>
 										         								                    
 								                    <div class="input-group input-group-outline mb-3">
-													    <select class="form-select" name="clientloanty" id="clientloanty"  data-th-field="*{clientloanty}" required>
+													    <select class="form-select" name="clientloanty" id="clientloanty" data-th-field="*{clientloanty}" required>
 																 <option  value=""> Loan Type</option>
 								                                  <option value="Personal Loan"> Personal Loan</option>
 											                      <option value="Business Loan"> Business Loan</option>
@@ -89,7 +78,7 @@
 													</div>
 																														    	
 								                    <div class="input-group input-group-outline mb-3">
-								                    <select class="form-select" name="clientIncome" id="clientIncome"  data-th-field="*{clientIncome}" required>
+								                    <select class="form-select" name="clientIncome" id="clientIncome" data-th-field="*{clientIncome}" required>
 																 <option value="">Income Source </option>
 								                                  <option value="Job"> Job</option>
 											                      <option value="Business"> Business</option>
@@ -107,6 +96,7 @@
 							          </div>
 							        </div>
 							      </div>
+	             
 	              </div>
 	            </div>
 	         

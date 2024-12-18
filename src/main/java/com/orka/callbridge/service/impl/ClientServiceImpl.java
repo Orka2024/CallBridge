@@ -81,12 +81,8 @@ public class ClientServiceImpl implements ClientService {
 
 	@Override
 	public Page<Client> getByUser(User user, int page, int size, String sortBy, String direction) {
-		
-
 		Sort sort = direction.equals("desc")? Sort.by(sortBy).descending():Sort.by(sortBy).ascending();
 		var pageable = PageRequest.of(page, size,sort);
-		
-		
 		return clientRepository.findByUser(user, pageable);
 	}
 	
@@ -115,8 +111,7 @@ public class ClientServiceImpl implements ClientService {
                 if (row.getRowNum() == 0) continue;
 
                 Client client = new Client();
-                client.setCId(UUID.randomUUID().toString());  // Generate a random UUID
-                
+                client.setCId(UUID.randomUUID().toString());  // Generate a random UUID              
                 client.setCName(getCellValue(row.getCell(1)));
                 client.setCPhoneNo(getCellValue(row.getCell(2)));
                 client.setCEmail(getCellValue(row.getCell(3)));
@@ -125,7 +120,6 @@ public class ClientServiceImpl implements ClientService {
                 client.setCCloudinaryImagePublicId( UUID.randomUUID().toString());
                 client.setCImage(AppConstants.DEFAULT_PROFILE_IMAGE_ID);
                 client.setUser(userByUId);
-
                 clients.add(client);
             }
 

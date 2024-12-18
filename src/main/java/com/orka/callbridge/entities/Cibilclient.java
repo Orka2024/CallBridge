@@ -1,7 +1,12 @@
 package com.orka.callbridge.entities;
 
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import java.lang.Override;
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -44,7 +49,7 @@ public class Cibilclient {
 	
 	@Column(nullable = false)
 	private String clientaddress;
-	
+	 
 	@Column(nullable = false)
 	private String clientpin;
 	
@@ -53,14 +58,20 @@ public class Cibilclient {
 	
 	@Column(nullable = false)
 	private String clientIncome;
+	
+    @Column(nullable = false, updatable = false)
+    @CreationTimestamp
+    private LocalDateTime TodayDate;
 
 	@Override
 	public String toString() {
 		return "Cibilclient [clientId=" + clientId + ", empname=" + empname + ", clientname=" + clientname
 				+ ", clientnumber=" + clientnumber + ", clientemail=" + clientemail + ", clientpan=" + clientpan
 				+ ", clientbod=" + clientbod + ", clientaddress=" + clientaddress + ", clientpin=" + clientpin
-				+ ", clientloanty=" + clientloanty + ", clientIncome=" + clientIncome + "]";
+				+ ", clientloanty=" + clientloanty + ", clientIncome=" + clientIncome + ", TodayDate=" + TodayDate + "]";
 	}
+	
+
 
 
 
