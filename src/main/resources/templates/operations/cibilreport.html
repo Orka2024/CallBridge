@@ -1,41 +1,97 @@
 <!DOCTYPE html>
-<html lang="en"
- th:replace="~{operations/opbase::parent(~{::#g},~{::title},~{::script})}"
-  xmlns:th="http://www.thymleaf.org">
+<html lang="en" 
+ 	  th:replace="~{operations/opbase::parent(~{::#i},~{::title},~{::script})}"
+      xmlns:th="http://www.thymleaf.org">
 <head>
-<title>Applications Of Cibil</title>
+<title>Cibil Status Form</title>
 </head>
-
 <body>
 
 <main>
-   <section id="g">
-    <div class="container-fluid py-4">
-      <div class="row">
-        <div class="col-12">
-          <div class="card my-4">
-            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-              <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                <h6 class="text-white text-capitalize ps-3"> Client:<span data-th-text="${filtered.clientname}"></span></h6>
-              </div>
-            </div>
+   <section id="i">
+	<div class="container-fluid py-4">
+	     <div class="row">
+	        <div class="col-12">
+	          <div class="card my-4">
+	            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+	              <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                     <h6 class="text-white text-capitalize ps-3"> Client : <span data-th-text="${filtered.clientname}"></span></h6> 	               	                
+	              </div>
+	            </div>
+	            <div class="card-body px-0 pb-2">
+	              <div class="table-responsive p-0">					   
+							      <div class="page-header min-vh-100">
+							        <div class="container">
+							          <div class="row">
+							            <div class="col-5 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 start-0 text-center justify-content-center flex-column">
+							              <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center" style="background-image: url('/img/office-dark.jpg'); background-size: cover;">
+							              </div>
+							            </div>
+							            <div class="col-xl-6 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
+							              <div class="card card-plain">
+							                <div class="card-body">
+							                <form data-th-action="@{'/operations/cibilreportsubmit'}" method="post"  data-th-object="${cibilreport}" enctype="multipart/form-data">
+								                <div class="input-group input-group-outline mb-3">            	        
+									             	              <label class="form-label">Cibil Score</label>
+											                      <input type="text" name="cibilScore" id="cibilScore" class="form-control" data-th-field="*{cibilScore}"  style="text-transform:capitalize;" required>         
+											    </div>
+											    
+											    <div class="input-group input-group-outline mb-3">           	        
+								             	              <label  class="me-5 mt-2">Cibil Upload</label>
+ 															  <input type="file" name="cibilupload" id="cibilupload_file_input" class="form-control"  data-th-field="*{cibilupload}" required />        
+										                      <img  src="" id="uploadimage_preview" alt="View Cibil" width="100" height="100" />
+										                      
+										        </div>
 
- 
-          </div>
-        </div>
-      </div>
-   </div>
+											    <div class="input-group input-group-outline mb-3">
+									                    <select class="form-select" name="cibilStatus" id="cibilStatus" data-th-field="*{cibilStatus}"   required>
+																	  <option value="">Cibil Status</option>
+									                                  <option value="Approve">Approve</option>
+												                      <option value="Reject">Reject</option>
+												                      <option value="Hold">Hold</option>												                     
+														</select>            						       						  
+									           </div>
+									           <div class="input-group input-group-outline mb-3">
+									                    <select class="form-select" name="cibilReason" id="cibilReason" data-th-field="*{cibilReason}"   required>
+																	  <option value="">Cibil Reason</option>
+									                                  <option value="Approve">Approve</option>
+												                      <option value="Reject">Reject</option>
+												                      <option value="NDA">NDA</option>
+												                      <option value="WeakCibil">WeakCibil</option>
+												                      <option value="Hold">Hold</option>												                     
+														</select>            						       						  
+									           </div>
+									           
+									           
+									           
+							                  <div class="text-center">
+									                    <button type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Submit</button>
+									          </div> 
+							                </form>
+							            
+							                </div>						
+							              </div>
+							            </div>
+							          </div>
+							        </div>
+							      </div>
+	             
+	              </div>
+	            </div>
+	         
+	          </div>
+	        </div>
+	      </div>
+	      
+	    </div>
    </section>
-  <script>
-  console.log("CibilMis page")
-  </script>
+   <script data-th-src="@{'/js/admin.js'}"></script>
+ 
+   <script>
+      console.log("Cibil Report")
+   </script>
 </main>
 	
 </body> 
 
 </html>
-
-
-
-
-

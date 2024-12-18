@@ -1,6 +1,7 @@
 package com.orka.callbridge.service.impl;
 
 import java.io.IOException;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,9 +21,6 @@ public class ImageServiceImpl implements ImageService {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	/**
-	 * @param cloudinary
-	 */
 	public ImageServiceImpl(Cloudinary cloudinary) {
 		this.cloudinary = cloudinary;
 	}
@@ -48,9 +46,9 @@ public class ImageServiceImpl implements ImageService {
 			cImage.getInputStream().read(data);
 			cloudinary.uploader().upload(data, ObjectUtils.asMap(
 					"public_id", cImageFileName
-					));
-			
+					));			
 			return this.getUrlFromPublicId(cImageFileName);
+			
 		} catch (IOException e) {
 	        logger.error("Error uploading image: ", e);
 	        return "Error uploading file";
@@ -73,6 +71,39 @@ public class ImageServiceImpl implements ImageService {
 						.crop(AppConstants.CLIENT_IMAGE_CROP)
 						)
 				.generate(publicId);
+	}
+
+	@Override
+	public String cibiluploadImage(MultipartFile cibilupload,String filename) {
+			
+		try {			
+			byte [] dataup= new byte[cibilupload.getInputStream().available()];
+			cibilupload.getInputStream().read(dataup);
+			cloudinary.uploader().upload(dataup,ObjectUtils.asMap(
+					"public_idsec",cibilupload.getOriginalFilename()));
+			
+			return this.getUrlFromPublicIdsec(filename);
+			}
+		catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+
+			}
+		
+	}
+
+	@Override
+	public String getUrlFromPublicIdsec(String publicIdsec) {
+		return cloudinary
+		.url()
+		.transformation(
+				new Transformation<>()
+				.width(AppConstants.CLIENT_IMAGE_WIDTH)
+				.height(AppConstants.CLIENT_IMAGE_HEIGHT)
+				.crop(AppConstants.CLIENT_IMAGE_CROP)
+				)
+		.generate(publicIdsec);
 	}
 
 }
