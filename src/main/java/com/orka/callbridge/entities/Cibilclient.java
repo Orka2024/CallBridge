@@ -4,12 +4,18 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.lang.Override;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -60,8 +66,10 @@ public class Cibilclient {
 	private String clientIncome;
 	
     @Column(nullable = false, updatable = false)
+    @Temporal(TemporalType.DATE) // Ensures only the date part is saved in the database
     @CreationTimestamp
-    private LocalDateTime TodayDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    private Date TodayDate;
 
 	@Override
 	public String toString() {
@@ -70,6 +78,8 @@ public class Cibilclient {
 				+ ", clientbod=" + clientbod + ", clientaddress=" + clientaddress + ", clientpin=" + clientpin
 				+ ", clientloanty=" + clientloanty + ", clientIncome=" + clientIncome + ", TodayDate=" + TodayDate + "]";
 	}
+	
+	
 	
 
 

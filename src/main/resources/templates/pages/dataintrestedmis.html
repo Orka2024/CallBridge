@@ -3,6 +3,7 @@
 
 <head>
 <title>CibilMis</title>
+
 </head>
 <body>
 
@@ -14,7 +15,7 @@
           <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                <h6 class="text-white text-capitalize ps-3">Interested Customer </h6>
+                <h6 class="text-white text-capitalize ps-3">Interested Customer</h6>
               </div>
             </div>
             <div class="card-body px-0 pb-2">
@@ -22,10 +23,10 @@
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr>
-                      <th class="text-secondary opacity-10"> Customer Name</th>
-                      <th class="text-secondary opacity-10"> Status</th>
-                      <th class="text-secondary opacity-10"> Intrested</th>   
-                      <th class="text-secondary opacity-10"> Cibil Application </th>                  
+                      <th class="text-secondary opacity-10">Customer Name</th>
+                      <th class="text-secondary opacity-10">Status</th>
+                      <th class="text-secondary opacity-10">Intrested</th>   
+                      <th class="text-secondary opacity-10">Cibil Application </th>                  
                     </tr>
                   </thead>
                   <tbody>
@@ -45,29 +46,25 @@
                             <h6 data-th-text="*{client_name}"></h6>
                           </div>
                         </div>
-                      </td>
-                                          
+                      </td>                                          
                       <td>
                           <div class="d-flex flex-column justify-content-center">
-                            <h6  data-th-text="*{c_status}"></h6>
+                            <h6 data-th-text="*{c_status}"></h6>
                           </div>
                       </td>
                       <td>
                           <div class="d-flex flex-column justify-content-center">
                             <h6 data-th-text="*{c_interest}"> </h6>
                           </div>
-                      </td>
-                      
-                   
-                       <td> 
-                           <a data-th-href ="@{'/user/applycibil/'+*{clientdata_id}}" class="btn btn-lg bg-gradient-primary">Apply</a>                                                                                                   
-				      </td>   
-				                         
+                      </td>                                         
+                      <td> 
+                          <a data-th-href ="@{'/user/applycibil/'+*{clientdata_id}}" class="btn btn-lg bg-gradient-primary">Apply</a>                                                                                                   
+				      </td>   				                         
                      
                     </tr>
                                       
                   </tbody>
-                
+               
                 </table>
               </div>
             </div>

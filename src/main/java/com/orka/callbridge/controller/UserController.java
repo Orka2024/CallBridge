@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.orka.callbridge.service.UserService;
 
@@ -98,7 +99,6 @@ public class UserController {
 	private CibilclientService cibilclientService;
 
 	@Autowired
-
 	private DataintresService dataintresService;
 
 	@GetMapping("/dataintrested")
@@ -123,37 +123,49 @@ public class UserController {
 			Cibilclientform cibilclientform = new Cibilclientform();
 			model.addAttribute("cibilclientform", cibilclientform);
 		}
+		
 		return "pages/applycibilform";
 
 	}
 
 	
-	  @RequestMapping(value="/cibilreturn",method = RequestMethod.POST) public
-	  String cibilreturn(@Valid Cibilclient cibilclient, @ModelAttribute Cibilclientform cibilclientform,
+	  @RequestMapping(value="/cibilreturn",method = RequestMethod.POST)
+	  public String cibilreturn(@Valid Cibilclient cibilclient, @ModelAttribute Cibilclientform cibilclientform,
 	  BindingResult result,HttpSession session) 
 	  { 
-			  if (result.hasErrors())
-				   { 
-				   			return "redirect:/user/applycibil/{data}";   
+		  
+	      String data = (String) session.getAttribute("cibilId");
+
+		  if (data == null) {
+		        Message errorMessage = Message.builder()
+		                                       .content("Something went wrong. Kindly check the cell.")
+		                                       .type(MessageType.red)
+		                                       .build();
+		        session.setAttribute("message", errorMessage); 
+		        return "redirect:/user/applycibil/"+data ; 
+
 				   } 
+			  
 	  cibilclient.setClientId((String)session.getAttribute("cibilId"));
 	  cibilclient.setClientname((String)session.getAttribute("clientName"));
 	  cibilclient.setClientnumber((String)session.getAttribute("clientContact"));
-
-	  
-	  Cibilclient cibil=Cibilclient.builder()
-			  .clientemail(cibilclientform.getClientemail())
-			  .clientpan(cibilclientform.getClientpan())
-			  .clientbod(cibilclientform.getClientbod())
-			  .clientaddress(cibilclientform.getClientaddress())
-			  .clientpin(cibilclientform.getClientpin())
-			  .clientloanty(cibilclientform.getClientloanty())
-			  .clientIncome(cibilclientform.getClientIncome())
-			  .build();
-	  
-	  Cibilclient saveclient=cibilclientService.saveCibilclient(cibilclient);
-	  
-	  return "redirect:/user/dataintrested"; 
+	 		  
+		 Cibilclient cibil=Cibilclient.builder()
+				  .clientemail(cibilclientform.getClientemail())
+				  .clientpan(cibilclientform.getClientpan())
+				  .clientbod(cibilclientform.getClientbod())
+				  .clientaddress(cibilclientform.getClientaddress())
+				  .clientpin(cibilclientform.getClientpin())
+				  .clientloanty(cibilclientform.getClientloanty())
+				  .clientIncome(cibilclientform.getClientIncome())
+				  .build();		  
+		  Cibilclient saveclient = cibilclientService.saveCibilclient(cibilclient);	
+		  Message message = Message.builder()
+				  .content("Record Added Successfully")
+				  .type(MessageType.green).build();
+		  session.setAttribute("message", message);
+		  
+	  return "redirect:/user/applycibil/"+data ; 
 	  
 	  }
 	 
@@ -169,21 +181,40 @@ public class UserController {
 	}
 
 	@GetMapping("/update/{up_cibilclientId}")
-	public String updatecibilclient(@PathVariable("up_cibilclientId") String up_cibilclientId, Model model) {
-		var cibilupdate = cibilclientService.getCibilclientById(up_cibilclientId);
-		model.addAttribute("cibilupdate", cibilupdate);
-		model.addAttribute("up_cibilclientId", up_cibilclientId);
-
+	public String updatecibilclient(@PathVariable("up_cibilclientId") String up_cibilclientId, Model model,HttpSession session) {
+		Optional<Cibilclient> cibilupdate = cibilclientService.getCibilclientById(up_cibilclientId);		
+		if (cibilupdate.isPresent()) {
+			Cibilclient upClient = cibilupdate.get();
+			session.setAttribute("clientId", upClient.getClientId());
+			session.setAttribute("clientName", upClient.getClientname());
+			session.setAttribute("clientContact",upClient.getClientnumber());
+			model.addAttribute("UPClient", upClient);
+			model.addAttribute("cibilupdate", cibilupdate);
+		}
 		return "pages/Update_applycibil";
 	}
 
-	@RequestMapping(value = "/updateapplycibil/{up_cibilclientId}", method = RequestMethod.POST)
-	public String updateapplycibil(@PathVariable("up_cibilclientId") String up_cibilclientId,
-			@ModelAttribute Cibilclientform cibilclientform, Model model) {
+	@RequestMapping(value = "/updateapplycibil", method = RequestMethod.POST)
+	public String updateapplycibil( @ModelAttribute Cibilclientform cibilclientform, Model model,HttpSession session) {
+		
+		String up_cibilclientId = (String) session.getAttribute("clientId");
+
+		  if (up_cibilclientId == null)
+		  {
+		        Message errorMessage = Message.builder()
+		                                       .content("Something went wrong cibilclient. Kindly check the cell.")
+		                                       .type(MessageType.red)
+		                                       .build();
+					        session.setAttribute("message", errorMessage); 
+					        return "redirect:/user/update/"+ up_cibilclientId ; 
+
+	    }
+		
+		
 		var cibilup = new Cibilclient();
-		cibilup.setClientId(up_cibilclientId);
-		cibilup.setClientname(cibilclientform.getClientname());
-		cibilup.setClientnumber(cibilclientform.getClientnumber());
+		cibilup.setClientId((String)session.getAttribute("clientId"));
+		cibilup.setClientname((String)session.getAttribute("clientName"));
+		cibilup.setClientnumber((String)session.getAttribute("clientContact"));
 		cibilup.setClientemail(cibilclientform.getClientemail());
 		cibilup.setClientpan(cibilclientform.getClientpan());
 		cibilup.setClientbod(cibilclientform.getClientbod());
@@ -198,15 +229,25 @@ public class UserController {
 		System.out.println("value of upcibil is " + upcibil);
 
 		logger.info("Your CibilClient Update successfully : ", upcibil);
-		model.addAttribute("message", Message.builder().content("up_cibilclientId").type(MessageType.green).build());
-		return "redirect:/user/cibilmis";
 
+		  Message message = Message.builder()
+				  .content("Record of Cibil Update Successfully")
+				  .type(MessageType.green).build();
+		  session.setAttribute("message", message);
+		
+		return "redirect:/user/update/"+ up_cibilclientId;
 	}
 
 	@GetMapping("/delete/{cibilclientId}")
-	public String deletecibilclient(@PathVariable("cibilclientId") String cibilclientId) {
+	public String deletecibilclient(@PathVariable("cibilclientId") String cibilclientId,HttpSession session) 	
+	{
 		cibilclientService.deleteCibilclient(cibilclientId);
 		// logger.info("Your CibilClient deleted successfully : ",cibilclientId);
+		
+		  Message message = Message.builder()
+				  .content("Record is Deleted Successfully")
+				  .type(MessageType.green).build();
+		  session.setAttribute("message", message);
 		return "redirect:/user/cibilmis";
 	}
 
