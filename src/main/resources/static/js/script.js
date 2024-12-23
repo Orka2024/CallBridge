@@ -63,3 +63,42 @@ function showSuccessToast() {
 
 /* email end  */
 
+
+/* Delete Contact */  
+
+
+
+function deleterecord(id){
+	
+	Swal.fire({
+	  title: "Do you want to delete the Record?",
+/*      icon: "warning",
+*/	  showCancelButton: true,
+	  confirmButtonText: "Delete",
+	}).then((result) => {
+	  /* Read more about isConfirmed, isDenied below */
+	  if (result.isConfirmed) {
+             const url = "http://localhost:8282/user/delete/" +id;
+			 window.location.replace(url);
+		  }
+	  
+	  
+	});
+	
+}
+
+
+
+
+
+
+
+/* Delete end */
+
+
+
+
+
+
+
+

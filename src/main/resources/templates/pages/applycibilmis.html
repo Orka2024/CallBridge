@@ -8,22 +8,29 @@
 
 <main>
    <section id="b">
+     <div  style="margin-left:250px; width:500px; height:50px;">
+          <div data-th-replace="~{message :: messagebox}"></div>           
+     </div>
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-12">
           <div class="card my-4">
+
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                 <h6 class="text-white text-capitalize ps-3">Interested Customer</h6>
               </div>
             </div>
+
+            
             <div class="card-body px-0 pb-2">
+
               <div class="table-responsive p-0">
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr>
+                      <th class="text-secondary opacity-10"> Date </th>                                     
                       <th class="text-secondary opacity-10"> Customer Name</th>
-                      <th class="text-secondary opacity-10"> Contact</th>
                       <th class="text-secondary opacity-10"> Pan Number</th>
                       <th class="text-secondary opacity-10"> Loan Type</th>   
                       <th class="text-secondary opacity-10"> Income Source</th>   
@@ -35,6 +42,12 @@
                      data-th-object="${cb}"
                      data-th-each="cb : ${Cibilclient}"
                     >
+                     <td>
+                          <div class="d-flex flex-column justify-content-center">
+                             <h6 data-th-text="${#dates.format(cb.TodayDate, 'dd-MM-yyyy')}"></h6>
+                          </div>
+                      </td>
+                    
                       <td>
                         <div class="d-flex px-2 py-1">
                           <img 
@@ -47,11 +60,6 @@
                             <h6 data-th-text="*{clientname}"></h6>
                           </div>
                         </div>
-                      </td>
-                      <td>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6  data-th-text="*{clientnumber}"> </h6>
-                          </div>
                       </td>
                                           
                       <td>
@@ -72,8 +80,11 @@
                       </td>
                    
                       <td> 
-                           <a data-th-href ="@{'/user/delete/'+*{clientId}}" class="btn btn-lg bg-gradient-danger"><i class="material-icons mb-0">delete</i></a> 
-                           <a data-th-href ="@{'/user/update/'+*{clientId}}" class="btn btn-lg bg-gradient-primary"><i class="material-icons mb-0">edit_note</i></a>                                                                                                   
+                           <a data-th-href ="@{'/user/update/'+*{clientId}}" class="btn btn-lg bg-gradient-primary"><i class="material-icons mb-0">edit_note</i></a>                                                                                                                         
+<!--                            <a data-th-href ="@{'/user/delete/'+*{clientId}}" class="btn btn-lg bg-gradient-danger"><i class="material-icons mb-0">delete</i></a> 
+ -->				       
+ 						   <button data-th-onclick ="deleterecord([[${cb.clientId}]])"  class="btn btn-lg bg-gradient-danger"><i class="material-icons mb-0">delete</i></button> 
+ 
 				      </td>  
 				                         
                      

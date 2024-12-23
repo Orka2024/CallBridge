@@ -155,12 +155,35 @@ public class OpController {
         activelist.setClientIncome((String) session.getAttribute("clientIncome"));
         activelist.setCibilUpload(FileURL);
         activelist.setCloudinaryImagePublicId(filename);
+        
+        
+        // Generate random clientActiveNumber
+        String clientName = (String) session.getAttribute("clientName");
+        int randomNumber = (int) (Math.random() * (999999 - 100000 + 1)) + 100000;
+        String random = clientName + randomNumber;
+        activelist.setClientActiveNumber(random);
+        
 
+        // Set applyStatus based on cibilStatus
+        String cibilStatus = activelistForm.getCibilStatus();
+        if ("Approve".equals(cibilStatus))
+        {
+            activelist.setApplyStatus(3);
+        } 
+        else if ("Reject".equals(cibilStatus)) 
+        {
+            activelist.setApplyStatus(4);
+        } 
+        else if ("Hold".equals(cibilStatus))
+        {
+            activelist.setApplyStatus(5);
+        }
+        
   
 		Activelist active=Activelist.builder()
 				.cibilScore(activelistForm.getCibilScore())
-				.cibilStatus(activelistForm.getCibilStatus())
-				.cibilReason(activelistForm.getCibilReason())				
+				.cibilStatus(cibilStatus)
+				.cibilReason(activelistForm.getCibilReason())
 				.build();    
 		
 		Activelist savecibilrepo=activelistService.saveActivelist(activelist);	
