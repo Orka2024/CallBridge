@@ -23,6 +23,7 @@ import com.orka.callbridge.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
+import com.orka.callbridge.entities.Activelist;
 import com.orka.callbridge.entities.Cibilclient;
 import com.orka.callbridge.entities.User;
 import com.orka.callbridge.entities.clientdata;
@@ -30,6 +31,7 @@ import com.orka.callbridge.forms.Cibilclientform;
 import com.orka.callbridge.helper.Helper;
 import com.orka.callbridge.helper.Message;
 import com.orka.callbridge.helper.MessageType;
+import com.orka.callbridge.service.ActivelistService;
 import com.orka.callbridge.service.CibilclientService;
 import com.orka.callbridge.service.DataintresService;
 
@@ -149,6 +151,8 @@ public class UserController {
 	  cibilclient.setClientId((String)session.getAttribute("cibilId"));
 	  cibilclient.setClientname((String)session.getAttribute("clientName"));
 	  cibilclient.setClientnumber((String)session.getAttribute("clientContact"));
+	  cibilclient.setApplyStatus(2);
+	  
 	 		  
 		 Cibilclient cibil=Cibilclient.builder()
 				  .clientemail(cibilclientform.getClientemail())
@@ -253,10 +257,27 @@ public class UserController {
 
 	/*----------------------------------------End Apply for Cibil Application------------------------------------*/
 
+	
+	/*---------------------------------------- Start Active List ----------------------------------------------   */
+	
+	@Autowired
+	private ActivelistService activelistService;
+	
+
 	@GetMapping("/activelist")
-	public String activelistmis(Model model) {
+	public String activelistmis(Model model) {	
+		List<Activelist> activecase = activelistService.getAll();
+		model.addAttribute("Active", activecase);
 		return "pages/activecasemis";
 	}
+	
+	@GetMapping("/docup/{activeid}")
+	public String Docupload(Model model)
+	{	
+		return "pages/docupload";
+	}
+
+	/*---------------------------------------- end Active List ----------------------------------------------   */
 
 	@GetMapping("/approvemis")
 	public String approvelist(Model model) {

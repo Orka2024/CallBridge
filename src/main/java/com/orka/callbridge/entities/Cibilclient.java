@@ -65,19 +65,34 @@ public class Cibilclient {
 	@Column(nullable = false)
 	private String clientIncome;
 	
+	
+	@Column(nullable = false)
+	private int ApplyStatus;
+	
+	
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.DATE) // Ensures only the date part is saved in the database
     @CreationTimestamp
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date TodayDate;
 
+
 	@Override
 	public String toString() {
 		return "Cibilclient [clientId=" + clientId + ", empname=" + empname + ", clientname=" + clientname
 				+ ", clientnumber=" + clientnumber + ", clientemail=" + clientemail + ", clientpan=" + clientpan
 				+ ", clientbod=" + clientbod + ", clientaddress=" + clientaddress + ", clientpin=" + clientpin
-				+ ", clientloanty=" + clientloanty + ", clientIncome=" + clientIncome + ", TodayDate=" + TodayDate + "]";
+				+ ", clientloanty=" + clientloanty + ", clientIncome=" + clientIncome + ", ApplyStatus=" + ApplyStatus
+				+ ", TodayDate=" + TodayDate + "]";
 	}
+
+
+
+
+
+
+
+
 	
 	
 	
