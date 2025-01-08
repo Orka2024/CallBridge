@@ -11,4 +11,8 @@ public interface ImageService {
 	String cibiluploadImage(MultipartFile cibilupload,String filename);
 
 	String getUrlFromPublicIdsec(String publicIdsec);
+
+
+
+	
 }

@@ -9,6 +9,9 @@ import com.cloudinary.utils.ObjectUtils;
 
 @Configuration
 public class AppConfig {
+	
+	@Value("${upload.base-dir}")
+	private String baseDir;
 
 	@Value("${cloudinary.cloud.name}")
 	private String cloudinaryCloudName;

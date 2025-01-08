@@ -1,59 +1,95 @@
 <!DOCTYPE html>
-<html lang="en" data-th-replace="~{pages/base::parent(~{::#n},~{::title},~{::script})}" xmlns:th="http://www.thymleaf.org">
-
+<html lang="en" 
+      data-th-replace="~{pages/base::parent(~{::#n},~{::title},~{::script})}"
+      xmlns:th="http://www.thymleaf.org">
 <head>
-<title>Upload Document</title>
+<title>Cibil Status Form</title>
 </head>
 <body>
 
 <main>
    <section id="n">
+	<div class="container-fluid py-4">
+	     <div class="row">
+	        <div class="col-12">
+	          <div class="card my-4">
+	            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+	              <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                     <h6 class="text-white text-capitalize ps-3"> Client Document upload</h6> 	
+                                    	                
+	              </div>
+	            </div>
+	            <div class="card-body px-0 pb-2">
+	              <div class="table-responsive p-0">					   
+							      <div class="page-header min-vh-10">
+							        <div class="container">
+							          <div class="row">
+							              <div class="card card-plain">
+							                <div class="card-body">						                							          							        	
+									        	 <div class="row">
+				                                       <h6 class="text-black text-capitalize ps-3">KYC Document</h6>
+							                           <form data-th-action="@{'/user/docuploadreturn'}" method="post"  data-th-object="${documentupl}" enctype="multipart/form-data">		    
+				                                          <div class="row">
+						                                        <!-- Column 1 -->
+						                                        <div class="col-md-4">
+						                                            <div class="form-group">
+						                                                <label for="panCard" style="color: red;">Pan Card</label>
+						                                                <input type="file" id="panCard" class="form-control"  data-th-field="*{pancard}" />
+																	    <img th:src="@{${pancard} != null? '/img/True.png' : '/img/False.png'}"  style="width: 20px; height: auto; margin-top: 10px;" />
+				                                                
+						                                            </div> 
+						                                            <div class="form-group">
+						                                                <label for="aadhaarCard" style="color: red;">Aadhaar Card</label>
+						                                                <input type="file" id="aadhaarCard" class="form-control" data-th-field="*{adhaarcard}" />
+																	    <img th:src="@{${adhaarcard} != null? '/img/True.png' : '/img/False.png'}"  style="width: 20px; height: auto; margin-top: 10px;" />						                                           
+						                                            </div>
+						                                        </div>
+						                                        
+						                                        <div class="col-md-4">
+						                                            <div class="form-group">
+						                                                <label for="DrivingLC" style="color: red;">Driving Licence</label>
+						                                                <input type="file" id="drivinglc" class="form-control"  data-th-field="*{drivinglc}" />
+																	    <img th:src="@{${drivinglc} != null? '/img/True.png' : '/img/False.png'}"  style="width: 20px; height: auto; margin-top: 10px;" />
 
-    <div class="container-fluid py-4">
-      <div class="row">
-        <div class="col-12">
-          <div class="card my-4">
-
-            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-              <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                <h6 class="text-white text-capitalize ps-3">Upload Client Document</h6>
-              </div>
-            </div>
-
-
-          </div>
-        </div>
-      </div>
-   </div>
+						                                            </div> 
+						                                            <div class="form-group">
+						                                                <label for="VoterID" style="color: red;">Voter Card</label>
+						                                                <input type="file" id="voterid" class="form-control" data-th-field="*{voterid}" />
+																	    <img th:src="@{${voterid} != null? '/img/True.png' : '/img/False.png'}"  style="width: 20px; height: auto; margin-top: 10px;" />
+						                                            </div>
+						                                        </div>
+						                                        
+						                                        <div class="col-md-4">
+						                                            <div class="form-group">
+						                                                <button type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-50 mt-4 mb-0">Submit</button>
+						                                            </div>			                                        
+						                                        </div>				     
+									                      </div>     
+							                           </form>
+							                     </div>
+							                </div>						
+							              </div>
+							            </div>
+							          </div>
+							        </div>
+							      </div>
+	             
+	              </div>
+	            </div>
+	         
+	          </div>
+	        </div>
+	      </div>
+	      
+	   
    </section>
-  <script>
-  console.log("CibilMis page")
-  </script>
+   <script data-th-src="@{'/js/admin.js'}"></script>
+ 
+   <script>
+      console.log("Cibil Report")
+   </script>
 </main>
 	
 </body> 
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

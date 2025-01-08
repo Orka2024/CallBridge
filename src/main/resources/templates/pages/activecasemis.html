@@ -8,19 +8,19 @@
 
 <main>
    <section id="m">
-
+     <div  style="margin-left:250px; width:500px; height:50px;">
+          <div data-th-replace="~{message :: messagebox}"></div>           
+     </div>
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-12">
           <div class="card my-4">
-
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                 <h6 class="text-white text-capitalize ps-3">Active Case</h6>
               </div>
             </div>
-
-            
+           
             <div class="card-body px-0 pb-2">
 
               <div class="table-responsive p-0">
@@ -38,16 +38,16 @@
                   <tbody>
                     <tr                     
                      data-th-object="${ac}"
-                     data-th-each="ac : ${Active}"
+                     data-th-each="ac:${Active}"
                     >
-                    <td>
+                      <td>
                           <div class="d-flex flex-column justify-content-center">
                              <h6 data-th-text="${#dates.format(ac.activecaseDate, 'dd-MM-yyyy')}"></h6>
                           </div>
                       </td>
 
                       
-                     <td>
+                      <td>
                           <div class="d-flex flex-column justify-content-center">
                             <h6  data-th-text="*{ClientActiveNumber}"></h6>
                           </div>
@@ -61,7 +61,6 @@
                         </div>
                       </td>
                                           
-
                       <td>
                           <div class="d-flex flex-column justify-content-center">
                             <h6 data-th-text="*{clientLoanty}"> </h6>
@@ -75,15 +74,13 @@
                       </td>
                    
                       <td> 
-                           <a data-th-href ="@{'/user/docup/'+*{cibilId}}" class="btn btn-lg bg-gradient-primary">Doc_upload</a>                                                                                                                         			       
+                           <a data-th-href ="@{'/user/docmentup/'+*{cibilId}}" class="btn btn-lg bg-gradient-primary">Doc_upload</a>                                                                                                                         			       
 				      </td>  
-				                         
-                     
-                    </tr>
-                                      
-                  </tbody>
-                
+				                                            
+                    </tr>                                     
+                  </tbody>               
                 </table>
+                
               </div>
             </div>
           </div>

@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity(name="cibilclient")
-@Table(name="cibilclients")
+@Table(name="cibilclient")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -85,6 +85,7 @@ public class Cibilclient {
 				+ ", clientloanty=" + clientloanty + ", clientIncome=" + clientIncome + ", ApplyStatus=" + ApplyStatus
 				+ ", TodayDate=" + TodayDate + "]";
 	}
+
 
 
 
