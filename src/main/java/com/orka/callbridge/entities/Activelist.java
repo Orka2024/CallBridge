@@ -3,17 +3,16 @@ package com.orka.callbridge.entities;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.lang.Override;
-import java.time.LocalDate;
 import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
@@ -43,9 +42,12 @@ public class Activelist {
     @CreationTimestamp
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private Date activecaseDate;
+    
+	@Column(nullable = false)
+	private int applyStatus;
 	
 	@Column(nullable = false)
-	private String empName;
+	private String employeeName;
 	
 	@Column(nullable = false)
 	private String clientName;
@@ -82,24 +84,27 @@ public class Activelist {
 
 	@Column(nullable = false)
 	private String cibilReason;
- 
-	@Column(nullable = false)
-	private int applyStatus;
+	
+	@ManyToOne
+	@JoinColumn(name = "user_uid", referencedColumnName = "u_id")
+	private User user;
 	
 	private String cibilUpload;
 	
 	private String cloudinaryImagePublicId;
-	
+
 	@Override
 	public String toString() {
-		return "Activelist [cibilId=" + cibilId + ", ClientActiveNumber=" + ClientActiveNumber + ", empName=" + empName
-				+ ", clientName=" + clientName + ", clientNumber=" + clientNumber + ", clientEmail=" + clientEmail
-				+ ", clientPan=" + clientPan + ", clientBod=" + clientBod + ", clientAddress=" + clientAddress
-				+ ", clientPin=" + clientPin + ", clientLoanty=" + clientLoanty + ", clientIncome=" + clientIncome
-				+ ", cibilScore=" + cibilScore + ", cibilStatus=" + cibilStatus + ", cibilReason=" + cibilReason
-				+ ", applyStatus=" + applyStatus + ", cibilUpload=" + cibilUpload + ", cloudinaryImagePublicId="
-				+ cloudinaryImagePublicId + ", activecaseDate=" + activecaseDate + "]";
+		return "Activelist [cibilId=" + cibilId + ", ClientActiveNumber=" + ClientActiveNumber + ", activecaseDate="
+				+ activecaseDate + ", applyStatus=" + applyStatus + ", employeeName=" + employeeName + ", clientName="
+				+ clientName + ", clientNumber=" + clientNumber + ", clientEmail=" + clientEmail + ", clientPan="
+				+ clientPan + ", clientBod=" + clientBod + ", clientAddress=" + clientAddress + ", clientPin="
+				+ clientPin + ", clientLoanty=" + clientLoanty + ", clientIncome=" + clientIncome + ", cibilScore="
+				+ cibilScore + ", cibilStatus=" + cibilStatus + ", cibilReason=" + cibilReason + ", cibilUpload="
+				+ cibilUpload + ", cloudinaryImagePublicId=" + cloudinaryImagePublicId + "]";
 	}
+	
+
 
 
 

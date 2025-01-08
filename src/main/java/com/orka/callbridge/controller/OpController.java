@@ -2,9 +2,16 @@ package com.orka.callbridge.controller;
 
 import jakarta.servlet.http.HttpSession;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.orka.callbridge.entities.Activelist;
+import com.orka.callbridge.entities.Approvedocupload;
 import com.orka.callbridge.entities.Cibilclient;
 import com.orka.callbridge.entities.User;
 import com.orka.callbridge.forms.ActivelistForm;
@@ -29,6 +37,7 @@ import com.orka.callbridge.helper.Helper;
 import com.orka.callbridge.helper.Message;
 import com.orka.callbridge.helper.MessageType;
 import com.orka.callbridge.service.ActivelistService;
+import com.orka.callbridge.service.ApprovedocuploadService;
 import com.orka.callbridge.service.CibilclientService;
 import com.orka.callbridge.service.ImageService;
 import com.orka.callbridge.service.UserService;
@@ -39,15 +48,17 @@ import jakarta.validation.Valid;
 @RequestMapping("/operations")
 public class OpController {
 	
+    // create one folder 
+    
+    String folderPath = "src/main/resources/uploadedclientdocument/";	
+	
 	private Logger logger = LoggerFactory.getLogger(OpController.class);
-
 	
 	@GetMapping("/dashboard")
 	public String dashboard() {
 		return "operations/dashboard";
 	}
-	  
-	
+	  	
 	@GetMapping("/profile")
 	public String showUserProfile() {
 		return "operations/profile";
@@ -74,10 +85,12 @@ public class OpController {
 	
 	
 	/* Start Generate cibil */
-	
-	
 	@Autowired
 	private ActivelistService activelistService;
+	
+	@Autowired
+	private ApprovedocuploadService approvedocuploadService;
+	
 	
 	@Autowired
 	private  ImageService imageService;
@@ -122,28 +135,29 @@ public class OpController {
 	        // Adding to model (optional, for immediate rendering)
 	        model.addAttribute("filtered", client);	
 	        ActivelistForm cibilreportreturn=new ActivelistForm();
-			model.addAttribute("cibilreport",cibilreportreturn);
+			model.addAttribute("cibilreport", cibilreportreturn);
 	    }
 		return "operations/cibilreport"; 
 	}
 	
 	@RequestMapping(value="/cibilreportsubmit",method = RequestMethod.POST)
-	public String checkreport (@Valid  Activelist activelist, @ModelAttribute ActivelistForm activelistForm ,
-            BindingResult result ,HttpSession session) {  
-		
-		//logger.info("file information : {}",activelistForm.getCibilupload().getOriginalFilename());
+	public String checkreport (@Valid  Activelist activelist, @Valid Approvedocupload approvedocupload,
+			@ModelAttribute ActivelistForm activelistForm ,
+            BindingResult result ,HttpSession session) {  		
+		//logger.info("file information : {}",activelistForm.getCibilupload().getOriginalFilename());		
+		String clientid =(String) session.getAttribute("cibilId");
+		String emp =(String) session.getAttribute("empName");
 		
 		if (result.hasErrors()) {
-			//result.getAllErrors().forEach(error -> logger.info(error.toString()));
-            return "redirect:/operations/checkreport/{clientid}";
+			
+            return "redirect:/operations/checkcibil/"+ emp;
         }
 		
 		String filename=UUID.randomUUID().toString();	
-
         String FileURL=imageService.cibiluploadImage(activelistForm.getCibilupload(),filename);
 
         activelist.setCibilId((String) session.getAttribute("cibilId"));
-        activelist.setEmpName((String) session.getAttribute("empName"));
+        activelist.setEmployeeName((String) session.getAttribute("empName"));
         activelist.setClientName((String) session.getAttribute("clientName"));
         activelist.setClientNumber((String) session.getAttribute("clientNumber"));
         activelist.setClientEmail((String) session.getAttribute("clientEmail"));
@@ -155,20 +169,37 @@ public class OpController {
         activelist.setClientIncome((String) session.getAttribute("clientIncome"));
         activelist.setCibilUpload(FileURL);
         activelist.setCloudinaryImagePublicId(filename);
-        
-        
+            
         // Generate random clientActiveNumber
         String clientName = (String) session.getAttribute("clientName");
-        int randomNumber = (int) (Math.random() * (999999 - 100000 + 1)) + 100000;
+        int randomNumber = (int)(Math.random()*(999999 - 100000 + 1)) + 100000;
         String random = clientName + randomNumber;
-        activelist.setClientActiveNumber(random);
+        activelist.setClientActiveNumber(random);        
+        String path=folderPath+random;
+        System.out.println("******************path***************"+path);
+        File folder = new File(path);
+        if (!folder.exists()) 
+        {
+            boolean isCreated = folder.mkdirs(); // Creates parent directories if necessary
+            if (isCreated) {
+                System.out.println("Folder created successfully: " + path);
+            } else {
+                System.out.println("Failed to create the folder: " + path);
+            }
+        } 
+        else
+        {
+            System.out.println("Folder already exists: " + path);
+        }
         
-
         // Set applyStatus based on cibilStatus
         String cibilStatus = activelistForm.getCibilStatus();
         if ("Approve".equals(cibilStatus))
         {
-            activelist.setApplyStatus(3);
+            approvedocupload.setApprovecaseid(clientid);
+            approvedocupload.setClientActiveNumber(random);
+            approvedocupload.setClientName(clientName);
+            activelist.setApplyStatus(3);   
         } 
         else if ("Reject".equals(cibilStatus)) 
         {
@@ -179,45 +210,47 @@ public class OpController {
             activelist.setApplyStatus(5);
         }
         
-  
 		Activelist active=Activelist.builder()
 				.cibilScore(activelistForm.getCibilScore())
 				.cibilStatus(cibilStatus)
 				.cibilReason(activelistForm.getCibilReason())
-				.build();    
-		
+				.build();    	
 		Activelist savecibilrepo=activelistService.saveActivelist(activelist);	
+		Approvedocupload saveapprovedocupload=approvedocuploadService.saveApprovedocuploadService(approvedocupload);
 		
-		return "redirect:/operations/generatecibil";
+        return "redirect:/operations/checkcibil/"+ emp;
 	}
 	
-	@GetMapping("/updoc")
-	public String checkreportform (Model model) 
-	{	   		
-	    	uploadform  upload = new uploadform();
-			model.addAttribute("upload",upload);	    
+	@GetMapping("/uploaddocshow")
+	public String uploaddocreport (Model model) 
+	{	
+		List<Approvedocupload> approvedocument= approvedocuploadService.getapprovedocuploadall();
+		model.addAttribute("document",approvedocument);
 		return "operations/updoc"; 
 	}
 	
-	@GetMapping("/upload")
-	public String upload(Model model) {  
-		return "operations/updoc";
-	}	
 	
-	/* End Generate cibil */
+    private final String basePath = "src/main/resources/uploaddocument/";
+
+	@GetMapping("/returnshowdoc/{foldername}")
+	public String returnshowdoc(@PathVariable("foldername") String foldername, Model model) {
+	        model.addAttribute("folder", foldername);
+
+	    return "operations/viewdownload";
+	}
+
+	
+
+	/* End Generate cibil  */
 		
 	@GetMapping("/approvemis")
 	public String approvelist(Model model) {  
 		return "operations/opapprovemis";
 	}
-
-	
 	@GetMapping("/rejectmis")
 	public String rejectlist(Model model) {  
 		return "operations/oprejectmis";
-	}
-	
-	
+	}	
 	@GetMapping("/holdmis")
 	public String holdlist(Model model) {  
 		return "operations/opholdmis";
