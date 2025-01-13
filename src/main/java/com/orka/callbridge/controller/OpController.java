@@ -4,6 +4,8 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,6 +18,11 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,7 +57,6 @@ public class OpController {
 	
     // create one folder 
     
-    String folderPath = "src/main/resources/uploadedclientdocument/";	
 	
 	private Logger logger = LoggerFactory.getLogger(OpController.class);
 	
@@ -228,18 +234,71 @@ public class OpController {
 		model.addAttribute("document",approvedocument);
 		return "operations/updoc"; 
 	}
-	
-	
-    private final String basePath = "src/main/resources/uploaddocument/";
-
-	@GetMapping("/returnshowdoc/{foldername}")
-	public String returnshowdoc(@PathVariable("foldername") String foldername, Model model) {
-	        model.addAttribute("folder", foldername);
-
+		
+	@GetMapping("/returnshowdoc/{approvecaseid}")
+	public String returnshowdoc(@PathVariable("approvecaseid") String approvecaseid, Model model,HttpSession session) {
+		
+		Optional<Approvedocupload> approvedocument= approvedocuploadService.getApprovedocuploadById(approvecaseid);
+		if(approvedocument.isPresent())
+		{
+			Approvedocupload getview = approvedocument.get();
+			session.setAttribute("folder", getview.getClientActiveNumber());
+			model.addAttribute("viewfile",getview);	 
+		}
 	    return "operations/viewdownload";
 	}
+	
+    String folderPath = "src/main/resources/uploadedclientdocument/";	
 
 	
+	@GetMapping("/view/{file}")
+	public ResponseEntity<Resource> viewdoc(@PathVariable("file") String file, Model model,HttpSession session) {
+		String Foldername = (String) session.getAttribute("folder");
+        String filePath= folderPath +Foldername+"/"+file;  
+        try {
+            Path path = Paths.get(filePath);
+            Resource resource = new UrlResource(path.toUri());
+            if (resource.exists()) {
+            	
+                // Detect MIME type dynamically
+                String mimeType = Files.probeContentType(path);
+                if (mimeType == null) {
+                    mimeType = "application/octet-stream"; // Default binary type
+                }
+            	
+                return ResponseEntity.ok()
+                        .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + file + "\"")
+                        .contentType(MediaType.parseMediaType(mimeType))
+                        .body(resource);
+            } else {
+                throw new RuntimeException("File not found: " + filePath);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error while viewing the file.", e);
+        }
+	}
+
+	@GetMapping("/download/{filedoc}")
+	public ResponseEntity<Resource>  download(@PathVariable("filedoc") String filedoc, Model model,HttpSession session) {
+		String Foldername = (String) session.getAttribute("folder");
+        String filePath= folderPath +Foldername+"/"+filedoc;  
+
+        System.out.println("Foldername : "+Foldername +"file : "+filedoc);
+        
+        try {
+            Path path = Paths.get(filePath);
+            Resource resource = new UrlResource(path.toUri());
+            if (resource.exists()) {
+                return ResponseEntity.ok()
+                        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + filedoc + "\"")
+                        .body(resource);
+            } else {
+                throw new RuntimeException("File not found: " + filePath);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error while downloading the file.", e);
+        }
+	}
 
 	/* End Generate cibil  */
 		
