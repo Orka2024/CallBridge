@@ -22,25 +22,22 @@
 	        <div class="card-body px-5 pb-2">
               <div class="table-responsive p-0">
                 <table class="table align-items-center mb-4">
-                  <tbody>
-                    <tr 
-                     
-                    >
-                    <td> 
-                     <h5>pan</h5>
-                    </td>
-                      <td>
-                         <a data-th-href="@{'/operations/view/' }" class="btn btn-lg bg-gradient-info">View</a>                                                         
+                  <tbody                     
+                     data-th-object="${vw}"
+                     data-th-each="vw : ${viewfile}">
+                     <tr>
+                      <td> 
+                         <h5>pan</h5>
                       </td>
-                     <td>
-                          <a data-th-href="@{'/operations/viewdownload' }" class="btn btn-lg bg-gradient-primary">Download</a>                                 
+                      <td>
+                         <a data-th-href="@{'/operations/view/'+ *{pancard}}" class="btn btn-lg bg-gradient-info">View</a>                                                         
+                      </td>
+                      <td>
+                         <a data-th-href="@{'/operations/download/'+ *{pancard}}" class="btn btn-lg bg-gradient-primary">Download</a>                                 
                       </td>                                   
                     </tr> 
-                     
-
-                                      
-                  </tbody>
-                
+                                                           
+                  </tbody>             
                 </table>
               </div>
             </div>
